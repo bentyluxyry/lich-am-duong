@@ -3,9 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentMonthYearSpan = document.getElementById('current-month-year');
     const prevMonthBtn = document.querySelector('.prev-month');
     const nextMonthBtn = document.querySelector('.next-month');
-    const toggleNotificationBtn = document.querySelector('.toggle-notification'); // Lấy nút thông báo
+    const toggleNotificationBtn = document.querySelector('.toggle-notification');
 
-    // Mốc thời gian hiện tại
     let currentDate = new Date();
     let currentMonth = currentDate.getMonth();
     let currentYear = currentDate.getFullYear();
@@ -13,36 +12,45 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentMonthForToday = currentDate.getMonth();
     const currentYearForToday = currentDate.getFullYear();
 
-    // --- LOGIC TÍNH ÂM LỊCH (Giả lập để sửa lỗi hiển thị) ---
-    function getLunarDay(gregorianDate) {
+    // --- LOGIC TÍNH ÂM LỊCH (Giả lập để mô phỏng chu kỳ) ---
+    // Chúng ta sẽ dùng một "offset" (độ lệch) để giả lập ngày 1 Âm Lịch rơi vào một ngày Dương Lịch khác nhau mỗi tháng.
+    function getLunarDay(gregorianDate, currentYearMonth) {
         const day = gregorianDate.getDate();
         const month = gregorianDate.getMonth();
+        const year = gregorianDate.getFullYear();
         
-        // Tạo một chu kỳ giả lập 30 ngày cho mỗi tháng Âm Lịch
-        let lunarDay = (day % 30) + 1; 
+        // Tạo một seed (hạt giống) dựa trên năm và tháng hiện tại để tạo ra độ lệch (offset) giả lập.
+        // Điều này giúp mùng 1 Âm Lịch không phải lúc nào cũng rơi vào mùng 1 Dương Lịch.
+        const seed = (year * 13 + month) % 7; 
+        const lunarCycleStartOffset = 5 + seed; // Giả lập ngày Dương Lịch mà mùng 1 Âm Lịch bắt đầu (từ ngày 5 đến ngày 11 DL)
+
+        // Tính ngày trong chu kỳ Âm Lịch 30 ngày
+        let lunarDay = day - lunarCycleStartOffset; 
         
-        // Điều chỉnh để ngày 1 Dương Lịch của mỗi tháng hiển thị là Mùng 1 Âm Lịch (Giả lập)
-        if (day === 1) {
-             // Giả sử mùng 1 Dương Lịch là mùng 1 Âm Lịch của tháng (month + 1)
-             return `1/${(month % 12) + 1}`; 
+        if (lunarDay < 1) {
+            // Nếu ngày Âm Lịch nhỏ hơn 1, nó thuộc tháng trước. Giả lập 30 ngày.
+            lunarDay = 30 + lunarDay; 
         }
 
-        // Ngày 15 DL (giữa tháng) giả lập là 15 Âm Lịch
-        if (day === 15) {
-             return '15';
-        }
+        // Đảm bảo không vượt quá 30 ngày (độ dài chu kỳ Âm Lịch giả lập)
+        lunarDay = (lunarDay % 30);
+        if (lunarDay === 0) lunarDay = 30;
 
-        // Các ngày còn lại: hiển thị ngày Âm Lịch giả lập
-        // Dùng một logic đơn giản hóa: 
-        // 1 -> 1, 2 -> 2, ..., 30 -> 30.
-        // Đây là code giả lập, không phải code tính Âm Lịch thực tế.
-        return (day % 30 === 0) ? '30' : String(day % 30);
+        // Nếu là ngày mùng 1 Âm Lịch, thêm tháng Âm Lịch (giả lập)
+        if (lunarDay === 1) {
+            // Giả lập tháng Âm Lịch là (Tháng Dương Lịch hiện tại + 1), để tránh hiển thị 1/12 khi tháng 12
+            let lunarMonth = (month % 12) + 1; 
+            return `1/${lunarMonth}`;
+        }
+        
+        return String(lunarDay);
     }
 
     // --- RENDER LỊCH ---
     function renderCalendar(month, year) {
         calendarBody.innerHTML = '';
         currentMonthYearSpan.textContent = `Tháng ${month + 1}, ${year}`;
+        const currentYearMonth = year * 100 + month; // Dùng để tạo seed
 
         const firstDayOfMonth = new Date(year, month, 1).getDay(); 
         const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -55,7 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
             dayCell.classList.add('day-cell', 'empty-day', 'prev-next-month');
             
             const prevMonthDate = new Date(year, month - 1, day);
-            const lunarText = getLunarDay(prevMonthDate);
+            // Lấy ngày Âm Lịch từ tháng trước
+            const lunarText = getLunarDay(prevMonthDate, year * 100 + (month - 1)); 
 
             dayCell.innerHTML = `
                 <span class="day-number">${day}</span>
@@ -76,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const thisMonthDate = new Date(year, month, day);
-            const lunarText = getLunarDay(thisMonthDate);
+            const lunarText = getLunarDay(thisMonthDate, currentYearMonth);
             
             dayCell.innerHTML = `
                 <span class="day-number">${day}</span>
@@ -103,7 +112,8 @@ document.addEventListener('DOMContentLoaded', () => {
             dayCell.classList.add('day-cell', 'empty-day', 'prev-next-month');
             
             const nextMonthDate = new Date(year, month + 1, day);
-            const lunarText = getLunarDay(nextMonthDate);
+            // Lấy ngày Âm Lịch từ tháng sau
+            const lunarText = getLunarDay(nextMonthDate, year * 100 + (month + 1)); 
 
             dayCell.innerHTML = `
                 <span class="day-number">${day}</span>
@@ -136,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (notificationsEnabled) {
             toggleNotificationBtn.innerHTML = '<i class="fas fa-bell"></i> Đang bật thông báo';
-            toggleNotificationBtn.style.color = '#dc3545'; // Ví dụ: màu đỏ khi bật
+            toggleNotificationBtn.style.color = '#dc3545'; // Màu đỏ khi bật
             alert("Thông báo ngày đã được BẬT!");
         } else {
             toggleNotificationBtn.innerHTML = '<i class="fas fa-bell"></i> Bật thông báo ngày';
