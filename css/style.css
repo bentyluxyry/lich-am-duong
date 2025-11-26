@@ -1,76 +1,282 @@
-/* Thiết lập cơ bản */
+/* General Reset & Font */
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
     line-height: 1.6;
-    background-color: #f8f8f8;
+    background-color: #f0f2f5; /* Light grey background */
+    color: #333;
+    display: flex; /* For centering the app-container */
+    justify-content: center;
+    align-items: flex-start; /* Align to top */
+    min-height: 100vh;
+}
+
+/* App Container (mimicking a mobile app frame) */
+.app-container {
+    width: 100%;
+    max-width: 400px; /* Max width like a phone screen */
+    background-color: white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden; /* Important for border-radius */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Full height on smaller screens */
+    position: relative;
+    padding-bottom: 70px; /* Space for bottom nav */
+}
+
+/* Header for Calendar */
+.app-header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: white;
+    border-bottom: 1px solid #eee;
+}
+
+.app-header .logo {
+    background-color: #6C5CE7; /* Purple from image */
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+.app-header .app-name {
+    font-size: 1.3em;
+    font-weight: 500;
     color: #333;
 }
 
-/* Container giới hạn độ rộng */
-.container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 20px;
+/* Calendar Navigation */
+.calendar-view {
+    padding: 20px;
+    flex-grow: 1; /* Allow calendar to take available space */
 }
 
-/* Header */
-header {
-    background-color: #6C5CE7; /* Màu tím chủ đạo */
+.calendar-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.calendar-nav .nav-arrow {
+    background: none;
+    border: none;
+    font-size: 1.2em;
+    color: #6C5CE7;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+
+.calendar-nav .nav-arrow:hover {
+    background-color: #f0f0f0;
+}
+
+.calendar-nav .current-month-year {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
+.calendar-nav .toggle-notify {
+    background-color: #f0f2f5;
+    border: none;
+    border-radius: 20px;
+    padding: 5px 10px;
+    font-size: 0.8em;
+    color: #666;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.calendar-nav .toggle-notify i {
+    margin-right: 5px;
+    color: #999;
+}
+
+/* Calendar Grid */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    text-align: center;
+}
+
+.calendar-header-day {
+    font-size: 0.9em;
+    color: #999;
+    padding: 10px 0;
+    font-weight: 500;
+}
+
+.calendar-day {
+    padding: 8px 0;
+    font-size: 1em;
+    color: #333;
+    border-radius: 50%; /* For default round shape */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 40px; /* Fixed height for day circles */
+    width: 40px; /* Fixed width for day circles */
+    margin: 0 auto; /* Center the circles */
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    position: relative;
+    line-height: 1; /* Adjust line height for better display of inner numbers */
+}
+
+.calendar-day .solar-date {
+    font-weight: 500;
+    font-size: 1em;
+}
+
+.calendar-day .lunar-date {
+    font-size: 0.7em;
+    color: #999; /* Lighter color for lunar date */
+    position: absolute; /* Position relative to the day cell */
+    bottom: 3px; /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.calendar-day.prev-month,
+.calendar-day.next-month {
+    color: #ccc; /* Faded for prev/next month days */
+}
+
+.calendar-day.today {
+    background-color: #6C5CE7; /* Purple active state */
     color: white;
-    padding: 40px 0;
+}
+.calendar-day.today .lunar-date {
+    color: rgba(255, 255, 255, 0.7); /* Lighter white for lunar date */
+}
+
+
+/* Bottom Navigation */
+.bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: white;
+    border-top: 1px solid #eee;
+    padding: 10px 0;
+    position: fixed; /* Fix at bottom */
+    bottom: 0;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+}
+
+.bottom-nav .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #999;
+    font-size: 0.8em;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.bottom-nav .nav-item i {
+    font-size: 1.4em;
+    margin-bottom: 5px;
+}
+
+.bottom-nav .nav-item.active {
+    color: #6C5CE7; /* Active nav item color */
+}
+
+/* Blog specific styles (reused from previous) */
+.blog-container {
+    padding-bottom: 70px; /* Ensure space for fixed bottom nav */
+}
+
+.blog-header {
+    background-color: #6C5CE7; /* Purple from image */
+    color: white;
+    padding: 30px 20px 20px 20px;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
-header h1 {
-    margin: 0 0 5px 0;
-    font-size: 2.5em;
+.blog-header h1 {
+    margin: 0;
+    font-size: 2em;
 }
 
-header p {
+.blog-header p {
     opacity: 0.9;
+    font-size: 0.9em;
 }
 
-/* Main Content & Post List */
-main {
-    padding: 40px 0;
+.back-to-home {
+    position: absolute;
+    left: 20px;
+    top: 35px;
+    color: white;
+    font-size: 1.2em;
+    text-decoration: none;
 }
 
-h2 {
+.blog-main-content {
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.blog-main-content h2 {
     color: #444;
-    border-bottom: 2px solid #ddd;
+    border-bottom: 1px solid #eee;
     padding-bottom: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    font-size: 1.5em;
 }
 
 .post-list {
-    display: grid;
-    gap: 20px;
-    /* Dùng Grid để dễ dàng mở rộng bố cục nếu cần */
+    display: flex;
+    flex-direction: column; /* Stack blog cards */
+    gap: 15px;
 }
 
-/* Thẻ bài viết (Post Card) */
 .post-card {
     background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     transition: transform 0.2s;
 }
 
 .post-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .post-card h3 a {
-    color: #6C5CE7; /* Màu tím link */
+    color: #6C5CE7;
     text-decoration: none;
-    font-size: 1.5em;
+    font-size: 1.2em;
     margin-top: 0;
     display: block;
+    font-weight: 500;
 }
 
 .post-card h3 a:hover {
@@ -79,29 +285,60 @@ h2 {
 
 .post-card p {
     color: #666;
-    margin: 10px 0;
+    font-size: 0.9em;
+    margin: 8px 0;
 }
 
 .meta {
     display: block;
-    font-size: 0.9em;
+    font-size: 0.75em;
     color: #aaa;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
-/* Footer */
-footer {
-    text-align: center;
-    padding: 20px 0;
-    background-color: #eee;
-    color: #777;
+/* Style for individual post pages (from previous example) */
+.post-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin-top: 20px; /* Add margin to separate from header */
+}
+.post-content h3 {
+    color: #6C5CE7;
+    border-bottom: 1px dashed #eee;
+    padding-bottom: 5px;
+    margin-top: 25px;
+    font-size: 1.3em;
+}
+.post-content pre {
+    background-color: #f4f4f4;
+    padding: 15px;
+    border-left: 4px solid #6C5CE7;
+    overflow-x: auto;
+    border-radius: 4px;
     font-size: 0.9em;
-    border-top: 1px solid #ddd;
 }
 
-/* Responsive cơ bản */
-@media (max-width: 600px) {
-    header h1 {
-        font-size: 2em;
+/* Responsive Adjustments (for smaller mobile screens) */
+@media (max-width: 380px) {
+    .app-container {
+        border-radius: 0; /* No border-radius on very small screens */
+        box-shadow: none;
+    }
+    .calendar-day {
+        height: 35px;
+        width: 35px;
+        font-size: 0.9em;
+    }
+    .calendar-day .lunar-date {
+        font-size: 0.65em;
+        bottom: 2px;
+    }
+    .bottom-nav .nav-item span {
+        font-size: 0.7em;
+    }
+    .bottom-nav .nav-item i {
+        font-size: 1.2em;
     }
 }
