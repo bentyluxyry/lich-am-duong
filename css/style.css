@@ -3,12 +3,13 @@
 /* ================================================= */
 :root {
     --primary-color: #6C5CE7; /* Tím chủ đạo */
+    --primary-light: #8A7CFB;
     --background-light: #f0f2f5; 
-    --text-dark: #333;
-    --text-muted: #999;
-    --error-color: #ff6347; 
-    --shadow-base: 0 4px 10px rgba(0, 0, 0, 0.08); 
-    --border-base: 1px solid #eee;
+    --text-dark: #2c3e50; /* Đậm hơn */
+    --text-muted: #95a5a6;
+    --error-color: #e74c3c; 
+    --shadow-base: 0 4px 15px rgba(0, 0, 0, 0.1); 
+    --border-base: 1px solid #ecf0f1;
 }
 
 *, *::before, *::after {
@@ -31,7 +32,7 @@ body {
 }
 
 a, button, .post-card, .calendar-day {
-    transition: all 0.2s ease-in-out; 
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Transition mượt mà hơn */
 }
 
 
@@ -40,9 +41,9 @@ a, button, .post-card, .calendar-day {
 /* ================================================= */
 .app-container {
     width: 100%;
-    max-width: 400px; 
+    max-width: 420px; /* Hơi rộng hơn cho mobile */
     background-color: white;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-base);
     overflow: hidden; 
     display: flex;
     flex-direction: column;
@@ -55,66 +56,77 @@ a, button, .post-card, .calendar-day {
 .app-header {
     display: flex;
     align-items: center;
-    padding: 15px 20px;
-    background-color: var(--primary-color);
+    padding: 18px 20px; /* Padding lớn hơn */
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%); /* Gradient đẹp hơn */
     color: white;
 }
 .logo {
-    font-size: 1.5em;
+    font-size: 1.8em;
     font-weight: 700;
-    margin-right: 10px;
-    border: 2px solid white;
-    border-radius: 4px;
-    padding: 2px 6px;
+    margin-right: 12px;
+    padding: 0 4px;
+}
+.logo .fa-sun, .logo .fa-moon {
+    margin: 0 1px;
+    font-size: 0.8em;
 }
 .app-name {
-    font-size: 1.2em;
+    font-size: 1.3em;
     font-weight: 500;
 }
 
 /* ================================================= */
 /* 3. CALENDAR STYLES (LỊCH) */
 /* ================================================= */
-.calendar-view { padding: 20px; flex-grow: 1; }
-.calendar-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+.calendar-view { padding: 20px 10px; flex-grow: 1; } /* Giảm padding ngang cho màn hình nhỏ */
+.calendar-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
 .calendar-nav button {
     background: none;
     border: none;
     color: var(--primary-color);
     cursor: pointer;
-    font-size: 1.2em;
-    padding: 5px;
+    font-size: 1.5em; /* Nút lớn hơn */
+    padding: 8px;
+    border-radius: 50%;
+}
+.calendar-nav button:hover {
+    background-color: #f0f0ff;
 }
 .current-month-year {
     text-align: center;
 }
 #displayMonthYear {
     font-weight: 700;
-    font-size: 1.2em;
+    font-size: 1.4em; /* Chữ lớn hơn */
     color: var(--text-dark);
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
 .toggle-notify {
-    font-size: 0.75em;
-    padding: 4px 8px;
+    font-size: 0.7em;
+    padding: 5px 10px;
     border: 1px solid var(--primary-color);
     background-color: transparent;
-    border-radius: 4px;
+    border-radius: 20px; /* Bo tròn hoàn toàn */
     color: var(--primary-color);
+    cursor: pointer;
+}
+.toggle-notify:hover {
+    background-color: var(--primary-color);
+    color: white;
 }
 
 .calendar-grid { 
     display: grid; 
     grid-template-columns: repeat(7, 1fr); 
-    gap: 5px; 
+    gap: 2px; /* Giảm gap */
     text-align: center; 
 }
 
 .calendar-header-day {
     font-weight: 500;
-    color: var(--primary-color);
-    padding-bottom: 5px;
+    color: var(--primary-light);
+    padding: 10px 0;
     font-size: 0.9em;
 }
 
@@ -123,14 +135,15 @@ a, button, .post-card, .calendar-day {
     flex-direction: column; 
     justify-content: center; 
     align-items: center; 
-    height: 40px; 
-    width: 100%; /* Dùng 100% để tự co giãn trong grid cell */
-    aspect-ratio: 1 / 1; /* Giữ hình vuông */
+    height: auto; 
+    width: 100%;
+    aspect-ratio: 1 / 1; 
     margin: 0 auto; 
     cursor: pointer; 
     position: relative; 
-    line-height: 1;
+    line-height: 1.2;
     border-radius: 8px;
+    padding: 5px 0;
 }
 
 .calendar-day:hover {
@@ -138,12 +151,12 @@ a, button, .post-card, .calendar-day {
 }
 
 .calendar-day .solar-date {
-    font-size: 1.0em;
+    font-size: 1.1em; /* Lớn hơn */
     font-weight: 500;
     margin-top: 5px;
 }
 .calendar-day .lunar-date { 
-    font-size: 0.6em; 
+    font-size: 0.7em; /* Lớn hơn */
     color: var(--text-muted); 
     margin-top: 3px;
     line-height: 1;
@@ -152,6 +165,7 @@ a, button, .post-card, .calendar-day {
 .calendar-day.prev-month,
 .calendar-day.next-month {
     color: #ccc;
+    pointer-events: none; /* Không cho click vào ngày tháng trước/sau */
 }
 .calendar-day.prev-month .lunar-date,
 .calendar-day.next-month .lunar-date {
@@ -162,9 +176,10 @@ a, button, .post-card, .calendar-day {
 .calendar-day.today { 
     background-color: var(--primary-color); 
     color: white !important; 
-    border-radius: 50%; 
+    border-radius: 50%; /* Tròn hoàn toàn */
     font-weight: 700;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05); /* Hiệu ứng nổi bật */
 }
 .calendar-day.today .lunar-date {
     color: rgba(255, 255, 255, 0.8) !important;
@@ -173,11 +188,13 @@ a, button, .post-card, .calendar-day {
 /* Indicator Dot (Có ghi chú/reminder) */
 .indicator-dot {
     position: absolute;
-    bottom: 0px;
-    width: 4px;
-    height: 4px;
+    bottom: 2px; /* Đặt lại vị trí */
+    width: 5px; /* Lớn hơn */
+    height: 5px;
     background-color: var(--error-color);
     border-radius: 50%;
+    right: 50%;
+    transform: translateX(50%);
 }
 
 
@@ -185,117 +202,122 @@ a, button, .post-card, .calendar-day {
 /* 4. MODAL & REMINDER STYLES */
 /* ================================================= */
 .modal {
-    display: none; /* Ẩn mặc định */
+    display: none; 
     position: fixed;
     z-index: 2000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4); 
-    padding-top: 60px;
+    overflow: hidden; /* Chặn cuộn body khi modal mở */
+    background-color: rgba(0,0,0,0.6); /* Nền tối hơn */
 }
 
 .modal-content {
     background-color: #fefefe;
-    margin: 5% auto; 
-    padding: 20px;
-    border: 1px solid #888;
+    margin: 10vh auto; /* Đưa lên cao hơn một chút */
+    padding: 25px;
+    border: none;
     width: 90%;
-    max-width: 380px; 
-    border-radius: 10px;
-    box-shadow: var(--shadow-base);
+    max-width: 450px; 
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     position: relative;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .close-button {
     color: #aaa;
     float: right;
-    font-size: 28px;
+    font-size: 32px;
     font-weight: bold;
-}
-.close-button:hover,
-.close-button:focus {
-    color: var(--error-color);
-    text-decoration: none;
-    cursor: pointer;
 }
 
 #modalDateDisplay {
     color: var(--primary-color);
-    font-size: 1.5em;
-    margin-bottom: 15px;
-    border-bottom: 1px solid #eee;
+    font-size: 1.6em;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--border-base);
     padding-bottom: 5px;
 }
 
 textarea#noteInput {
     width: 100%;
-    height: 100px;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    height: 120px;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: var(--border-base);
+    border-radius: 8px;
     resize: vertical;
+    font-size: 1em;
 }
 
 .primary-btn, .secondary-btn {
-    padding: 8px 15px;
+    padding: 10px 18px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
     font-weight: 500;
     margin-top: 10px;
-    margin-right: 5px;
+    margin-right: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 .primary-btn {
     background-color: var(--primary-color);
     color: white;
 }
+.primary-btn:hover {
+    background-color: var(--primary-light);
+}
 .secondary-btn {
-    background-color: #eee;
+    background-color: #ecf0f1;
     color: var(--text-dark);
+}
+.secondary-btn:hover {
+    background-color: #bdc3c7;
 }
 
 hr {
     border: 0;
-    border-top: 1px solid #eee;
+    border-top: 1px solid #ddd;
     margin: 20px 0;
 }
 
 #reminderList {
     list-style: none;
     padding: 0;
+    margin-top: 10px;
 }
 #reminderList li {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 8px 0;
-    border-bottom: 1px dotted #f0f0f0;
+    padding: 10px 0;
+    border-bottom: 1px solid #f8f8f8; /* Đường kẻ mỏng hơn */
+    font-size: 0.95em;
 }
-#reminderList li input[type="checkbox"] {
-    margin-right: 10px;
-}
-.reminder-done {
-    text-decoration: line-through;
-    color: var(--text-muted);
-}
-.delete-reminder {
-    background: none;
-    border: none;
-    color: var(--error-color);
-    cursor: pointer;
-    font-size: 1em;
-}
-
 
 /* ================================================= */
 /* 5. BOTTOM NAVIGATION */
 /* ================================================= */
 .bottom-nav {
-    display: flex; justify-content: space-around; align-items: center; background-color: white; border-top: var(--border-base); padding: 10px 0; position: fixed; bottom: 0; width: 100%; max-width: 400px; box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05); z-index: 1000;
+    display: flex; 
+    justify-content: space-around; 
+    align-items: center; 
+    background-color: white; 
+    border-top: var(--border-base); 
+    padding: 10px 0; 
+    position: fixed; 
+    bottom: 0; 
+    width: 100%; 
+    max-width: 420px; 
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05); 
+    z-index: 1000;
 }
 .nav-item {
     text-decoration: none;
@@ -306,135 +328,83 @@ hr {
     font-size: 0.75em;
     padding: 5px;
 }
+.nav-item:hover {
+    color: var(--primary-light);
+}
 .nav-item.active {
     color: var(--primary-color);
-}
-.nav-item i {
-    font-size: 1.3em;
-    margin-bottom: 3px;
+    font-weight: 500;
 }
 
 
 /* ================================================= */
-/* 6. BLOG & POST STYLES (Tiêu đề H1/H2/H3/H4) */
+/* 6. BLOG & POST STYLES (Đã tinh gọn) */
 /* ================================================= */
 .blog-header {
-    background-color: var(--primary-color); 
-    color: white;
-    padding: 20px 20px 15px 20px; 
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
-    position: relative;
-}
-.back-to-home {
-    position: absolute;
-    left: 15px;
-    top: 25px;
-    color: white;
-    text-decoration: none;
-    font-size: 0.9em;
+    /* Đã được định nghĩa ở trên */
+    padding: 30px 20px 20px 20px;
 }
 .blog-main-content {
     padding: 20px;
 }
 .post-list {
-    margin-top: 15px;
+    margin-top: 20px;
 }
 .post-card {
-    padding: 15px;
-    border: var(--border-base);
+    padding: 20px;
+    border: none;
     border-radius: 8px;
     margin-bottom: 15px;
     cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
-.post-card a {
+.post-card:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+.post-card h3 a {
     text-decoration: none;
     color: var(--primary-color);
-}
-.post-content h1 {
-    font-size: 2.0em; /* Tiêu đề chính của bài viết */
-    color: var(--primary-color);
-    margin: 10px 0 5px 0;
-    line-height: 1.2;
-}
-.post-content h2 {
-    font-size: 1.6em; /* Mục lớn */
-    color: var(--text-dark);
-    margin-top: 30px;
-    border-bottom: 2px solid #eee;
-    padding-bottom: 5px;
-}
-.post-content h3 {
-    font-size: 1.3em; /* Mục con */
-    color: #555;
-    margin-top: 20px;
-}
-.post-content h4 {
-    font-size: 1.1em; /* Mục nhỏ */
-    color: #777;
-    margin-top: 15px;
-    font-weight: 500;
-}
-.post-content p {
-    margin-top: 10px;
-}
-.post-content pre {
-    background-color: #f4f4f4;
-    padding: 15px;
-    border-radius: 6px;
-    overflow-x: auto;
-    font-size: 0.9em;
-    margin: 15px 0;
+    font-size: 1.1em;
 }
 
 
 /* ================================================= */
-/* 7. VIDEO RESPONSIVE EMBED */
+/* 7. MEDIA QUERIES (TỐI ƯU DESKTOP) */
 /* ================================================= */
-/* Đảm bảo video YouTube hiển thị đúng tỷ lệ 16:9 và co giãn trên Mobile/Desktop */
-.video-responsive {
-    overflow: hidden;
-    padding-bottom: 56.25%; /* Tỷ lệ 16:9 */
-    position: relative;
-    height: 0;
-    margin: 15px 0;
-    border-radius: 8px;
-    box-shadow: var(--shadow-base);
-}
-
-.video-responsive iframe {
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    border: none;
-}
-
-
-/* ================================================= */
-/* 8. MEDIA QUERIES (TỐI ƯU DESKTOP) */
-/* ================================================= */
-
 @media (min-width: 768px) {
-    /* Mở rộng Blog Container trên Desktop */
-    .app-container:not(.blog-container) {
+    /* Khung ứng dụng trên Desktop */
+    .app-container {
         max-width: 800px; 
         margin: 30px auto; 
         border-radius: 12px;
-        padding-bottom: 20px;
+        min-height: 85vh; /* Giảm chiều cao tối thiểu */
+        padding-bottom: 20px; /* Bỏ padding cho nav ẩn */
     }
     
-    .app-container.blog-container {
-        max-width: 800px; 
-        min-height: 800px; 
-        margin: 30px auto; 
-        border-radius: 12px;
-        padding-bottom: 20px; /* Không cần padding lớn vì nav ẩn */
-    }
-
-    /* Ẩn thanh nav dưới cùng khi dùng Desktop để nó không che khuất nội dung */
+    /* Ẩn thanh nav dưới cùng khi dùng Desktop */
     .bottom-nav {
         display: none; 
+    }
+
+    /* Tối ưu hóa Calendar View trên Desktop */
+    .calendar-view {
+        padding: 30px 40px; /* Padding lớn hơn */
+    }
+    .calendar-day {
+        height: 50px; /* Kích thước ô ngày lớn hơn */
+    }
+    .calendar-day .solar-date {
+        font-size: 1.2em;
+    }
+    .indicator-dot {
+        bottom: 5px;
+        width: 6px;
+        height: 6px;
+    }
+
+    /* Modal lớn hơn */
+    .modal-content {
+        max-width: 600px; 
     }
 }

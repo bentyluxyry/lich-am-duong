@@ -14,27 +14,32 @@ document.addEventListener('DOMContentLoaded', () => {
         addReminderBtn: document.getElementById('addReminderBtn')
     };
     
-    // Đảm bảo lấy ngày tháng hiện tại để hiển thị lần đầu
     let today = new Date();
     let currentMonth = today.getMonth();
     let currentYear = today.getFullYear();
     let selectedDateKey = ''; // YYYYMMDD
     
     // Dữ liệu giả lập cho lịch âm
+    // **LƯU Ý:** Để có lịch âm chính xác, bạn cần một thư viện lịch âm hoặc một API.
+    // Logic 'getLunarDate' ở đây chỉ là giả lập.
     const lunarData = {
-        '20251126': '6/10', '20251201': '1/11', '20251230': '30/11'
+        '20251126': '6/10', '20251127': '7/10', '20251128': '8/10',
+        '20251201': '1/11', '20251230': '30/11'
     };
 
 
     // --- 2. LOGIC LOCAL STORAGE (DATA) ---
 
-    function getLunarDate(year, month, day) {
-        // Giả lập logic tính ngày âm, ví dụ: L.M. (Lịch Mới) hoặc L.N. (Lịch Năm)
-        const monthPadded = String(month + 1).padStart(2, '0');
+    function createDateKey(year, monthIndex, day) {
+        const monthPadded = String(monthIndex + 1).padStart(2, '0');
         const dayPadded = String(day).padStart(2, '0');
-        const key = `${year}${monthPadded}${dayPadded}`;
-        
-        return lunarData[key] || (day % 3 === 0 ? 'L.M.' : 'L.N.');
+        return `${year}${monthPadded}${dayPadded}`;
+    }
+
+    function getLunarDate(year, monthIndex, day) {
+        const key = createDateKey(year, monthIndex, day);
+        // Thay thế bằng logic tính lịch âm thực tế
+        return lunarData[key] || (day % 4 === 0 ? 'L.M.' : 'L.N.'); 
     }
 
     function saveNote(dateKey, content) {
@@ -55,6 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 3. LOGIC XỬ LÝ GIAO DIỆN & LỊCH (UI) ---
 
+    function checkHasData(dateKey) {
+        return loadNote(dateKey) || loadReminders(dateKey).length > 0;
+    }
+
     function displayRemindersInModal(dateKey) {
         const reminders = loadReminders(dateKey);
         DOM.reminderList.innerHTML = '';
@@ -70,40 +79,46 @@ document.addEventListener('DOMContentLoaded', () => {
         reminders.forEach((reminder, index) => {
             const li = document.createElement('li');
             li.innerHTML = `
-                <input type="checkbox" data-index="${index}" ${reminder.done ? 'checked' : ''}>
-                <span class="${reminder.done ? 'reminder-done' : ''}">${reminder.text}</span>
-                <button class="delete-reminder" data-index="${index}"><i class="fas fa-trash"></i></button>
+                <label>
+                    <input type="checkbox" data-index="${index}" ${reminder.done ? 'checked' : ''}>
+                    <span class="${reminder.done ? 'reminder-done' : ''}">${reminder.text}</span>
+                </label>
+                <button class="delete-reminder" data-index="${index}" aria-label="Xóa reminder"><i class="fas fa-trash"></i></button>
             `;
+            // Thêm class để dễ style
+            if (reminder.done) li.classList.add('done-item'); 
             DOM.reminderList.appendChild(li);
         });
     }
 
     function renderCalendar() {
         // Xóa tất cả các ô ngày (trừ header)
-        const existingDays = DOM.calendarGrid.querySelectorAll('.calendar-day:not(.calendar-header-day)');
-        existingDays.forEach(el => el.remove());
+        DOM.calendarGrid.querySelectorAll('.calendar-day').forEach(el => el.remove());
 
         const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay(); // 0 (CN) -> 6 (T7)
         const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
         
         DOM.displayMonthYear.textContent = `Tháng ${currentMonth + 1}, ${currentYear}`;
 
-        // 1. Ngày tháng trước (Thêm vào đầu lưới để đúng vị trí)
+        // Lấy ngày tháng trước (Thêm vào đầu lưới để đúng vị trí)
+        const daysInPrevMonth = new Date(currentYear, currentMonth, 0).getDate();
         for (let i = firstDayOfMonth; i > 0; i--) {
-            // Lấy ngày cuối của tháng trước
-            const day = new Date(currentYear, currentMonth, 0).getDate() - i + 1;
+            const day = daysInPrevMonth - i + 1;
             const dayDiv = document.createElement('div');
             dayDiv.className = 'calendar-day prev-month';
-            // Month index for lunar calculation of previous month is currentMonth - 1
-            dayDiv.innerHTML = `<span class="solar-date">${day}</span><span class="lunar-date">${getLunarDate(currentYear, currentMonth - 1, day)}</span>`;
+            // Tính toán tháng và năm trước
+            const prevMonth = currentMonth === 0 ? 11 : currentMonth - 1;
+            const prevYear = currentMonth === 0 ? currentYear - 1 : currentYear;
+            
+            dayDiv.innerHTML = `<span class="solar-date">${day}</span><span class="lunar-date">${getLunarDate(prevYear, prevMonth, day)}</span>`;
             DOM.calendarGrid.appendChild(dayDiv);
         }
 
-        // 2. Ngày tháng hiện tại
-        today = new Date(); // Cập nhật lại ngày hôm nay
+        // Ngày tháng hiện tại
+        today = new Date(); 
         for (let i = 1; i <= daysInMonth; i++) {
-            const dateKey = `${currentYear}${String(currentMonth + 1).padStart(2, '0')}${String(i).padStart(2, '0')}`;
-            const hasData = loadNote(dateKey) || loadReminders(dateKey).length > 0;
+            const dateKey = createDateKey(currentYear, currentMonth, i);
+            const hasData = checkHasData(dateKey);
             
             const dayDiv = document.createElement('div');
             dayDiv.className = 'calendar-day current-month';
@@ -122,22 +137,20 @@ document.addEventListener('DOMContentLoaded', () => {
             DOM.calendarGrid.appendChild(dayDiv);
         }
 
-        // 3. Ngày tháng sau (Lấp đầy hàng cuối cùng)
-        // Lấy tổng số ô đã có (gồm header 7 ngày và các ô ngày tháng)
-        // Số lượng phần tử con trong grid trừ đi 7 header days là số ô ngày đã tạo
+        // Ngày tháng sau (Lấp đầy hàng cuối cùng)
         const currentDaysCount = DOM.calendarGrid.children.length - 7; 
-        const totalCellsInGrid = 7 * Math.ceil(currentDaysCount / 7);
+        const totalCellsInGrid = 42; // Tổng số ô tối đa (7x6)
         const remainingCells = totalCellsInGrid - currentDaysCount; 
 
-        // Nếu số ô còn lại nhỏ hơn 7 và lớn hơn 0
-        if (remainingCells > 0 && remainingCells < 7) {
-            for (let i = 1; i <= remainingCells; i++) {
-                const dayDiv = document.createElement('div');
-                dayDiv.className = 'calendar-day next-month';
-                // Month index for lunar calculation of next month is currentMonth + 1
-                dayDiv.innerHTML = `<span class="solar-date">${i}</span><span class="lunar-date">${getLunarDate(currentYear, currentMonth + 1, i)}</span>`;
-                DOM.calendarGrid.appendChild(dayDiv);
-            }
+        for (let i = 1; i <= (remainingCells % 7 === 0 ? 0 : remainingCells); i++) {
+            const dayDiv = document.createElement('div');
+            dayDiv.className = 'calendar-day next-month';
+            // Tính toán tháng và năm sau
+            const nextMonth = currentMonth === 11 ? 0 : currentMonth + 1;
+            const nextYear = currentMonth === 11 ? currentYear + 1 : currentYear;
+
+            dayDiv.innerHTML = `<span class="solar-date">${i}</span><span class="lunar-date">${getLunarDate(nextYear, nextMonth, i)}</span>`;
+            DOM.calendarGrid.appendChild(dayDiv);
         }
     }
 
@@ -154,23 +167,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 4. EVENT LISTENERS ---
 
     // Điều hướng lịch
-    DOM.prevMonthBtn.addEventListener('click', () => { currentMonth--; if (currentMonth < 0) { currentMonth = 11; currentYear--; } renderCalendar(); });
-    DOM.nextMonthBtn.addEventListener('click', () => { currentMonth++; if (currentMonth > 11) { currentMonth = 0; currentYear++; } renderCalendar(); });
+    DOM.prevMonthBtn.addEventListener('click', () => { 
+        currentMonth--; 
+        if (currentMonth < 0) { currentMonth = 11; currentYear--; } 
+        renderCalendar(); 
+    });
+    DOM.nextMonthBtn.addEventListener('click', () => { 
+        currentMonth++; 
+        if (currentMonth > 11) { currentMonth = 0; currentYear++; } 
+        renderCalendar(); 
+    });
 
     // Lưu Ghi chú
     DOM.saveNoteBtn.addEventListener('click', () => {
         saveNote(selectedDateKey, DOM.noteInput.value.trim());
-        DOM.modal.style.display = 'none'; // Đóng modal sau khi lưu
+        DOM.modal.style.display = 'none'; 
         renderCalendar(); 
     });
     
     // Thêm Reminder
     DOM.addReminderBtn.addEventListener('click', () => {
-        // Dùng prompt tạm thời
         const text = prompt('Nhập nội dung Reminder:'); 
-        if (text) {
+        if (text && text.trim() !== '') {
             const reminders = loadReminders(selectedDateKey);
-            reminders.push({ text: text, done: false });
+            reminders.push({ text: text.trim(), done: false });
             saveReminders(selectedDateKey, reminders);
             displayRemindersInModal(selectedDateKey);
             renderCalendar(); 
@@ -190,6 +210,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const btn = target.closest('.delete-reminder');
             const index = parseInt(btn.dataset.index);
             reminders.splice(index, 1); 
+        } else if (target.closest('label') && target.nodeName === 'SPAN') {
+             // Cho phép click vào text để toggle
+             const checkbox = target.parentElement.querySelector('input[type="checkbox"]');
+             if (checkbox) {
+                 checkbox.checked = !checkbox.checked;
+                 const index = parseInt(checkbox.dataset.index);
+                 reminders[index].done = checkbox.checked;
+             }
         } else {
             return;
         }

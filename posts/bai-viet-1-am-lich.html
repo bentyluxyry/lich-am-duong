@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cách Tính Toán Ngày Âm Lịch Chính Xác trong JavaScript/Python | Vạn Niên Số Dev</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="app-container blog-container">
+        <header class="blog-header">
+            <a href="blog.html" class="back-to-home"><i class="fas fa-arrow-left"></i> Quay lại Blog</a>
+            <h1>🌑 Cách Tính Toán Ngày Âm Lịch Chính Xác trong JavaScript/Python</h1>
+            <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9em;">Đăng ngày 26/11/2025 | Chuyên mục: Kỹ thuật</p>
+        </header>
+
+        <main class="blog-main-content">
+            <div class="post-content">
+                
+                <p>Việc tính toán và chuyển đổi giữa **Lịch Dương (Gregorian)** và **Lịch Âm (Chinese/Vietnamese Lunisolar)** là một thách thức kỹ thuật lớn do sự phức tạp của các quy tắc thiên văn học liên quan đến các pha Mặt Trăng và các quy tắc nhuận tháng.</p>
+
+                <h3>1. Thách thức Chính: Chu Kỳ Nhuận</h3>
+                <p>Lịch Âm không chỉ dựa vào pha Mặt Trăng (tháng bắt đầu vào ngày sóc - trăng non) mà còn phải đồng bộ với chu kỳ Mặt Trời (các tiết khí). Một năm Âm lịch có thể có **12 hoặc 13 tháng**. Tháng thứ 13 được gọi là **Tháng Nhuận**.</p>
+                <p>Quy tắc nhuận phổ biến là: Nếu một tháng không chứa tiết khí **Trung Khí** (tiết khí chẵn), tháng đó sẽ được tính là tháng nhuận (tức là lặp lại tên của tháng trước đó).</p>
+
+                <h3>2. Phương Pháp Tiếp Cận trong Lập trình</h3>
+                <p>Việc tự xây dựng thuật toán tính toán Lịch Âm Dương từ đầu là cực kỳ phức tạp. Hầu hết các ứng dụng chuyên nghiệp đều dựa vào:</p>
+                <ul>
+                    <li>**Thư viện:** Sử dụng các thư viện đã được kiểm chứng và tối ưu hóa như `lunisolar-calendar` (JS/Python) hoặc các gói thiên văn chuyên biệt.</li>
+                    <li>**Bảng Dữ Liệu (Lookup Table):** Đối với các ứng dụng web đơn giản, lưu trữ sẵn dữ liệu cho một phạm vi năm nhất định (ví dụ: 100 năm) để tra cứu nhanh hơn. Đây là cách tiếp cận mà phiên bản Vạn Niên Số này đang giả lập.</li>
+                </ul>
+
+                <h3>3. Ví dụ Giả Lập trong `main.js`</h3>
+                <p>Trong phiên bản hiện tại, chúng ta tạo ra một hàm giả lập để hiển thị các ngày Âm lịch, như sau:</p>
+                <pre>
+<code>
+const lunarData = {
+    '20251126': '6/10', '20251127': '7/10', '20251128': '8/10',
+    '20251201': '1/11', '20251230': '30/11'
+};
+
+function getLunarDate(year, monthIndex, day) {
+    const key = createDateKey(year, monthIndex, day);
+    // Đây là tra cứu trong bảng hoặc logic giả lập
+    return lunarData[key] || (day % 4 === 0 ? 'L.M.' : 'L.N.'); 
+}
+</code>
+                </pre>
+                
+                <p>Để ứng dụng lịch trở nên chính xác, bạn cần tích hợp một thư viện Lịch Âm Dương thực tế để thay thế cho hàm `getLunarDate` giả lập này.</p>
+
+            </div>
+        </main>
+
+        <footer>
+            <p style="text-align: center; font-size: 0.8em; color: #999; padding: 20px 0;">
+                &copy; 2025 Vạn Niên Số Dev. Cùng nhau chia sẻ kiến thức.
+            </p>
+        </footer>
+        
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item">
+                <i class="fas fa-calendar-alt"></i>
+                <span>LỊCH</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fas fa-heart"></i>
+                <span>BÓI DUYÊN</span>
+            </a>
+            <a href="blog.html" class="nav-item active">
+                <i class="fas fa-comment-dots"></i>
+                <span>TRỢ LÝ</span>
+            </a>
+        </nav>
+    </div>
+</body>
+</html>

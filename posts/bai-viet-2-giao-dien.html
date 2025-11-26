@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tối Ưu Hóa Giao Diện Lịch với CSS Grid/Flexbox | Vạn Niên Số Dev</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="app-container blog-container">
+        <header class="blog-header">
+            <a href="blog.html" class="back-to-home"><i class="fas fa-arrow-left"></i> Quay lại Blog</a>
+            <h1>📐 Tối Ưu Hóa Giao Diện Lịch với CSS Grid/Flexbox</h1>
+            <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9em;">Đăng ngày 26/11/2025 | Chuyên mục: Frontend</p>
+        </header>
+
+        <main class="blog-main-content">
+            <div class="post-content">
+                
+                <p>Việc tạo ra bố cục cho lịch là một ví dụ hoàn hảo để áp dụng **CSS Grid**. Khác với việc sử dụng các thuộc tính cũ như <code>float</code> hoặc thậm chí cả **Flexbox** (khi cần cả hàng và cột), Grid giúp ta định nghĩa cấu trúc 2 chiều một cách rõ ràng và mạnh mẽ hơn.</p>
+
+                <h3>1. Thiết lập Cấu trúc HTML</h3>
+                <p>Chúng ta cần một thẻ cha bao bọc <code>.calendar-grid</code> và các thẻ con <code>.calendar-header-day</code> (nhãn thứ) cùng với các ô ngày <code>.calendar-day</code>.</p>
+
+                <pre>
+<code>
+&lt;div class="calendar-grid"&gt;
+    &lt;div class="calendar-header-day"&gt;CN&lt;/div&gt;
+    ...
+    &lt;div class="calendar-header-day"&gt;T7&lt;/div&gt;
+
+    &lt;!-- Ngày tháng sẽ được JS chèn vào --&gt;
+    &lt;div class="calendar-day"&gt;...&lt;/div&gt;
+    &lt;div class="calendar-day today"&gt;...&lt;/div&gt;
+    ...
+&lt;/div&gt;
+</code>
+                </pre>
+
+                <h3>2. Áp dụng CSS Grid cho Bố cục 7 Cột</h3>
+                <p>Thuộc tính then chốt là <code>display: grid;</code> và <code>grid-template-columns</code>. Chúng ta sử dụng hàm <code>repeat(7, 1fr)</code> để tạo ra 7 cột có chiều rộng bằng nhau (1 phần - 1 fraction), đảm bảo tính **responsive** tuyệt đối.</p>
+                
+
+                <h4>Mã CSS Cốt lõi:</h4>
+                <pre>
+<code>
+.calendar-grid {
+    display: grid;
+    /* Tạo 7 cột có chiều rộng bằng nhau. */
+    grid-template-columns: repeat(7, 1fr); 
+    gap: 2px; /* Khoảng cách giữa các ô */
+    text-align: center;
+}
+
+.calendar-day { 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    /* Dùng aspect-ratio để giữ ô luôn là hình vuông */
+    aspect-ratio: 1 / 1; 
+    /* ... các style khác ... */
+}
+</code>
+                </pre>
+
+                <p>Bằng cách này, dù màn hình di động nhỏ hay desktop lớn, bố cục lịch luôn duy trì được 7 cột hoàn hảo và các ô ngày tự động căn chỉnh để giữ tỷ lệ hình vuông, tạo giao diện chuyên nghiệp và rõ ràng.</p>
+
+            </div>
+        </main>
+
+        <footer>
+            <p style="text-align: center; font-size: 0.8em; color: #999; padding: 20px 0;">
+                &copy; 2025 Vạn Niên Số Dev. Cùng nhau chia sẻ kiến thức.
+            </p>
+        </footer>
+
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item">
+                <i class="fas fa-calendar-alt"></i>
+                <span>LỊCH</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fas fa-heart"></i>
+                <span>BÓI DUYÊN</span>
+            </a>
+            <a href="blog.html" class="nav-item active">
+                <i class="fas fa-comment-dots"></i>
+                <span>TRỢ LÝ</span>
+            </a>
+        </nav>
+    </div>
+</body>
+</html>
