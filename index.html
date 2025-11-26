@@ -10,6 +10,7 @@
 </head>
 <body>
     <div class="app-container">
+        
         <header class="app-header">
             <div class="logo">L</div>
             <div class="app-name">Vạn Niên Số</div>
@@ -33,10 +34,26 @@
                 <div class="calendar-header-day">T5</div>
                 <div class="calendar-header-day">T6</div>
                 <div class="calendar-header-day">T7</div>
-
                 </div>
         </div>
 
+        <div id="dayDetailModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h2 id="modalDateDisplay">Chi tiết ngày...</h2>
+                
+                <h3><i class="fas fa-pencil-alt"></i> Ghi Chú:</h3>
+                <textarea id="noteInput" placeholder="Thêm ghi chú cá nhân cho ngày này..."></textarea>
+                <button id="saveNoteBtn" class="primary-btn"><i class="fas fa-save"></i> Lưu Ghi Chú</button>
+                <hr>
+
+                <h3><i class="fas fa-bell"></i> Reminders/Sự kiện:</h3>
+                <ul id="reminderList">
+                    </ul>
+                <button id="addReminderBtn" class="secondary-btn"><i class="fas fa-plus"></i> Thêm Reminder</button>
+            </div>
+        </div>
+        
         <nav class="bottom-nav">
             <a href="index.html" class="nav-item active">
                 <i class="fas fa-calendar-alt"></i>
@@ -51,25 +68,6 @@
                 <span>TRỢ LÝ</span>
             </a>
         </nav>
-    </div>
-	
-	<div id="dayDetailModal" class="modal">
-    <div class="modal-content">
-        <span class="close-button">&times;</span>
-        <h2 id="modalDateDisplay">Chi tiết ngày 26/11/2025</h2>
-        
-        <h3>Ghi chú:</h3>
-        <textarea id="noteInput" placeholder="Thêm ghi chú cá nhân cho ngày này..."></textarea>
-        <button id="saveNoteBtn">Lưu Ghi Chú</button>
-
-        <h3>Reminders/Sự kiện:</h3>
-        <ul id="reminderList">
-            <li><input type="checkbox"> Nhắc nhở: Cuộc họp lúc 10h</li>
-        </ul>
-        <button id="addReminderBtn">Thêm Reminder</button>
-    </div>
-</div>
-
-    <script src="js/main.js"></script>
+    </div> <script src="js/main.js"></script>
 </body>
 </html>

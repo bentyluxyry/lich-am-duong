@@ -7,7 +7,7 @@
     --text-primary: #333;
     --text-secondary: #666;
     --shadow-light: 0 4px 10px rgba(0, 0, 0, 0.08);
-    --red-alert: #ff6347; /* Màu đỏ cho reminder */
+    --red-alert: #ff6347; 
 }
 
 *, *::before, *::after {
@@ -21,7 +21,7 @@ body {
     line-height: 1.6;
     background-color: var(--grey-background); 
     color: var(--text-primary);
-    scroll-behavior: smooth; /* Cuộn trang mượt */
+    scroll-behavior: smooth; 
     
     /* Thiết lập cho .app-container */
     display: flex; 
@@ -84,12 +84,6 @@ a, button, .post-card, .calendar-day {
     margin-right: 10px;
 }
 
-.app-header .app-name {
-    font-size: 1.3em;
-    font-weight: 500;
-    color: var(--text-primary);
-}
-
 /* Blog Header */
 .blog-header {
     background-color: var(--purple-main); 
@@ -99,7 +93,6 @@ a, button, .post-card, .calendar-day {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
     position: relative;
 }
-
 .back-to-home {
     position: absolute;
     left: 15px;
@@ -109,11 +102,8 @@ a, button, .post-card, .calendar-day {
     text-decoration: none;
     opacity: 0.9;
 }
-.back-to-home:hover {
-    opacity: 1;
-}
 
-/* Bottom Nav (Fixed) */
+/* Bottom Nav (Fixed) - Quan trọng để Fix lỗi mất Nav */
 .bottom-nav {
     display: flex;
     justify-content: space-around;
@@ -121,16 +111,15 @@ a, button, .post-card, .calendar-day {
     background-color: white;
     border-top: 1px solid #eee;
     padding: 10px 0;
-    position: fixed; 
+    position: fixed; /* Cố định vị trí */
     bottom: 0;
     width: 100%;
-    max-width: 400px;
+    max-width: 400px; /* Ràng buộc theo app-container */
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
     z-index: 1000;
 }
-/* Mở rộng Nav cho blog khi ở chế độ desktop */
 .blog-container .bottom-nav {
-    max-width: 960px;
+    max-width: 960px; /* Mở rộng cho blog trên desktop */
 }
 
 .bottom-nav .nav-item {
@@ -142,12 +131,6 @@ a, button, .post-card, .calendar-day {
     font-size: 0.8em;
     font-weight: 500;
 }
-
-.bottom-nav .nav-item i {
-    font-size: 1.4em;
-    margin-bottom: 5px;
-}
-
 .bottom-nav .nav-item.active {
     color: var(--purple-main); 
 }
@@ -160,61 +143,21 @@ a, button, .post-card, .calendar-day {
     padding: 20px;
     flex-grow: 1; 
 }
-
-.calendar-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.calendar-nav .nav-arrow {
-    background: none;
-    border: none;
-    font-size: 1.2em;
-    color: var(--purple-main);
-    cursor: pointer;
-    padding: 5px 10px;
-    border-radius: 5px;
-}
-
-.calendar-nav .current-month-year {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 1.2em;
-    font-weight: 500;
-}
-
-.calendar-nav .toggle-notify {
-    background-color: var(--grey-background);
-    border: none;
-    border-radius: 20px;
-    padding: 5px 10px;
-    font-size: 0.8em;
-    color: #666;
-    margin-top: 5px;
-    cursor: pointer;
-}
-
 .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 5px;
     text-align: center;
 }
-
 .calendar-header-day {
     font-size: 0.9em;
     color: #999;
     padding: 10px 0;
     font-weight: 500;
 }
-
 .calendar-day {
     padding: 8px 0;
     font-size: 1em;
-    color: var(--text-primary);
     border-radius: 50%;
     display: flex;
     flex-direction: column;
@@ -227,12 +170,6 @@ a, button, .post-card, .calendar-day {
     position: relative;
     line-height: 1; 
 }
-
-.calendar-day .solar-date {
-    font-weight: 500;
-    font-size: 1em;
-}
-
 .calendar-day .lunar-date {
     font-size: 0.7em;
     color: #999; 
@@ -241,16 +178,6 @@ a, button, .post-card, .calendar-day {
     left: 50%;
     transform: translateX(-50%);
 }
-
-.calendar-day.prev-month,
-.calendar-day.next-month {
-    color: #ccc; 
-}
-.calendar-day.prev-month .lunar-date,
-.calendar-day.next-month .lunar-date {
-    color: #ccc;
-}
-
 .calendar-day.today {
     background-color: var(--purple-main);
     color: white;
@@ -258,9 +185,6 @@ a, button, .post-card, .calendar-day {
 .calendar-day.today .lunar-date {
     color: rgba(255, 255, 255, 0.7); 
 }
-
-
-/* Indicator dot (Dấu chấm nhỏ cho Note/Reminder) */
 .indicator-dot {
     position: absolute;
     bottom: 0px;
@@ -269,10 +193,6 @@ a, button, .post-card, .calendar-day {
     background-color: var(--red-alert); 
     border-radius: 50%;
 }
-.calendar-day.today .indicator-dot {
-     background-color: white; 
-}
-
 
 /* ================================================= */
 /* 5. BLOG CONTENT & POST CARD STYLES */
@@ -281,22 +201,11 @@ a, button, .post-card, .calendar-day {
     padding: 20px;
     flex-grow: 1;
 }
-
-.blog-main-content h2 {
-    color: var(--text-primary);
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 10px;
-    margin-bottom: 25px;
-    font-size: 1.5em;
-    font-weight: 700;
-}
-
 .post-list {
     display: flex;
     flex-direction: column; 
     gap: 15px;
 }
-
 .post-card {
     background-color: white;
     padding: 18px;
@@ -304,60 +213,15 @@ a, button, .post-card, .calendar-day {
     box-shadow: var(--shadow-light);
     cursor: pointer;
 }
-
 .post-card:hover {
-    transform: translateY(-5px); /* Hiệu ứng lift mượt */
+    transform: translateY(-5px); 
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
 }
-
 .post-card h3 a {
     color: var(--purple-main);
     text-decoration: none;
     font-size: 1.3em;
-    margin-top: 0;
-    display: block;
     font-weight: 500;
-}
-
-.post-card h3 a:hover {
-    text-decoration: underline;
-}
-
-.post-card p {
-    color: var(--text-secondary);
-    font-size: 0.9em;
-    margin: 8px 0;
-}
-
-.meta {
-    display: block;
-    font-size: 0.75em;
-    color: #aaa;
-    margin-top: 5px;
-}
-
-/* Style for individual post pages (post-content) */
-.post-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    margin-top: 20px;
-}
-.post-content h3 {
-    color: var(--purple-main);
-    border-bottom: 1px dashed #eee;
-    padding-bottom: 5px;
-    margin-top: 25px;
-    font-size: 1.3em;
-}
-.post-content pre {
-    background-color: #f4f4f4;
-    padding: 15px;
-    border-left: 4px solid var(--purple-main);
-    overflow-x: auto;
-    border-radius: 4px;
-    font-size: 0.9em;
 }
 
 
@@ -401,25 +265,6 @@ a, button, .post-card, .calendar-day {
     font-weight: bold;
     cursor: pointer;
 }
-.close-button:hover, .close-button:focus {
-    color: #000;
-    text-decoration: none;
-}
-
-.modal-content h2 {
-    color: var(--purple-main);
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-    margin-top: 0;
-}
-.modal-content h3 {
-    font-size: 1.1em;
-    color: #444;
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-
-/* Form controls */
 #noteInput {
     width: 100%;
     min-height: 80px;
@@ -430,7 +275,6 @@ a, button, .post-card, .calendar-day {
     resize: vertical;
     font-family: 'Roboto', sans-serif;
 }
-
 .primary-btn, .secondary-btn {
     padding: 10px 15px;
     border: none;
@@ -447,119 +291,32 @@ a, button, .post-card, .calendar-day {
     background-color: var(--grey-background);
     color: #333;
 }
-.primary-btn i, .secondary-btn i {
-    margin-right: 5px;
-}
-
-hr {
-    border: none;
-    border-top: 1px solid #eee;
-    margin: 20px 0;
-}
-
-/* Reminder List styles */
-#reminderList {
-    list-style: none;
-    padding: 0;
-    margin: 10px 0;
-}
-#reminderList li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px 0;
-    border-bottom: 1px dotted #eee;
-}
-#reminderList li input[type="checkbox"] {
-    margin-right: 10px;
-}
-#reminderList li span {
-    flex-grow: 1;
-}
 .reminder-done {
     text-decoration: line-through;
     color: #aaa;
 }
-.delete-reminder {
-    background: none;
-    border: none;
-    color: var(--red-alert); 
-    cursor: pointer;
-    font-size: 0.9em;
-}
-
 
 /* ================================================= */
 /* 7. MEDIA QUERIES (TÍNH ĐÁP ỨNG) */
 /* ================================================= */
-
-/* Transition sang Desktop/Tablet (Màn hình lớn hơn 768px) */
 @media (min-width: 768px) {
-    
-    /* Mở rộng khung blog cho màn hình lớn */
     .app-container.blog-container {
         border-radius: 12px;
-        margin-top: 20px;
-        margin-bottom: 20px;
+        margin: 20px auto;
         min-height: unset; 
         padding-bottom: 0; 
     }
-
-    /* Ẩn Bottom Nav và chuyển sang Footer/Header Nav truyền thống */
     .bottom-nav {
-        display: none; 
-    }
-    
-    /* Điều chỉnh font và padding cho Desktop */
-    .blog-header h1 {
-        font-size: 2.5em;
-    }
-    .post-card {
-        padding: 25px;
-    }
-    .post-card h3 a {
-        font-size: 1.5em;
-    }
-    .post-card p {
-        font-size: 1em;
-    }
-
-    /* Nếu muốn căn giữa lịch trên Desktop (khi không dùng blog-container) */
-    .app-container:not(.blog-container) {
-        margin-top: 30px;
-        margin-bottom: 30px;
-        min-height: unset;
+        display: none; /* Ẩn Nav dưới cùng trên Desktop */
     }
 }
-
-/* Mobile nhỏ (dưới 480px) */
 @media (max-width: 480px) {
     .app-container {
-        border-radius: 0; /* Tràn ra full màn hình */
+        border-radius: 0; 
         box-shadow: none;
     }
-    
-    .blog-header {
-        padding-top: 40px; 
-    }
-    .blog-header h1 {
-        font-size: 1.6em;
-    }
-    .back-to-home {
-        top: 45px;
-    }
-    
-    /* Điều chỉnh ô lịch cho màn hình rất nhỏ */
     .calendar-day {
         height: 35px;
         width: 35px;
-        font-size: 0.9em;
-    }
-    .calendar-day .lunar-date {
-        font-size: 0.65em;
-        bottom: 2px;
-    }
-    .bottom-nav .nav-item span {
-        font-size: 0.7em;
     }
 }

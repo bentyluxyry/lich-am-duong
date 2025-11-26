@@ -18,15 +18,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Dữ liệu giả lập cho lịch âm (CHỈ LÀ VÍ DỤ, cần thay bằng thư viện Lịch Âm thực tế)
     const lunarData = {
-        '20251126': '6/10', // Ví dụ: 26/11 DL là 6/10 AL
+        '20251126': '6/10', 
         '20251201': '1/11',
         '20251230': '30/11'
     };
 
     function getLunarDate(year, month, day) {
-        // Month là 0-index, cần +1 khi tạo key
         const key = `${year}${String(month + 1).padStart(2, '0')}${String(day).padStart(2, '0')}`;
-        // Lấy dữ liệu từ mock data hoặc trả về placeholder
         return lunarData[key] || (day % 3 === 0 ? 'L.M.' : 'L.N.');
     }
 
@@ -42,13 +40,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // --- HÀM LOCAL STORAGE CHO REMINDERS ---
     function saveReminders(dateKey, reminders) {
-        // Lưu mảng reminders dưới dạng chuỗi JSON
         localStorage.setItem(`reminders_${dateKey}`, JSON.stringify(reminders));
     }
 
     function loadReminders(dateKey) {
         const json = localStorage.getItem(`reminders_${dateKey}`);
-        // Trả về mảng rỗng nếu chưa có dữ liệu
         return json ? JSON.parse(json) : [];
     }
     
@@ -71,16 +67,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- LOGIC RENDER LỊCH (TẠO CÁC Ô NGÀY) ---
     function renderCalendar() {
-        // ... (Giữ nguyên logic render header CN, T2, T3...)
-        calendarGrid.innerHTML = ''; 
-        
-        // Re-add day headers (CN, T2,...)
-        const dayHeaders = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
-        dayHeaders.forEach(day => {
-            const headerDiv = document.createElement('div');
-            headerDiv.className = 'calendar-header-day';
-            headerDiv.textContent = day;
-            calendarGrid.appendChild(headerDiv);
+        // Xóa các ô ngày cũ (giữ lại header days trong HTML)
+        const existingDays = calendarGrid.querySelectorAll('.calendar-day, .calendar-header-day');
+        existingDays.forEach((el, index) => {
+             // Chỉ xóa các ô ngày, giữ lại 7 header đầu tiên
+            if (index >= 7) {
+                el.remove(); 
+            }
         });
 
         const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
@@ -103,11 +96,8 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 1; i <= daysInMonth; i++) {
             const dayDiv = document.createElement('div');
             const lunarText = getLunarDate(currentYear, currentMonth, i);
-            
-            // Tạo Key định dạng YYYYMMDD cho Local Storage
             const dateKey = `${currentYear}${String(currentMonth + 1).padStart(2, '0')}${String(i).padStart(2, '0')}`;
             
-            // Kiểm tra xem ngày có ghi chú/reminder không để thêm dấu chấm nhỏ
             const hasNoteOrReminder = loadNote(dateKey) || loadReminders(dateKey).length > 0;
             
             dayDiv.className = 'calendar-day';
@@ -145,16 +135,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function openDayDetail(dateKey, day, month, year) {
         selectedDateKey = dateKey;
         
-        // 1. Cập nhật tiêu đề ngày
         modalDateDisplay.textContent = `Chi tiết ngày ${day}/${month + 1}/${year}`;
-        
-        // 2. Tải Ghi chú
         noteInput.value = loadNote(dateKey);
-        
-        // 3. Tải Reminders
         displayReminders(dateKey);
-        
-        // 4. Mở Modal
         modal.style.display = 'block';
     }
 
@@ -162,7 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
     saveNoteBtn.addEventListener('click', () => {
         saveNote(selectedDateKey, noteInput.value.trim());
         alert('Đã lưu ghi chú!');
-        // Tải lại lịch để hiển thị dấu chấm chỉ báo (indicator dot)
         renderCalendar(); 
     });
     
@@ -174,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
             reminders.push({ text: text, done: false });
             saveReminders(selectedDateKey, reminders);
             displayReminders(selectedDateKey);
-            renderCalendar(); // Tải lại lịch
+            renderCalendar(); 
         }
     });
 
@@ -186,16 +168,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const index = parseInt(e.target.dataset.index);
             reminders[index].done = e.target.checked;
             saveReminders(selectedDateKey, reminders);
-            displayReminders(selectedDateKey); // Tải lại để áp dụng style
+            displayReminders(selectedDateKey); 
         }
         
         if (e.target.classList.contains('delete-reminder') || e.target.parentElement.classList.contains('delete-reminder')) {
             const btn = e.target.closest('.delete-reminder');
             const index = parseInt(btn.dataset.index);
-            reminders.splice(index, 1); // Xóa phần tử
+            reminders.splice(index, 1); 
             saveReminders(selectedDateKey, reminders);
             displayReminders(selectedDateKey);
-            renderCalendar(); // Tải lại lịch
+            renderCalendar(); 
         }
     });
 
@@ -204,7 +186,6 @@ document.addEventListener('DOMContentLoaded', () => {
     closeModalBtn.addEventListener('click', () => {
         modal.style.display = 'none';
     });
-    // Đóng Modal khi click ra ngoài
     window.addEventListener('click', (e) => {
         if (e.target === modal) {
             modal.style.display = 'none';
