@@ -1,0 +1,107 @@
+/* Thiết lập cơ bản */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+/* Container giới hạn độ rộng */
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+header {
+    background-color: #6C5CE7; /* Màu tím chủ đạo */
+    color: white;
+    padding: 40px 0;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0 0 5px 0;
+    font-size: 2.5em;
+}
+
+header p {
+    opacity: 0.9;
+}
+
+/* Main Content & Post List */
+main {
+    padding: 40px 0;
+}
+
+h2 {
+    color: #444;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+.post-list {
+    display: grid;
+    gap: 20px;
+    /* Dùng Grid để dễ dàng mở rộng bố cục nếu cần */
+}
+
+/* Thẻ bài viết (Post Card) */
+.post-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s;
+}
+
+.post-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.post-card h3 a {
+    color: #6C5CE7; /* Màu tím link */
+    text-decoration: none;
+    font-size: 1.5em;
+    margin-top: 0;
+    display: block;
+}
+
+.post-card h3 a:hover {
+    text-decoration: underline;
+}
+
+.post-card p {
+    color: #666;
+    margin: 10px 0;
+}
+
+.meta {
+    display: block;
+    font-size: 0.9em;
+    color: #aaa;
+    margin-top: 10px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #eee;
+    color: #777;
+    font-size: 0.9em;
+    border-top: 1px solid #ddd;
+}
+
+/* Responsive cơ bản */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 2em;
+    }
+}

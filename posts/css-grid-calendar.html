@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tối Ưu Hóa Giao Diện Lịch với CSS Grid/Flexbox | Vạn Niên Số Dev</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <p><a href="../index.html" style="color: white; text-decoration: none;">← Quay lại Trang Chủ</a></p>
+            <h1>📐 Tối Ưu Hóa Giao Diện Lịch với CSS Grid/Flexbox</h1>
+            <span style="color: rgba(255, 255, 255, 0.8);">Đăng ngày 26/11/2025 | Chuyên mục: Frontend</span>
+        </div>
+    </header>
+
+    <main>
+        <div class="container post-content">
+            
+            <p>Việc tạo ra bố cục cho lịch là một ví dụ hoàn hảo để áp dụng **CSS Grid**. Khác với việc sử dụng các thuộc tính cũ như <code>float</code> hoặc thậm chí cả **Flexbox** (khi cần cả hàng và cột), Grid giúp ta định nghĩa cấu trúc 2 chiều một cách rõ ràng và mạnh mẽ hơn.</p>
+
+            <h3>1. Thiết lập Cấu trúc HTML</h3>
+            <p>Chúng ta cần một thẻ cha bao bọc và 42 thẻ con (7 ngày x 6 hàng) để đảm bảo hiển thị đủ các ngày trong tháng, kể cả những ngày thuộc tháng liền kề.</p>
+
+            <pre>
+<code>
+&lt;div class="calendar-grid"&gt;
+    &lt;!-- Đầu tiên là các nhãn CN, T2, T3, ... --&gt;
+    &lt;div class="calendar-header"&gt;CN&lt;/div&gt;
+    ...
+    &lt;div class="calendar-header"&gt;T7&lt;/div&gt;
+
+    &lt;!-- Tiếp theo là các ô ngày --&gt;
+    &lt;div class="calendar-day"&gt;1&lt;/div&gt;
+    &lt;div class="calendar-day active"&gt;2&lt;/div&gt;
+    ...
+&lt;/div&gt;
+</code>
+            </pre>
+
+            <h3>2. Áp dụng CSS Grid cho Bố cục 7 Cột</h3>
+            <p>Thuộc tính then chốt là <code>display: grid;</code> và <code>grid-template-columns</code>. Chúng ta sử dụng hàm <code>repeat(7, 1fr)</code> để tạo ra 7 cột có chiều rộng bằng nhau (1 phần - 1 fraction).</p>
+            
+
+            <h4>Mã CSS Cốt lõi:</h4>
+            <pre>
+<code>
+.calendar-grid {
+    display: grid;
+    /* Tạo 7 cột có chiều rộng bằng nhau. */
+    grid-template-columns: repeat(7, 1fr); 
+    gap: 5px; /* Khoảng cách giữa các ô */
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+}
+
+.calendar-header {
+    text-align: center;
+    font-weight: bold;
+    color: #6C5CE7;
+}
+
+.calendar-day {
+    /* Đảm bảo ô vuông */
+    padding-top: 100%; 
+    position: relative;
+    cursor: pointer;
+    text-align: center;
+}
+</code>
+            </pre>
+
+            <h3>3. Sử dụng Flexbox bên trong Ô Ngày</h3>
+            <p>Trong mỗi ô ngày (<code>.calendar-day</code>), chúng ta cần căn chỉnh cả số Dương lịch (lớn hơn) và số Âm lịch (nhỏ hơn, nằm phía dưới). Lúc này, **Flexbox** sẽ phát huy tác dụng để căn chỉnh nội dung theo chiều dọc và ngang bên trong ô Grid.</p>
+
+            <p>Kỹ thuật kết hợp **Grid** (cho bố cục tổng thể) và **Flexbox** (cho chi tiết nội dung) là một phương pháp tối ưu giúp giao diện lịch của Vạn Niên Số vừa gọn gàng, vừa dễ dàng tùy biến.</p>
+
+        </div>
+    </main>
+    
+    <style>
+        .post-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .post-content h3 {
+            color: #6C5CE7;
+            border-bottom: 1px dashed #eee;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        .post-content pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-left: 4px solid #6C5CE7;
+            overflow-x: auto;
+            border-radius: 4px;
+        }
+    </style>
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Vạn Niên Số Dev. Cùng nhau chia sẻ kiến thức.</p>
+        </div>
+    </footer>
+</body>
+</html>

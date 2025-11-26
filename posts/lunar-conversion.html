@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tính Âm Lịch trong JS/Python | Vạn Niên Số Dev</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <p><a href="../index.html" style="color: white; text-decoration: none;">← Quay lại Trang Chủ</a></p>
+            <h1>📅 Cách Tính Toán Ngày Âm Lịch Chính Xác trong JS/Python</h1>
+            <span style="color: rgba(255, 255, 255, 0.8);">Đăng ngày 26/11/2025 | Chuyên mục: Kỹ thuật</span>
+        </div>
+    </header>
+
+    <main>
+        <div class="container post-content">
+            
+            <p>Việc hiển thị lịch Âm Dương song hành là một tính năng cốt lõi của ứng dụng Vạn Niên Số. Tuy nhiên, việc chuyển đổi chính xác giữa hai hệ thống lịch này đòi hỏi sự hiểu biết về thiên văn học và các quy tắc lịch pháp...</p>
+
+            <h3>1. Thách thức của Lịch Âm Dương</h3>
+            <p>Khác với Lịch Dương (Gregorian) đơn giản, Lịch Âm (Lunar Calendar) phức tạp hơn vì nó dựa trên chu kỳ của mặt trăng. Các yếu tố cần xem xét:</p>
+            <ul>
+                <li><strong>Tháng Nhuận:</strong> Cứ khoảng 3 năm lại có một tháng nhuận để đồng bộ hóa với chu kỳ mặt trời.</li>
+                <li><strong>Múi Giờ:</strong> Việc xác định ngày mới bắt đầu phải căn cứ vào múi giờ địa phương (Việt Nam là GMT+7).</li>
+            </ul>
+
+            <h3>2. Phương pháp trong JavaScript (Frontend)</h3>
+            <p>Đối với môi trường trình duyệt, việc tự viết công thức tính toán rất dễ xảy ra lỗi. Thay vào đó, chúng ta có thể dựa vào các thư viện đã được kiểm chứng hoặc một bảng tra cứu (lookup table) chính xác.</p>
+
+            <h4>Mã mẫu (Giả định):</h4>
+            <pre>
+<code>
+/**
+ * Hàm giả định chuyển đổi Dương lịch sang Âm lịch
+ * Cần sử dụng thư viện lịch pháp uy tín hoặc API backend
+ */
+function convertSolarToLunar(year, month, day) {
+    // Gọi API hoặc hàm tính toán phức tạp tại đây
+    // Ví dụ: return { lunarDay: 15, lunarMonth: 10, lunarYear: 2025, isLeap: false };
+    
+    // Giả định trả về
+    if (month === 11 && day === 26) {
+        return "Ngày 6, Tháng 10 Âm lịch (năm Ất Tỵ)"; 
+    }
+    return "Đang cập nhật...";
+}
+
+console.log(convertSolarToLunar(2025, 11, 26)); 
+</code>
+            </pre>
+
+            <h3>3. Tối ưu hóa hiệu năng</h3>
+            <p>Để tránh việc tính toán phức tạp lặp lại, Vạn Niên Số thường sử dụng kỹ thuật **Caching** hoặc tính toán trước (Pre-calculation) dữ liệu lịch cho một khoảng thời gian dài (ví dụ: 100 năm) và lưu trữ dưới dạng JSON/Database.</p>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Vạn Niên Số Dev. Cùng nhau chia sẻ kiến thức.</p>
+        </div>
+    </footer>
+
+    <style>
+        .post-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .post-content h3 {
+            color: #6C5CE7;
+            border-bottom: 1px dashed #eee;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        .post-content pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-left: 4px solid #6C5CE7;
+            overflow-x: auto;
+            border-radius: 4px;
+        }
+    </style>
+</body>
+</html>

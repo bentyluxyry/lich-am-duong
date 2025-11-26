@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kỹ Thuật Hiển Thị Trạng Thái Ngày Hiện Tại (Active State) | Vạn Niên Số Dev</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <p><a href="../index.html" style="color: white; text-decoration: none;">← Quay lại Trang Chủ</a></p>
+            <h1>✨ Kỹ Thuật Hiển Thị Trạng Thái Ngày Hiện Tại (Active State)</h1>
+            <span style="color: rgba(255, 255, 255, 0.8);">Đăng ngày 26/11/2025 | Chuyên mục: JS & UI/UX</span>
+        </div>
+    </header>
+
+    <main>
+        <div class="container post-content">
+            
+            <p>Việc làm nổi bật ngày hiện tại hoặc ngày mà người dùng đang chọn là một phần quan trọng trong bất kỳ ứng dụng lịch nào. Đây là cách Vạn Niên Số sử dụng kết hợp JavaScript (quản lý logic) và CSS (quản lý giao diện) để tạo ra hiệu ứng nổi bật với màu Tím.</p>
+
+            <h3>1. Định nghĩa Class CSS `active`</h3>
+            <p>Chúng ta cần một class CSS duy nhất, ví dụ là <code>.active</code>, để áp dụng tất cả các hiệu ứng nổi bật (màu nền, màu chữ, bo tròn, v.v.).</p>
+
+            <pre>
+<code>
+.calendar-day.active {
+    background-color: #6C5CE7; /* Màu tím bạn thấy trong ảnh */
+    color: white;
+    font-weight: bold;
+    /* Dùng border-radius: 50% để tạo hình tròn */
+    border-radius: 50%; 
+    /* Thêm hiệu ứng chuyển đổi mượt mà */
+    transition: all 0.2s ease-in-out;
+}
+</code>
+            </pre>
+            
+
+            <h3>2. Quản lý Trạng thái bằng JavaScript</h3>
+            <p>JavaScript chịu trách nhiệm tìm ra ô ngày nào cần được làm nổi bật và thêm/bỏ class <code>.active</code> tương ứng. Có hai trường hợp chính:</p>
+            
+            <h4>2.1. Hiển thị Ngày Hiện Tại (Initial Load)</h4>
+            <p>Khi trang được tải lần đầu, chúng ta sử dụng JavaScript để tìm ngày hiện tại dựa trên thuộc tính dữ liệu (ví dụ: <code>data-date</code>) và áp dụng class.</p>
+
+            <pre>
+<code>
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Lấy ngày hiện tại ở định dạng YYYY-MM-DD
+    const today = new Date().toISOString().slice(0, 10); // Ví dụ: "2025-11-26"
+    
+    // 2. Tìm phần tử tương ứng
+    const activeDay = document.querySelector(`.calendar-day[data-date="${today}"]`);
+
+    // 3. Thêm class 'active'
+    if (activeDay) {
+        activeDay.classList.add('active');
+    }
+});
+</code>
+            </pre>
+
+            <h4>2.2. Xử lý Sự kiện Click (User Interaction)</h4>
+            <p>Khi người dùng nhấp vào một ngày khác, chúng ta phải loại bỏ class <code>.active</code> khỏi ngày cũ và áp dụng nó cho ngày mới.</p>
+
+            <pre>
+<code>
+document.querySelectorAll('.calendar-day').forEach(dayElement => {
+    dayElement.addEventListener('click', (event) => {
+        // 1. Tìm và loại bỏ class 'active' khỏi phần tử cũ
+        const oldActive = document.querySelector('.calendar-day.active');
+        if (oldActive) {
+            oldActive.classList.remove('active');
+        }
+        
+        // 2. Thêm class 'active' vào phần tử vừa click
+        event.currentTarget.classList.add('active');
+    });
+});
+</code>
+            </pre>
+
+        </div>
+    </main>
+
+    <style>
+        .post-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .post-content h3 {
+            color: #6C5CE7;
+            border-bottom: 1px dashed #eee;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        .post-content pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-left: 4px solid #6C5CE7;
+            overflow-x: auto;
+            border-radius: 4px;
+        }
+    </style>
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Vạn Niên Số Dev. Cùng nhau chia sẻ kiến thức.</p>
+        </div>
+    </footer>
+</body>
+</html>
