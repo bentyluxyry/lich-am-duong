@@ -52,6 +52,23 @@
             </a>
         </nav>
     </div>
+	
+	<div id="dayDetailModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2 id="modalDateDisplay">Chi tiết ngày 26/11/2025</h2>
+        
+        <h3>Ghi chú:</h3>
+        <textarea id="noteInput" placeholder="Thêm ghi chú cá nhân cho ngày này..."></textarea>
+        <button id="saveNoteBtn">Lưu Ghi Chú</button>
+
+        <h3>Reminders/Sự kiện:</h3>
+        <ul id="reminderList">
+            <li><input type="checkbox"> Nhắc nhở: Cuộc họp lúc 10h</li>
+        </ul>
+        <button id="addReminderBtn">Thêm Reminder</button>
+    </div>
+</div>
 
     <script src="js/main.js"></script>
 </body>
