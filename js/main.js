@@ -26,13 +26,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 2. LOGIC LOCAL STORAGE (DATA) ---
 
-    // Hàm chung để lấy ngày âm lịch
     function getLunarDate(year, month, day) {
         const key = `${year}${String(month + 1).padStart(2, '0')}${String(day).padStart(2, '0')}`;
         return lunarData[key] || (day % 3 === 0 ? 'L.M.' : 'L.N.');
     }
 
-    // Ghi chú
     function saveNote(dateKey, content) {
         localStorage.setItem(`note_${dateKey}`, content);
     }
@@ -40,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return localStorage.getItem(`note_${dateKey}`) || '';
     }
     
-    // Reminders
     function saveReminders(dateKey, reminders) {
         localStorage.setItem(`reminders_${dateKey}`, JSON.stringify(reminders));
     }
@@ -52,9 +49,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 3. LOGIC XỬ LÝ GIAO DIỆN & LỊCH (UI) ---
 
-    // Hàm chính render lịch
+    function displayRemindersInModal(dateKey) {
+        const reminders = loadReminders(dateKey);
+        DOM.reminderList.innerHTML = '';
+        
+        reminders.forEach((reminder, index) => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <input type="checkbox" data-index="${index}" ${reminder.done ? 'checked' : ''}>
+                <span class="${reminder.done ? 'reminder-done' : ''}">${reminder.text}</span>
+                <button class="delete-reminder" data-index="${index}"><i class="fas fa-trash"></i></button>
+            `;
+            DOM.reminderList.appendChild(li);
+        });
+    }
+
     function renderCalendar() {
-        // Xóa các ô ngày cũ (giữ lại 7 header days)
         const existingDays = DOM.calendarGrid.querySelectorAll('.calendar-day, .calendar-header-day');
         existingDays.forEach((el, index) => { if (index >= 7) el.remove(); });
 
@@ -106,23 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Hiển thị reminders trong modal
-    function displayRemindersInModal(dateKey) {
-        const reminders = loadReminders(dateKey);
-        DOM.reminderList.innerHTML = '';
-        
-        reminders.forEach((reminder, index) => {
-            const li = document.createElement('li');
-            li.innerHTML = `
-                <input type="checkbox" data-index="${index}" ${reminder.done ? 'checked' : ''}>
-                <span class="${reminder.done ? 'reminder-done' : ''}">${reminder.text}</span>
-                <button class="delete-reminder" data-index="${index}"><i class="fas fa-trash"></i></button>
-            `;
-            DOM.reminderList.appendChild(li);
-        });
-    }
-
-    // Mở Modal chi tiết ngày
     function openDayDetail(dateKey, day, month, year) {
         selectedDateKey = dateKey;
         

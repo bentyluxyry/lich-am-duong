@@ -3,44 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Kỹ Thuật | Vạn Niên Số Dev</title>
+    <title>Blog - Kỹ thuật Lịch Âm Dương</title>
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="app-container blog-container">
+        
         <header class="blog-header">
-            <a href="index.html" class="back-to-home"><i class="fas fa-chevron-left"></i></a>
-            <h1>Vạn Niên Số Dev Blog 🛠️</h1>
+            <a href="index.html" class="back-to-home"><i class="fas fa-arrow-left"></i> Trang Chủ</a>
+            <h1>Vạn Niên Số</h1>
             <p>Chia sẻ kỹ thuật phát triển ứng dụng Lịch Âm Dương</p>
         </header>
 
-        <main class="blog-main-content">
+        <div class="blog-main-content">
             <h2>Bài Viết Gần Đây</h2>
-            
-            <section class="post-list">
+
+            <div class="post-list">
                 
-                <article class="post-card">
-                    <h3><a href="posts/lunar-conversion.html">📅 Cách Tính Toán Ngày Âm Lịch Chính Xác trong JavaScript/Python</a></h3>
-                    <p>Khám phá logic cốt lõi và những thách thức khi chuyển đổi giữa lịch Dương và lịch Âm, bao gồm các quy tắc nhuận phức tạp.</p>
+                <div class="post-card">
+                    <h3><a href="bai-viet-moi-vi-du.html">Hướng dẫn Nhúng Video Youtube và Cấu trúc Bài Viết H1/H2</a></h3>
+                    <p>Chi tiết về việc sử dụng thẻ H1 cho tiêu đề và cấu trúc H2/H3/H4 cho nội dung, kèm theo kỹ thuật nhúng video responsive.</p>
+                    <span class="meta">Kỹ thuật/HTML | 26/11/2025</span>
+                </div>
+                <div class="post-card">
+                    <h3><a href="#">Cách Tính Toán Ngày Âm Lịch Chính Xác trong JavaScript/Python</a></h3>
+                    <p>Khám phá logic cốt lõi và những thách thức khi chuyển đổi giữa Lịch Dương và Lịch Âm, bao gồm các quy tắc nhuận phức tạp.</p>
                     <span class="meta">Kỹ thuật | 26/11/2025</span>
-                </article>
-
-                <article class="post-card">
-                    <h3><a href="posts/css-grid-calendar.html">📐 Tối Ưu Hóa Giao Diện Lịch với CSS Grid/Flexbox</a></h3>
-                    <p>Hướng dẫn xây dựng bố cục lịch 7 cột đáp ứng (responsive) một cách hiệu quả và hiện đại bằng CSS Grid.</p>
-                    <span class="meta">Frontend | 26/11/2025</span>
-                </article>
+                </div>
                 
-                <article class="post-card">
-                    <h3><a href="posts/active-state.html">✨ Kỹ Thuật Hiển Thị Trạng Thái Ngày Hiện Tại (Active State)</a></h3>
-                    <p>Sử dụng JavaScript và CSS để tạo hiệu ứng nổi bật (màu tím) cho ngày đang chọn, giúp tăng trải nghiệm người dùng.</p>
-                    <span class="meta">JS & UI/UX | 26/11/2025</span>
-                </article>
+                <div class="post-card">
+                    <h3><a href="#">Tối Ưu Hóa Giao Diện Lịch với CSS Grid/Flexbox</a></h3>
+                    <p>Hướng dẫn xây dựng bộ cục 7 cột đáp ứng (responsive) một cách hiệu quả và hiện đại bằng CSS Grid.</p>
+                    <span class="meta">Frontend | 26/11/2025</span>
+                </div>
 
-            </section>
-        </main>
+            </div>
+        </div>
+
+        <footer>
+            <p style="text-align: center; font-size: 0.8em; color: #999; padding: 20px 0;">
+                &copy; 2025 Vạn Niên Số Dev. Được xây dựng trên GitHub Pages.
+            </p>
+        </footer>
 
         <nav class="bottom-nav">
             <a href="index.html" class="nav-item">
