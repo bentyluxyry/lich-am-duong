@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentMonthYearSpan = document.getElementById('current-month-year');
     const prevMonthBtn = document.querySelector('.prev-month');
     const nextMonthBtn = document.querySelector('.next-month');
+    const toggleNotificationBtn = document.querySelector('.toggle-notification'); // Lấy nút thông báo
 
     // Mốc thời gian hiện tại
     let currentDate = new Date();
@@ -12,39 +13,39 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentMonthForToday = currentDate.getMonth();
     const currentYearForToday = currentDate.getFullYear();
 
-    // --- LOGIC TÍNH ÂM LỊCH (Đơn giản hóa cho mục đích demo) ---
-    // Trong thực tế, đây là một thư viện phức tạp. Ở đây chỉ dùng số ngẫu nhiên
-    // hoặc một hàm giả lập để hiển thị L.N. (Lịch Nhuận/Âm)
+    // --- LOGIC TÍNH ÂM LỊCH (Giả lập để sửa lỗi hiển thị) ---
     function getLunarDay(gregorianDate) {
-        // Giả lập ngày âm lịch ngẫu nhiên từ 1 đến 30
-        const date = gregorianDate.getDate();
-        const lunarDay = (date % 30) + 1; 
-
-        // Thêm "1/1" cho ngày đầu tiên của tháng để giả lập Tết
-        if (date === 1 && gregorianDate.getMonth() === 0) {
-             return '1/1'; // Giả lập Tết Dương Lịch là 1/1 Âm Lịch
-        }
+        const day = gregorianDate.getDate();
+        const month = gregorianDate.getMonth();
         
-        // Trả về ngày âm lịch và tháng (giả định)
-        // Ví dụ: L.N. 1/1, L.N. 15, L.N. 2
-        return `L.N. ${lunarDay}`;
+        // Tạo một chu kỳ giả lập 30 ngày cho mỗi tháng Âm Lịch
+        let lunarDay = (day % 30) + 1; 
+        
+        // Điều chỉnh để ngày 1 Dương Lịch của mỗi tháng hiển thị là Mùng 1 Âm Lịch (Giả lập)
+        if (day === 1) {
+             // Giả sử mùng 1 Dương Lịch là mùng 1 Âm Lịch của tháng (month + 1)
+             return `1/${(month % 12) + 1}`; 
+        }
+
+        // Ngày 15 DL (giữa tháng) giả lập là 15 Âm Lịch
+        if (day === 15) {
+             return '15';
+        }
+
+        // Các ngày còn lại: hiển thị ngày Âm Lịch giả lập
+        // Dùng một logic đơn giản hóa: 
+        // 1 -> 1, 2 -> 2, ..., 30 -> 30.
+        // Đây là code giả lập, không phải code tính Âm Lịch thực tế.
+        return (day % 30 === 0) ? '30' : String(day % 30);
     }
 
     // --- RENDER LỊCH ---
     function renderCalendar(month, year) {
-        // Xóa nội dung cũ
         calendarBody.innerHTML = '';
-        
-        // Đặt lại tiêu đề tháng/năm
         currentMonthYearSpan.textContent = `Tháng ${month + 1}, ${year}`;
 
-        // 1. Tìm ngày đầu tiên của tháng (thứ mấy)
-        const firstDayOfMonth = new Date(year, month, 1).getDay(); // 0 (CN) đến 6 (T7)
-        
-        // 2. Tìm tổng số ngày trong tháng
+        const firstDayOfMonth = new Date(year, month, 1).getDay(); 
         const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-        // 3. Tìm tổng số ngày của tháng trước (để điền vào các ô trống)
         const daysInPrevMonth = new Date(year, month, 0).getDate();
 
         // --- BƯỚC 1: Ngày của Tháng Trước ---
@@ -53,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const dayCell = document.createElement('div');
             dayCell.classList.add('day-cell', 'empty-day', 'prev-next-month');
             
-            // Tạo ngày giả định cho việc tính Âm Lịch
             const prevMonthDate = new Date(year, month - 1, day);
             const lunarText = getLunarDay(prevMonthDate);
 
@@ -70,13 +70,11 @@ document.addEventListener('DOMContentLoaded', () => {
             dayCell.classList.add('day-cell');
             dayCell.dataset.date = `${year}-${month + 1}-${day}`;
 
-            // Kiểm tra xem có phải là ngày hôm nay không
             const isToday = (day === today) && (month === currentMonthForToday) && (year === currentYearForToday);
             if (isToday) {
-                dayCell.classList.add('active'); // Thêm class 'active' cho ngày hôm nay
+                dayCell.classList.add('active'); 
             }
 
-            // Tính toán Ngày Âm Lịch
             const thisMonthDate = new Date(year, month, day);
             const lunarText = getLunarDay(thisMonthDate);
             
@@ -87,16 +85,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Xử lý sự kiện click
             dayCell.addEventListener('click', function() {
-                // 1. Xóa trạng thái active cũ
                 document.querySelectorAll('.day-cell').forEach(cell => {
                     cell.classList.remove('active');
                 });
-
-                // 2. Thêm trạng thái active mới
                 this.classList.add('active');
-                
-                // 3. (Optional) Log thông tin ngày được chọn
-                console.log('Ngày được chọn:', this.dataset.date);
             });
 
             calendarBody.appendChild(dayCell);
@@ -104,13 +96,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // --- BƯỚC 3: Ngày của Tháng Kế Tiếp ---
         const totalCells = firstDayOfMonth + daysInMonth;
-        const remainingCells = 42 - totalCells; // Đảm bảo luôn có 6 hàng (7 * 6 = 42)
+        const remainingCells = 42 - totalCells; 
 
         for (let day = 1; day <= remainingCells; day++) {
             const dayCell = document.createElement('div');
             dayCell.classList.add('day-cell', 'empty-day', 'prev-next-month');
             
-            // Tạo ngày giả định cho việc tính Âm Lịch
             const nextMonthDate = new Date(year, month + 1, day);
             const lunarText = getLunarDay(nextMonthDate);
 
@@ -135,6 +126,23 @@ document.addEventListener('DOMContentLoaded', () => {
         currentMonth = currentDate.getMonth();
         currentYear = currentDate.getFullYear();
         renderCalendar(currentMonth, currentYear);
+    });
+
+    // --- CÀI ĐẶT THÔNG BÁO (Notification Handler) ---
+    let notificationsEnabled = false;
+    
+    toggleNotificationBtn.addEventListener('click', () => {
+        notificationsEnabled = !notificationsEnabled;
+        
+        if (notificationsEnabled) {
+            toggleNotificationBtn.innerHTML = '<i class="fas fa-bell"></i> Đang bật thông báo';
+            toggleNotificationBtn.style.color = '#dc3545'; // Ví dụ: màu đỏ khi bật
+            alert("Thông báo ngày đã được BẬT!");
+        } else {
+            toggleNotificationBtn.innerHTML = '<i class="fas fa-bell"></i> Bật thông báo ngày';
+            toggleNotificationBtn.style.color = 'var(--primary-color)';
+            alert("Thông báo ngày đã được TẮT!");
+        }
     });
 
     // Khởi tạo lịch
