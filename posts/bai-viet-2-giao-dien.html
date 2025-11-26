@@ -3,81 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tối Ưu Hóa Giao Diện Lịch với CSS Grid/Flexbox | Vạn Niên Số Dev</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <title>Tối Ưu Hóa Giao Diện Lịch</title>
+    <link rel="stylesheet" href="../css/style.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="app-container blog-container">
-        <header class="blog-header">
-            <a href="blog.html" class="back-to-home"><i class="fas fa-arrow-left"></i> Quay lại Blog</a>
-            <h1>📐 Tối Ưu Hóa Giao Diện Lịch với CSS Grid/Flexbox</h1>
-            <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9em;">Đăng ngày 26/11/2025 | Chuyên mục: Frontend</p>
-        </header>
+        
+        <nav class="top-nav">
+            <a href="../index.html" class="nav-item">LỊCH</a>
+            <a href="#" class="nav-item">BÓI DUYÊN</a>
+            <a href="../blog.html" class="nav-item active">TRỢ LÝ</a>
+        </nav>
+        <div class="post-detail-content">
+            <a href="../blog.html" class="back-to-home"><i class="fas fa-arrow-left"></i> Quay lại Blog</a>
+            <header>
+                <h1>Tối Ưu Hóa Giao Diện Lịch với CSS Grid/Flexbox</h1>
+                <p style="font-size: 0.9em; color: var(--text-muted);">Đăng ngày: 26/11/2025 | Tác giả: Dev Team</p>
+            </header>
+            <hr>
+            
+            <p>Để tạo ra bố cục 7 cột chuẩn mực của lịch, **CSS Grid** là lựa chọn vượt trội so với các phương pháp cũ. Nó cho phép định nghĩa một hệ thống lưới hai chiều (hàng và cột) một cách trực quan.</p>
 
-        <main class="blog-main-content">
-            <div class="post-content">
-                
-                <p>Việc tạo ra bố cục cho lịch là một ví dụ hoàn hảo để áp dụng **CSS Grid**. Khác với việc sử dụng các thuộc tính cũ như <code>float</code> hoặc thậm chí cả **Flexbox** (khi cần cả hàng và cột), Grid giúp ta định nghĩa cấu trúc 2 chiều một cách rõ ràng và mạnh mẽ hơn.</p>
-
-                <h3>1. Thiết lập Cấu trúc HTML</h3>
-                <p>Chúng ta cần một thẻ cha bao bọc <code>.calendar-grid</code> và các thẻ con <code>.calendar-header-day</code> (nhãn thứ) cùng với các ô ngày <code>.calendar-day</code>.</p>
-
-                <pre>
-<code>
-&lt;div class="calendar-grid"&gt;
-    &lt;div class="calendar-header-day"&gt;CN&lt;/div&gt;
-    ...
-    &lt;div class="calendar-header-day"&gt;T7&lt;/div&gt;
-
-    &lt;!-- Ngày tháng sẽ được JS chèn vào --&gt;
-    &lt;div class="calendar-day"&gt;...&lt;/div&gt;
-    &lt;div class="calendar-day today"&gt;...&lt;/div&gt;
-    ...
-&lt;/div&gt;
-</code>
-                </pre>
-
-                <h3>2. Áp dụng CSS Grid cho Bố cục 7 Cột</h3>
-                <p>Thuộc tính then chốt là <code>display: grid;</code> và <code>grid-template-columns</code>. Chúng ta sử dụng hàm <code>repeat(7, 1fr)</code> để tạo ra 7 cột có chiều rộng bằng nhau (1 phần - 1 fraction), đảm bảo tính **responsive** tuyệt đối.</p>
-                
-
-                <h4>Mã CSS Cốt lõi:</h4>
-                <pre>
-<code>
-.calendar-grid {
+            <h2>I. Xây dựng Lưới (Grid System)</h2>
+            <p>Kỹ thuật cốt lõi là sử dụng thuộc tính <span style="font-family: monospace;">grid-template-columns</span> với đơn vị <span style="font-family: monospace;">fr</span> (fractional unit) để đảm bảo 7 cột luôn có chiều rộng bằng nhau và đáp ứng (responsive) hoàn hảo.</p>
+            
+            <h3>Mã CSS cho Lưới Lịch</h3>
+            <pre><code>.calendar-grid {
     display: grid;
-    /* Tạo 7 cột có chiều rộng bằng nhau. */
+    /* Chia 7 cột bằng nhau, chiếm toàn bộ không gian có sẵn */
     grid-template-columns: repeat(7, 1fr); 
-    gap: 2px; /* Khoảng cách giữa các ô */
     text-align: center;
 }
 
-.calendar-day { 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: center; 
-    align-items: center; 
-    /* Dùng aspect-ratio để giữ ô luôn là hình vuông */
-    aspect-ratio: 1 / 1; 
-    /* ... các style khác ... */
-}
-</code>
-                </pre>
+.day-cell {
+    /* Sử dụng Flexbox để căn giữa nội dung Ngày và Âm Lịch */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 60px; 
+}</code></pre>
 
-                <p>Bằng cách này, dù màn hình di động nhỏ hay desktop lớn, bố cục lịch luôn duy trì được 7 cột hoàn hảo và các ô ngày tự động căn chỉnh để giữ tỷ lệ hình vuông, tạo giao diện chuyên nghiệp và rõ ràng.</p>
-
-            </div>
-        </main>
+            <h2>II. Tối ưu Responsive (Mobile First)</h2>
+            <p>Ứng dụng được thiết kế theo tư duy **Mobile First**, nghĩa là CSS mặc định là dành cho mobile. Media Query chỉ được dùng để **tăng** kích thước hoặc **thay đổi** bố cục khi màn hình đủ lớn.</p>
+            
+            <h3>Tùy chỉnh cho Desktop (Media Query)</h3>
+            <p>Ví dụ, tăng chiều cao ô ngày để tận dụng không gian trên máy tính:</p>
+            <pre><code>@media (min-width: 768px) {
+    .calendar-card {
+        padding: 25px;
+    }
+    .day-cell {
+        height: 70px; /* Tăng chiều cao trên desktop */
+    }
+}</code></pre>
+            
+        </div>
 
         <footer>
             <p style="text-align: center; font-size: 0.8em; color: #999; padding: 20px 0;">
-                &copy; 2025 Vạn Niên Số Dev. Cùng nhau chia sẻ kiến thức.
+                &copy; 2025 Vạn Niên Số Dev. 
             </p>
         </footer>
 
         <nav class="bottom-nav">
-            <a href="index.html" class="nav-item">
+            <a href="../index.html" class="nav-item">
                 <i class="fas fa-calendar-alt"></i>
                 <span>LỊCH</span>
             </a>
@@ -85,7 +77,7 @@
                 <i class="fas fa-heart"></i>
                 <span>BÓI DUYÊN</span>
             </a>
-            <a href="blog.html" class="nav-item active">
+            <a href="../blog.html" class="nav-item active">
                 <i class="fas fa-comment-dots"></i>
                 <span>TRỢ LÝ</span>
             </a>

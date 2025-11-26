@@ -3,79 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kỹ Thuật Hiển Thị Trạng Thái Ngày Hiện Tại (Active State) | Vạn Niên Số Dev</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <title>Kỹ Thuật Active State</title>
+    <link rel="stylesheet" href="../css/style.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="app-container blog-container">
-        <header class="blog-header">
-            <a href="blog.html" class="back-to-home"><i class="fas fa-arrow-left"></i> Quay lại Blog</a>
-            <h1>✨ Kỹ Thuật Hiển Thị Trạng Thái Ngày Hiện Tại (Active State)</h1>
-            <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9em;">Đăng ngày 26/11/2025 | Chuyên mục: JS & UI/UX</p>
-        </header>
+        
+        <nav class="top-nav">
+            <a href="../index.html" class="nav-item">LỊCH</a>
+            <a href="#" class="nav-item">BÓI DUYÊN</a>
+            <a href="../blog.html" class="nav-item active">TRỢ LÝ</a>
+        </nav>
+        <div class="post-detail-content">
+            <a href="../blog.html" class="back-to-home"><i class="fas fa-arrow-left"></i> Quay lại Blog</a>
+            <header>
+                <h1>Kỹ Thuật Hiển Thị Trạng Thái Ngày Hiện Tại (Active State)</h1>
+                <p style="font-size: 0.9em; color: var(--text-muted);">Đăng ngày: 26/11/2025 | Tác giả: Dev Team</p>
+            </header>
+            <hr>
+            
+            <p>Trạng thái **Active State** hay **Ngày được chọn** (màu tím) là một yếu tố quan trọng trong UI/UX của lịch. Nó giúp người dùng biết họ đang tập trung vào ngày nào.</p>
 
-        <main class="blog-main-content">
-            <div class="post-content">
-                
-                <p>Việc làm nổi bật ngày hiện tại hoặc ngày mà người dùng đang chọn là một phần quan trọng trong bất kỳ ứng dụng lịch nào. Đây là cách Vạn Niên Số sử dụng kết hợp JavaScript (quản lý logic) và CSS (quản lý giao diện) để tạo ra hiệu ứng nổi bật với màu Tím.</p>
+            <h2>I. CSS cho Active State</h2>
+            <p>Chúng ta sử dụng một class CSS đơn giản là <span style="font-family: monospace;">.active</span> và áp dụng các kiểu dáng nổi bật (màu nền, bo tròn) cho nó.</p>
+            
+            <h3>Định nghĩa Style Active</h3>
+            <pre><code>.day-cell.active {
+    background-color: var(--active-day-bg); /* Màu tím */
+    color: var(--active-day-text); /* Màu trắng */
+    border-radius: 50%; /* Hình tròn */
+    width: 45px;
+    height: 45px;
+    box-shadow: 0 4px 8px rgba(121, 82, 179, 0.4); /* Thêm bóng nổi */
+    transition: all 0.3s ease; /* Chuyển động mượt mà */
+}</code></pre>
 
-                <h3>1. Định nghĩa Class CSS cho Ngày Hôm Nay (`.today`)</h3>
-                <p>Trong Vạn Niên Số, chúng ta sử dụng class <code>.today</code> để làm nổi bật ngày hiện tại, đảm bảo nó luôn được nhìn thấy rõ ràng trên lịch.</p>
+            <h2>II. JavaScript cho Chuyển đổi Trạng thái</h2>
+            <p>Logic trong <span style="font-family: monospace;">main.js</span> đảm nhiệm việc quản lý trạng thái này:</p>
+            
+            <ol>
+                <li>**Khởi tạo:** Khi lịch được tải (<span style="font-family: monospace;">renderCalendar</span>), kiểm tra và thêm class <span style="font-family: monospace;">.active</span> vào ngày hôm nay.</li>
+                <li>**Tương tác (Click):** Khi người dùng nhấp vào một ô ngày khác, cần thực hiện hai bước sau:
+                    <ul>
+                        <li>Xóa class <span style="font-family: monospace;">.active</span> khỏi tất cả các ô ngày.</li>
+                        <li>Thêm class <span style="font-family: monospace;">.active</span> vào ô ngày vừa được nhấp.</li>
+                    </ul>
+                </li>
+            </ol>
+            
+            <h3>Mã JavaScript xử lý Click</h3>
+            <pre><code>dayCell.addEventListener('click', function() {
+    // 1. Xóa trạng thái active cũ
+    document.querySelectorAll('.day-cell').forEach(cell => {
+        cell.classList.remove('active');
+    });
 
-                <pre>
-<code>
-/* Đã có trong style.css */
-.calendar-day.today { 
-    background-color: var(--primary-color); 
-    color: white !important; 
-    border-radius: 50%; /* Tròn hoàn toàn */
-    font-weight: 700;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    transform: scale(1.05); /* Hiệu ứng nổi bật */
-    transition: transform 0.3s ease-out; /* Thêm transition */
-}
-</code>
-                </pre>
-                
-
-                <h3>2. Logic Xác định Ngày Hiện Tại trong JavaScript</h3>
-                <p>Hàm <code>renderCalendar()</code> trong `main.js` chịu trách nhiệm so sánh ngày đang vẽ với ngày hiện tại của hệ thống và thêm class `today` tương ứng.</p>
-                
-                <pre>
-<code>
-// Trong hàm renderCalendar()...
-today = new Date(); // Cập nhật lại ngày hôm nay
-for (let i = 1; i <= daysInMonth; i++) {
-    // ...
-    const dayDiv = document.createElement('div');
-    // ...
-    
-    // Đánh dấu ngày hôm nay (today)
-    if (i === today.getDate() && currentMonth === today.getMonth() && currentYear === today.getFullYear()) {
-        dayDiv.classList.add('today');
-    }
-    
-    // ...
-    DOM.calendarGrid.appendChild(dayDiv);
-}
-</code>
-                </pre>
-                
-                <h4>Lưu ý về Trạng thái Active cho Ngày được Chọn</h4>
-                <p>Trong thiết kế này, chúng ta không dùng một class `.active` riêng cho ngày được chọn click vào. Thay vào đó, việc click chỉ mở Modal Chi Tiết Ngày. Class `.today` được dùng riêng biệt và cố định cho ngày hệ thống.</p>
-
-            </div>
-        </main>
+    // 2. Thêm trạng thái active mới
+    this.classList.add('active');
+});</code></pre>
+            <p>Nhờ có thuộc tính <span style="font-family: monospace;">transition: all 0.3s ease;</span> trong CSS, việc thêm và xóa class <span style="font-family: monospace;">.active</span> sẽ tạo ra hiệu ứng chuyển đổi mượt mà thay vì thay đổi đột ngột.</p>
+        </div>
 
         <footer>
             <p style="text-align: center; font-size: 0.8em; color: #999; padding: 20px 0;">
-                &copy; 2025 Vạn Niên Số Dev. Cùng nhau chia sẻ kiến thức.
+                &copy; 2025 Vạn Niên Số Dev. 
             </p>
         </footer>
 
         <nav class="bottom-nav">
-            <a href="index.html" class="nav-item">
+            <a href="../index.html" class="nav-item">
                 <i class="fas fa-calendar-alt"></i>
                 <span>LỊCH</span>
             </a>
@@ -83,7 +81,7 @@ for (let i = 1; i <= daysInMonth; i++) {
                 <i class="fas fa-heart"></i>
                 <span>BÓI DUYÊN</span>
             </a>
-            <a href="blog.html" class="nav-item active">
+            <a href="../blog.html" class="nav-item active">
                 <i class="fas fa-comment-dots"></i>
                 <span>TRỢ LÝ</span>
             </a>

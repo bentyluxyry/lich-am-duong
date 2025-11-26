@@ -3,64 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cách Tính Toán Ngày Âm Lịch Chính Xác trong JavaScript/Python | Vạn Niên Số Dev</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <title>Kỹ thuật Tính Âm Lịch Chính Xác</title>
+    <link rel="stylesheet" href="../css/style.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="app-container blog-container">
-        <header class="blog-header">
-            <a href="blog.html" class="back-to-home"><i class="fas fa-arrow-left"></i> Quay lại Blog</a>
-            <h1>🌑 Cách Tính Toán Ngày Âm Lịch Chính Xác trong JavaScript/Python</h1>
-            <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9em;">Đăng ngày 26/11/2025 | Chuyên mục: Kỹ thuật</p>
-        </header>
+        
+        <nav class="top-nav">
+            <a href="../index.html" class="nav-item">LỊCH</a>
+            <a href="#" class="nav-item">BÓI DUYÊN</a>
+            <a href="../blog.html" class="nav-item active">TRỢ LÝ</a>
+        </nav>
+        <div class="post-detail-content">
+            <a href="../blog.html" class="back-to-home"><i class="fas fa-arrow-left"></i> Quay lại Blog</a>
+            <header>
+                <h1>Cách Tính Toán Ngày Âm Lịch Chính Xác trong JavaScript/Python</h1>
+                <p style="font-size: 0.9em; color: var(--text-muted);">Đăng ngày: 26/11/2025 | Tác giả: Dev Team</p>
+            </header>
+            <hr>
+            
+            <p>Việc chuyển đổi từ Lịch Dương (Gregorian) sang Lịch Âm (Lunisolar) không chỉ đơn thuần là phép cộng trừ mà là một hệ thống tính toán thiên văn phức tạp, liên quan đến các chu kỳ của Mặt Trăng và Mặt Trời.</p>
 
-        <main class="blog-main-content">
-            <div class="post-content">
-                
-                <p>Việc tính toán và chuyển đổi giữa **Lịch Dương (Gregorian)** và **Lịch Âm (Chinese/Vietnamese Lunisolar)** là một thách thức kỹ thuật lớn do sự phức tạp của các quy tắc thiên văn học liên quan đến các pha Mặt Trăng và các quy tắc nhuận tháng.</p>
+            <h2>I. Thách thức lớn nhất: Tháng Nhuận</h2>
+            <p>Khác với Lịch Dương có 365.25 ngày cố định, Lịch Âm dựa trên chu kỳ trăng, dẫn đến việc phải thêm một tháng nhuận (tháng thứ 13) khoảng 3 năm một lần để đồng bộ với chu kỳ mùa.</p>
+            
+            <h3>Mã giả lập tính Âm Lịch (JavaScript)</h3>
+            <p>Đây là một ví dụ đơn giản hóa về logic cốt lõi. Trong thực tế, các thuật toán như <em>Thuật toán Nguyệt Hải Trào</em> hoặc các bảng look-up được dùng.</p>
+            <pre><code>function convertSolarToLunar(year, month, day) {
+  // BƯỚC 1: Tính số ngày Julian (JD)
+  let JD = calculateJulianDay(year, month, day);
 
-                <h3>1. Thách thức Chính: Chu Kỳ Nhuận</h3>
-                <p>Lịch Âm không chỉ dựa vào pha Mặt Trăng (tháng bắt đầu vào ngày sóc - trăng non) mà còn phải đồng bộ với chu kỳ Mặt Trời (các tiết khí). Một năm Âm lịch có thể có **12 hoặc 13 tháng**. Tháng thứ 13 được gọi là **Tháng Nhuận**.</p>
-                <p>Quy tắc nhuận phổ biến là: Nếu một tháng không chứa tiết khí **Trung Khí** (tiết khí chẵn), tháng đó sẽ được tính là tháng nhuận (tức là lặp lại tên của tháng trước đó).</p>
+  // BƯỚC 2: Dùng JD để tìm ngày Sóc (New Moon) gần nhất
+  // Cần thuật toán tính Sóc - một công việc phức tạp
+  let nearestNewMoon = findNearestNewMoon(JD);
 
-                <h3>2. Phương Pháp Tiếp Cận trong Lập trình</h3>
-                <p>Việc tự xây dựng thuật toán tính toán Lịch Âm Dương từ đầu là cực kỳ phức tạp. Hầu hết các ứng dụng chuyên nghiệp đều dựa vào:</p>
-                <ul>
-                    <li>**Thư viện:** Sử dụng các thư viện đã được kiểm chứng và tối ưu hóa như `lunisolar-calendar` (JS/Python) hoặc các gói thiên văn chuyên biệt.</li>
-                    <li>**Bảng Dữ Liệu (Lookup Table):** Đối với các ứng dụng web đơn giản, lưu trữ sẵn dữ liệu cho một phạm vi năm nhất định (ví dụ: 100 năm) để tra cứu nhanh hơn. Đây là cách tiếp cận mà phiên bản Vạn Niên Số này đang giả lập.</li>
-                </ul>
+  // BƯỚC 3: Xác định Tháng Nhuận và Chuyển đổi
+  let lunarDate = JD - nearestNewMoon + 1; // Ngày âm lịch
+  let lunarMonth = determineLunarMonth(JD);
+  
+  return { lunarDate, lunarMonth };
+}</code></pre>
 
-                <h3>3. Ví dụ Giả Lập trong `main.js`</h3>
-                <p>Trong phiên bản hiện tại, chúng ta tạo ra một hàm giả lập để hiển thị các ngày Âm lịch, như sau:</p>
-                <pre>
-<code>
-const lunarData = {
-    '20251126': '6/10', '20251127': '7/10', '20251128': '8/10',
-    '20251201': '1/11', '20251230': '30/11'
-};
-
-function getLunarDate(year, monthIndex, day) {
-    const key = createDateKey(year, monthIndex, day);
-    // Đây là tra cứu trong bảng hoặc logic giả lập
-    return lunarData[key] || (day % 4 === 0 ? 'L.M.' : 'L.N.'); 
-}
-</code>
-                </pre>
-                
-                <p>Để ứng dụng lịch trở nên chính xác, bạn cần tích hợp một thư viện Lịch Âm Dương thực tế để thay thế cho hàm `getLunarDate` giả lập này.</p>
-
-            </div>
-        </main>
+            <h2>II. Vai trò của JD và Sóc</h2>
+            <p><strong>Ngày Julian (JD)</strong> là công cụ toán học để đếm số ngày trôi qua kể từ một mốc thời gian cố định. Đây là nền tảng để các thuật toán có thể tính toán chính xác thời điểm <strong>Sóc</strong> (thời điểm Mặt Trăng nằm giữa Trái Đất và Mặt Trời - ngày 1 Âm Lịch) xảy ra.</p>
+            
+            <p>Để xây dựng một ứng dụng Lịch Vạn Niên hoàn chỉnh, việc tích hợp một thư viện tính toán thiên văn học uy tín (ví dụ: các thư viện mã nguồn mở dựa trên C/C++ được biên dịch sang WebAssembly) là điều cần thiết để đảm bảo độ chính xác.</p>
+            
+        </div>
 
         <footer>
             <p style="text-align: center; font-size: 0.8em; color: #999; padding: 20px 0;">
-                &copy; 2025 Vạn Niên Số Dev. Cùng nhau chia sẻ kiến thức.
+                &copy; 2025 Vạn Niên Số Dev. 
             </p>
         </footer>
         
         <nav class="bottom-nav">
-            <a href="index.html" class="nav-item">
+            <a href="../index.html" class="nav-item">
                 <i class="fas fa-calendar-alt"></i>
                 <span>LỊCH</span>
             </a>
@@ -68,7 +68,7 @@ function getLunarDate(year, monthIndex, day) {
                 <i class="fas fa-heart"></i>
                 <span>BÓI DUYÊN</span>
             </a>
-            <a href="blog.html" class="nav-item active">
+            <a href="../blog.html" class="nav-item active">
                 <i class="fas fa-comment-dots"></i>
                 <span>TRỢ LÝ</span>
             </a>

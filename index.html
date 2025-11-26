@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vạn Niên Số | Lịch Âm Dương</title>
+    <title>Lịch Vạn Niên Số</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -12,46 +12,45 @@
     <div class="app-container">
         
         <header class="app-header">
-            <div class="logo"><i class="fas fa-sun"></i><i class="fas fa-moon"></i></div>
-            <div class="app-name">Vạn Niên Số</div>
+            <div class="app-title-group">
+                <i class="fas fa-moon"></i>
+                <h1>Vạn Niên Số</h1>
+            </div>
+            <button class="settings-btn">
+                <i class="fas fa-cog"></i>
+            </button>
         </header>
 
-        <div class="calendar-view">
-            <div class="calendar-nav">
-                <button class="nav-arrow" id="prevMonth" aria-label="Tháng trước"><i class="fas fa-chevron-left"></i></button>
-                <div class="current-month-year">
-                    <span id="displayMonthYear">Tháng 11, 2025</span>
-                    <button class="toggle-notify"><i class="fas fa-bell"></i> Bật thông báo ngày</button>
+        <nav class="top-nav">
+            <a href="index.html" class="nav-item active">LỊCH</a>
+            <a href="#" class="nav-item">BÓI DUYÊN</a>
+            <a href="blog.html" class="nav-item">TRỢ LÝ</a>
+        </nav>
+        <div class="calendar-card">
+            
+            <div class="month-navigator">
+                <button class="nav-arrow prev-month"><i class="fas fa-chevron-left"></i></button>
+                <div class="current-month-info">
+                    <span id="current-month-year">Tháng 11, 2025</span>
+                    <button class="toggle-notification">
+                        <i class="fas fa-bell"></i> Bật thông báo ngày
+                    </button>
                 </div>
-                <button class="nav-arrow" id="nextMonth" aria-label="Tháng sau"><i class="fas fa-chevron-right"></i></button>
+                <button class="nav-arrow next-month"><i class="fas fa-chevron-right"></i></button>
             </div>
 
-            <div class="calendar-grid">
-                <div class="calendar-header-day">CN</div>
-                <div class="calendar-header-day">T2</div>
-                <div class="calendar-header-day">T3</div>
-                <div class="calendar-header-day">T4</div>
-                <div class="calendar-header-day">T5</div>
-                <div class="calendar-header-day">T6</div>
-                <div class="calendar-header-day">T7</div>
-                </div>
-        </div>
-
-        <div id="dayDetailModal" class="modal">
-            <div class="modal-content">
-                <span class="close-button" title="Đóng">&times;</span>
-                <h2 id="modalDateDisplay">Chi tiết ngày...</h2>
-                
-                <h3><i class="fas fa-pencil-alt"></i> Ghi Chú:</h3>
-                <textarea id="noteInput" placeholder="Thêm ghi chú cá nhân cho ngày này..."></textarea>
-                <button id="saveNoteBtn" class="primary-btn"><i class="fas fa-save"></i> Lưu Ghi Chú</button>
-                <hr>
-
-                <h3><i class="fas fa-bell"></i> Reminders/Sự kiện:</h3>
-                <ul id="reminderList">
-                    </ul>
-                <button id="addReminderBtn" class="secondary-btn"><i class="fas fa-plus"></i> Thêm Reminder</button>
+            <div class="calendar-grid day-headers">
+                <span class="header-item">CN</span>
+                <span class="header-item">T2</span>
+                <span class="header-item">T3</span>
+                <span class="header-item">T4</span>
+                <span class="header-item">T5</span>
+                <span class="header-item">T6</span>
+                <span class="header-item">T7</span>
             </div>
+
+            <div class="calendar-grid day-cells" id="calendar-body">
+                </div>
         </div>
         
         <nav class="bottom-nav">
@@ -69,6 +68,7 @@
             </a>
         </nav>
     </div>
+
     <script src="js/main.js"></script>
 </body>
 </html>
