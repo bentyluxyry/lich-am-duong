@@ -452,3 +452,13 @@ body {
         padding: 20px;
     }
 }
+
+/* --- Styles cho Logo --- */
+.app-logo {
+    height: 35px; /* Chiều cao mong muốn cho logo */
+    width: auto; /* Giữ tỷ lệ khung hình */
+    margin-right: 10px; /* Khoảng cách giữa logo và tiêu đề */
+    border-radius: 50%; /* Nếu bạn muốn logo hình tròn */
+    /* background-color: rgba(255, 255, 255, 0.2); Màu nền nếu logo có viền trong suốt */
+    /* padding: 5px; Tùy chỉnh padding nếu cần */
+}
