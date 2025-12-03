@@ -464,3 +464,15 @@ table tr:hover {
     border-radius: 16px;
     z-index: -1;
 }
+
+img[data-src] {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    background: #f0e8ff;
+    min-height: 100px;
+}
+img[data-src].loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
