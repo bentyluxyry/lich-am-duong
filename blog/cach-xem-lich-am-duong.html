@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cách Xem Lịch Âm Dương Chính Xác | Lịch Vạn Niên</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .post-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .post-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .post-title {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .post-meta {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 1em;
+            opacity: 0.95;
+        }
+
+        .post-content {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            line-height: 1.8;
+        }
+
+        .post-content h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .post-content h3 {
+            color: #764ba2;
+            font-size: 1.4em;
+            margin-top: 25px;
+            margin-bottom: 12px;
+        }
+
+        .post-content p {
+            margin-bottom: 18px;
+            text-align: justify;
+            font-size: 1.05em;
+            color: #333;
+        }
+
+        .post-content ul, .post-content ol {
+            margin: 15px 0 20px 30px;
+        }
+
+        .post-content li {
+            margin-bottom: 12px;
+            line-height: 1.7;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            border-left: 5px solid #f39c12;
+        }
+
+        .highlight-box strong {
+            color: #d35400;
+            font-size: 1.1em;
+        }
+
+        .info-box {
+            background: #e8f4f8;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #3498db;
+        }
+
+        .warning-box {
+            background: #ffe8e8;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #e74c3c;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin: 30px 0;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        table tr:hover {
+            background: #f5f5f5;
+        }
+
+        @media (max-width: 768px) {
+            .post-title {
+                font-size: 1.8em;
+            }
+
+            .post-content {
+                padding: 20px;
+            }
+
+            .post-content h2 {
+                font-size: 1.5em;
+            }
+
+            .post-content h3 {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="post-container">
+        <a href="../blog/index.html" class="back-btn">← Quay lại Blog</a>
+
+        <div class="post-header">
+            <h1 class="post-title">📅 Cách Xem Lịch Âm Dương Chính Xác</h1>
+            <div class="post-meta">
+                <span>🗓️ 1/12/2024</span>
+                <span>👁️ 1,250 lượt xem</span>
+                <span>⏱️ 5 phút đọc</span>
+                <span>📝 Lịch Âm Dương</span>
+            </div>
+        </div>
+
+        <div class="post-content">
+            <p class="lead" style="font-size: 1.2em; font-weight: 500; color: #555;">
+                Lịch âm dương là hệ thống lịch pháp truyền thống được sử dụng rộng rãi ở Việt Nam và nhiều nước châu Á. 
+                Hiểu và biết cách xem lịch âm dương giúp bạn tra cứu các ngày lễ, chọn ngày tốt cho các sự kiện quan trọng 
+                trong cuộc sống.
+            </p>
+
+            <h2>🌙 Lịch Âm Dương Là Gì?</h2>
+            <p>
+                <strong>Lịch âm dương</strong> là sự kết hợp giữa hai hệ thống lịch:
+            </p>
+            <ul>
+                <li><strong>Lịch âm:</strong> Dựa trên chu kỳ của Mặt Trăng (khoảng 29,5 ngày cho mỗi tháng)</li>
+                <li><strong>Lịch dương:</strong> Dựa trên chu kỳ của Mặt Trời quanh Trái Đất (365,25 ngày cho mỗi năm)</li>
+            </ul>
+
+            <p>
+                Hệ thống lịch âm dương giúp điều hòa sự chênh lệch giữa hai hệ thống này, đảm bảo các mùa trong năm 
+                luôn diễn ra đúng thời điểm. Đây là lý do tại sao Tết Nguyên Đán (theo âm lịch) có thể rơi vào các 
+                ngày khác nhau trong tháng 1 hoặc tháng 2 dương lịch.
+            </p>
+
+            <div class="highlight-box">
+                <strong>💡 Lưu ý quan trọng:</strong> Một tháng âm lịch có thể có 29 hoặc 30 ngày, và mỗi 2-3 năm 
+                sẽ có một tháng nhuận để điều chỉnh với chu kỳ của Mặt Trời.
+            </div>
+
+            <h2>📖 Cách Đọc Lịch Âm Dương</h2>
+
+            <h3>1. Ngày Âm Lịch</h3>
+            <p>
+                Mỗi ngày trong tháng âm lịch được đánh số từ 1 đến 29 hoặc 30. Các mốc quan trọng:
+            </p>
+            <ul>
+                <li><strong>Mồng 1:</strong> Trăng mới (trăng non), bắt đầu tháng mới</li>
+                <li><strong>Ngày 15:</strong> Rằm (trăng tròn), giữa tháng</li>
+                <li><strong>Ngày 29-30:</strong> Trăng tàn, cuối tháng</li>
+            </ul>
+
+            <h3>2. Hệ Thống Can Chi</h3>
+            <p>
+                Lịch âm dương sử dụng hệ thống <strong>Can Chi</strong> để đặt tên cho ngày, tháng, năm:
+            </p>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Thiên Can (10 Can)</th>
+                            <th>Địa Chi (12 Chi)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Giáp, Ất, Bính, Đinh, Mậu</td>
+                            <td>Tý, Sửu, Dần, Mão, Thìn, Tỵ</td>
+                        </tr>
+                        <tr>
+                            <td>Kỷ, Canh, Tân, Nhâm, Quý</td>
+                            <td>Ngọ, Mùi, Thân, Dậu, Tuất, Hợi</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>
+                Sự kết hợp giữa Can và Chi tạo thành 60 năm một chu kỳ, được gọi là <strong>Lục thập hoa giáp</strong>. 
+                Ví dụ: Năm 2024 là năm <strong>Giáp Thìn</strong> (năm con Rồng).
+            </p>
+
+            <div class="info-box">
+                <strong>ℹ️ Thông tin thêm:</strong> Mỗi người sinh ra đều có một bộ Can Chi riêng dựa trên 
+                năm, tháng, ngày, giờ sinh. Đây là cơ sở để xem tử vi và phong thủy.
+            </div>
+
+            <h2>🕐 Giờ Hoàng Đạo - Hắc Đạo</h2>
+            <p>
+                Trong một ngày có 12 giờ (mỗi giờ = 2 tiếng), chia thành:
+            </p>
+            <ul>
+                <li><strong>Giờ Hoàng Đạo (6 giờ):</strong> Thời điểm tốt để làm việc quan trọng</li>
+                <li><strong>Giờ Hắc Đạo (6 giờ):</strong> Thời điểm nên tránh làm việc quan trọng</li>
+            </ul>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Giờ</th>
+                            <th>Thời gian</th>
+                            <th>Đánh giá</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Giờ Tý</td>
+                            <td>23:00 - 01:00</td>
+                            <td>🟢 Hoàng Đạo</td>
+                        </tr>
+                        <tr>
+                            <td>Giờ Sửu</td>
+                            <td>01:00 - 03:00</td>
+                            <td>🔴 Hắc Đạo</td>
+                        </tr>
+                        <tr>
+                            <td>Giờ Dần</td>
+                            <td>03:00 - 05:00</td>
+                            <td>🟢 Hoàng Đạo</td>
+                        </tr>
+                        <tr>
+                            <td>Giờ Mão</td>
+                            <td>05:00 - 07:00</td>
+                            <td>🔴 Hắc Đạo</td>
+                        </tr>
+                        <tr>
+                            <td>Giờ Thìn</td>
+                            <td>07:00 - 09:00</td>
+                            <td>🟢 Hoàng Đạo</td>
+                        </tr>
+                        <tr>
+                            <td>Giờ Tỵ</td>
+                            <td>09:00 - 11:00</td>
+                            <td>🔴 Hắc Đạo</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="warning-box">
+                <strong>⚠️ Lưu ý:</strong> Giờ Hoàng Đạo - Hắc Đạo thay đổi theo từng ngày. Nên tra cứu lịch 
+                vạn niên để biết chính xác giờ tốt trong ngày cụ thể.
+            </div>
+
+            <h2>📱 Ứng Dụng Trong Cuộc Sống</h2>
+
+            <h3>1. Xem Ngày Tốt - Xấu</h3>
+            <p>
+                Người Việt thường chọn ngày tốt để thực hiện các việc quan trọng:
+            </p>
+            <ul>
+                <li>🏠 <strong>Động thổ, khởi công:</strong> Xem ngày tốt để bắt đầu xây dựng</li>
+                <li>💑 <strong>Cưới hỏi:</strong> Chọn ngày đẹp cho đám cưới</li>
+                <li>🎊 <strong>Khai trương:</strong> Ngày tốt để mở cửa hàng, công ty</li>
+                <li>🚗 <strong>Xuất hành:</strong> Chọn ngày đi xa bình an</li>
+                <li>🏡 <strong>Nhập택:</strong> Chọn ngày chuyển nhà mới</li>
+            </ul>
+
+            <h3>2. Lễ Tết Và Ngày Giỗ</h3>
+            <p>
+                Các ngày lễ quan trọng theo âm lịch:
+            </p>
+            <ul>
+                <li><strong>Tết Nguyên Đán:</strong> Mồng 1 tháng Giêng</li>
+                <li><strong>Tết Nguyên Tiêu:</strong> Rằm tháng Giêng</li>
+                <li><strong>Tết Hàn Thực:</strong> Mồng 3 tháng 3</li>
+                <li><strong>Tết Đoan Ngọ:</strong> Mồng 5 tháng 5</li>
+                <li><strong>Vu Lan:</strong> Rằm tháng 7</li>
+                <li><strong>Tết Trung Thu:</strong> Rằm tháng 8</li>
+                <li><strong>Tết Trùng Cửu:</strong> Mồng 9 tháng 9</li>
+            </ul>
+
+            <h2>🎬 Video Hướng Dẫn Chi Tiết</h2>
+            <div class="video-container">
+                <iframe 
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <h2>💡 Mẹo Tra Cứu Lịch Âm Dương</h2>
+            <ol>
+                <li><strong>Sử dụng website Lịch Vạn Niên:</strong> Tra cứu nhanh chóng và chính xác nhất</li>
+                <li><strong>Lưu ý tháng nhuận:</strong> Năm nào có tháng nhuận, các ngày lễ có thể thay đổi</li>
+                <li><strong>Kết hợp phong thủy:</strong> Xem ngày tốt phù hợp với mệnh của bạn</li>
+                <li><strong>Tham khảo người lớn tuổi:</strong> Họ có kinh nghiệm về các phong tục truyền thống</li>
+            </ol>
+
+            <div class="highlight-box">
+                <strong>🌟 Mẹo hay:</strong> Hãy bookmark website Lịch Vạn Niên của chúng tôi để tra cứu 
+                lịch âm dương mỗi ngày một cách nhanh chóng và thuận tiện nhất!
+            </div>
+
+            <h2>🎯 Kết Luận</h2>
+            <p>
+                Lịch âm dương không chỉ là công cụ tra cứu thời gian mà còn là một phần quan trọng trong văn hóa 
+                truyền thống Việt Nam. Hiểu và biết cách sử dụng lịch âm dương giúp bạn:
+            </p>
+            <ul>
+                <li>✅ Chọn được ngày tốt cho các sự kiện quan trọng</li>
+                <li>✅ Hiểu rõ hơn về văn hóa và truyền thống dân tộc</li>
+                <li>✅ Hòa hợp với chu kỳ tự nhiên và vũ trụ</li>
+                <li>✅ Mang lại may mắn và thuận lợi trong cuộc sống</li>
+            </ul>
+
+            <p>
+                Hãy truy cập thường xuyên website của chúng tôi để cập nhật lịch âm dương mỗi ngày và tìm hiểu 
+                thêm nhiều thông tin bổ ích về phong thủy, tử vi và văn hóa truyền thống!
+            </p>
+        </div>
+
+        <a href="../blog/index.html" class="back-btn">← Quay lại Blog</a>
+    </div>
+</body>
+</html>

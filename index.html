@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch Vạn Niên - Âm Dương</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                🌙 Lịch Vạn Niên
+            </div>
+            <nav>
+                <button class="tab-btn active" data-tab="home">🏠 Trang Chủ</button>
+                <button class="tab-btn" data-tab="calendar">📅 Lịch</button>
+                <button class="tab-btn" onclick="window.location.href='fortune/index.html'">🔮 Bói Duyên</button>
+                <button class="tab-btn" onclick="window.location.href='blog/index.html'">✍️ Trợ Lý</button>
+            </nav>
+        </header>
+
+        <div class="content">
+            <!-- Tab Trang Chủ -->
+            <div id="home" class="tab-content active">
+                <div class="home-content">
+                    <h2>Chào Mừng Đến Với Lịch Vạn Niên</h2>
+                    <p>Ứng dụng tra cứu lịch âm dương, xem ngày tốt xấu và nhiều tính năng thú vị khác.</p>
+                    <p>Website cung cấp thông tin chính xác về lịch âm, lịch dương và các thông tin phong thủy hữu ích cho cuộc sống hàng ngày.</p>
+                    
+                    <div class="features">
+                        <div class="feature-card">
+                            <h3>📅 Lịch Âm Dương</h3>
+                            <p>Tra cứu ngày âm lịch chính xác, xem thứ, ngày, tháng tự động cập nhật</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>🔮 Bói Duyên</h3>
+                            <p>Xem vận may trong ngày, tìm hiểu về tình duyên và công việc</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>✍️ Chia Sẻ</h3>
+                            <p>Đọc bài viết, chia sẻ kinh nghiệm và video hữu ích</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Lịch -->
+            <div id="calendar" class="tab-content">
+                <div class="calendar-header">
+                    <button id="prevMonth">← Tháng Trước</button>
+                    <div class="current-date" id="currentDate"></div>
+                    <button id="nextMonth">Tháng Sau →</button>
+                </div>
+                <div class="lunar-info" id="lunarInfo"></div>
+                <div class="calendar-grid" id="calendarGrid"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

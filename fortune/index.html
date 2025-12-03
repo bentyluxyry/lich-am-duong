@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bói Duyên - Xem Mạng Mệnh | Lịch Vạn Niên</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/fortune.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                🌙 Lịch Vạn Niên
+            </div>
+            <nav>
+                <button class="tab-btn" onclick="window.location.href='../index.html'">🏠 Trang Chủ</button>
+                <button class="tab-btn" onclick="window.location.href='../index.html'">📅 Lịch</button>
+                <button class="tab-btn active">🔮 Bói Duyên</button>
+                <button class="tab-btn" onclick="window.location.href='../blog/index.html'">✍️ Trợ Lý</button>
+            </nav>
+        </header>
+
+        <div class="content">
+            <div class="fortune-header">
+                <h1>🔮 Bói Duyên - Xem Mạng Mệnh</h1>
+                <p>Nhập ngày tháng năm sinh để xem mạng mệnh và vận may của bạn</p>
+            </div>
+
+            <!-- Form nhập thông tin -->
+            <div class="fortune-form-container" id="fortuneForm">
+                <div class="fortune-form">
+                    <h3>Nhập Thông Tin Của Bạn</h3>
+                    
+                    <div class="form-group">
+                        <label>Giới tính:</label>
+                        <div class="gender-select">
+                            <button type="button" class="gender-btn active" data-gender="male">
+                                👨 Nam
+                            </button>
+                            <button type="button" class="gender-btn" data-gender="female">
+                                👩 Nữ
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="birthDay">Ngày sinh:</label>
+                        <input type="number" id="birthDay" min="1" max="31" placeholder="Ngày (1-31)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="birthMonth">Tháng sinh:</label>
+                        <select id="birthMonth">
+                            <option value="">Chọn tháng</option>
+                            <option value="1">Tháng 1</option>
+                            <option value="2">Tháng 2</option>
+                            <option value="3">Tháng 3</option>
+                            <option value="4">Tháng 4</option>
+                            <option value="5">Tháng 5</option>
+                            <option value="6">Tháng 6</option>
+                            <option value="7">Tháng 7</option>
+                            <option value="8">Tháng 8</option>
+                            <option value="9">Tháng 9</option>
+                            <option value="10">Tháng 10</option>
+                            <option value="11">Tháng 11</option>
+                            <option value="12">Tháng 12</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="birthYear">Năm sinh:</label>
+                        <input type="number" id="birthYear" min="1920" max="2024" placeholder="Năm (VD: 1990)">
+                    </div>
+
+                    <button class="submit-btn" onclick="calculateFortune()">
+                        ✨ Xem Vận Mệnh
+                    </button>
+                </div>
+            </div>
+
+            <!-- Kết quả -->
+            <div class="fortune-result-container" id="fortuneResult" style="display: none;">
+                <!-- Kết quả sẽ được render từ JS -->
+            </div>
+        </div>
+
+        <footer class="blog-footer">
+            <p>&copy; 2024 Lịch Vạn Niên. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="../js/fortune.js"></script>
+</body>
+</html>

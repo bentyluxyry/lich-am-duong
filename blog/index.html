@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trợ Lý - Blog | Lịch Vạn Niên</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/blog.css">
+    <!-- Nếu muốn bài viết chi tiết cũng đẹp thì thêm dòng này -->
+    <link rel="stylesheet" href="../css/blog-post.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">Lịch Vạn Niên</div>
+            <nav>
+                <button class="tab-btn" onclick="window.location.href='../index.html'">Trang Chủ</button>
+                <button class="tab-btn" onclick="window.location.href='../index.html'">Lịch</button>
+                <button class="tab-btn" onclick="window.location.href='../fortune/index.html'">Bói Duyên</button>
+                <button class="tab-btn active">Trợ Lý</button>
+            </nav>
+        </header>
+
+        <div class="content">
+            <div class="blog-header">
+                <h1>Trợ Lý Blog</h1>
+                <p>Khám phá các bài viết về lịch âm dương, phong thủy và văn hóa truyền thống</p>
+            </div>
+
+            <div class="blog-categories">
+                <button class="category-btn active" data-category="all">Tất cả</button>
+                <button class="category-btn" data-category="lich">Lịch Âm Dương</button>
+                <button class="category-btn" data-category="phongthuy">Phong Thủy</button>
+                <button class="category-btn" data-category="vanhoa">Văn Hóa</button>
+            </div>
+
+            <div id="blogPosts" class="blog-grid"></div>
+            <div class="pagination" id="pagination"></div>
+        </div>
+
+        <footer class="blog-footer">
+            <p>&copy; 2024 Lịch Vạn Niên. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Đường dẫn này là HOÀN HẢO, giữ nguyên! -->
+    <script src="../js/blog.js"></script>
+</body>
+</html>

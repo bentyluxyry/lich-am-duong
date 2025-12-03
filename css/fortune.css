@@ -1,0 +1,295 @@
+/* Fortune Header */
+.fortune-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 30px 20px;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    border-radius: 15px;
+}
+
+.fortune-header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.fortune-header p {
+    font-size: 1.1em;
+    opacity: 0.95;
+}
+
+/* Fortune Form */
+.fortune-form-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.fortune-form {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.fortune-form h3 {
+    color: #667eea;
+    font-size: 1.5em;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-size: 1.05em;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+/* Gender Select */
+.gender-select {
+    display: flex;
+    gap: 15px;
+}
+
+.gender-btn {
+    flex: 1;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    background: white;
+    border-radius: 10px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.gender-btn:hover {
+    border-color: #667eea;
+    background: #f0f0ff;
+}
+
+.gender-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: transparent;
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    border-radius: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(240, 147, 251, 0.4);
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(240, 147, 251, 0.6);
+}
+
+/* Fortune Result */
+.fortune-result-container {
+    margin-top: 30px;
+    animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.result-header {
+    text-align: center;
+    padding: 30px;
+    background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.result-header h2 {
+    color: #333;
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.result-header .destiny-badge {
+    display: inline-block;
+    padding: 10px 25px;
+    background: white;
+    color: #667eea;
+    border-radius: 25px;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-top: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.result-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.info-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.info-card .label {
+    color: #888;
+    font-size: 0.9em;
+    margin-bottom: 5px;
+}
+
+.info-card .value {
+    color: #667eea;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.result-details {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.result-details h3 {
+    color: #667eea;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.result-details p {
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    font-size: 1.05em;
+}
+
+.result-details ul {
+    list-style: none;
+    padding: 0;
+}
+
+.result-details li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    color: #555;
+    line-height: 1.6;
+}
+
+.result-details li:last-child {
+    border-bottom: none;
+}
+
+.result-details li strong {
+    color: #667eea;
+}
+
+/* Lucky Items */
+.lucky-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.lucky-item {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.lucky-item .icon {
+    font-size: 2em;
+    margin-bottom: 5px;
+}
+
+.lucky-item .text {
+    font-size: 0.9em;
+}
+
+/* Back Button */
+.back-btn {
+    display: inline-block;
+    padding: 12px 25px;
+    background: #667eea;
+    color: white;
+    border-radius: 25px;
+    text-decoration: none;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: #764ba2;
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .fortune-header h1 {
+        font-size: 1.8em;
+    }
+
+    .fortune-form {
+        padding: 25px;
+    }
+
+    .result-header h2 {
+        font-size: 1.5em;
+    }
+
+    .result-details {
+        padding: 20px;
+    }
+
+    .lucky-items {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
