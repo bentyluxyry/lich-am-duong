@@ -1,6 +1,4 @@
-// js/blog.js - PHIÊN BẢN HOÀN HẢO CUỐI CÙNG 2025
-// Đã fix hết: ảnh thumbnail, ngày tháng, emoji, video badge, lazy loading, lỗi ký tự...
-
+// js/blog.js - PHIÊN BẢN HOÀN HẢO 2025 - SẠCH, ĐẸP, KHÔNG LỖI
 const blogPosts = [
     {
         id: 1,
@@ -114,14 +112,12 @@ document.addEventListener('DOMContentLoaded', function () {
     initLazyLoading();
 });
 
-// Định dạng ngày chuẩn Việt Nam: 20/11/2025
 function formatDate(dateStr) {
     if (!dateStr || !dateStr.includes('-')) return "Đang cập nhật";
     const [y, m, d] = dateStr.split('-');
     return `${parseInt(d)}/${parseInt(m)}/${y}`;
 }
 
-// Render danh sách bài viết
 function renderBlogPosts() {
     const container = document.getElementById('blogPosts');
     if (!container) return;
@@ -133,8 +129,9 @@ function renderBlogPosts() {
     const postsToShow = filteredPosts.slice(start, end);
 
     if (postsToShow.length === 0) {
-        container.innerHTML = '<p style="text-align:center;color:#888;padding:60px 0;font-size:1.1em;">Chưa có bài viết nào trong danh mục này.</p>';
-        document.getElementById('pagination').innerHTML = '';
+        container.innerHTML = '<p style="text-align:center; color:#888; padding:60px 0; font-size:1.1em;">Chưa có bài viết nào trong danh mục này.</p>';
+        const pagination = document.getElementById('pagination');
+        if (pagination) pagination.innerHTML = '';
         return;
     }
 
@@ -147,9 +144,9 @@ function renderBlogPosts() {
                          loading="lazy" 
                          decoding="async" 
                          class="lazy-img"
-                         onerror="this.style.display='none';this.parentElement.querySelector('.emoji-placeholder').style.display='flex';">
+                         onerror="this.style.display='none'; this.parentElement.querySelector('.emoji-placeholder').style.display='flex';">
                 ` : ''}
-                <div class="emoji-placeholder" style="display:${post.image ? 'none' : 'flex'};">
+                <div class="emoji-placeholder" style="display: ${post.image ? 'none' : 'flex'};">
                     ${post.emoji}
                 </div>
                 ${post.videoUrl ? '<span class="video-badge">Video</span>' : ''}
@@ -169,22 +166,22 @@ function renderBlogPosts() {
     renderPagination(totalPages);
 }
 
-// Phân trang
 function renderPagination(totalPages) {
     const container = document.getElementById('pagination');
     if (!container || totalPages <= 1) {
-        container.innerHTML = '';
+        if (container) container.innerHTML = '';
         return;
     }
-    let html = `<button onclick="changePage(${currentPage-1})" ${currentPage===1?'disabled':''}>Trước</button>`;
+
+    let html = `<button onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>Trước</button>`;
     for (let i = 1; i <= totalPages; i++) {
         if (i === 1 || i === totalPages || Math.abs(i - currentPage) <= 2) {
-            html += `<button onclick="changePage(${i})" ${i===currentPage?'class="active"':''}>${i}</button>`;
+            html += `<button onclick="changePage(${i})" ${i === currentPage ? 'class="active"' : ''}>${i}</button>`;
         } else if (Math.abs(i - currentPage) === 3) {
             html += '<span>...</span>';
         }
     }
-    html += `<button onclick="changePage(${currentPage+1})" ${currentPage===totalPages?'disabled':''}>Sau</button>`;
+    html += `<button onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>Sau</button>`;
     container.innerHTML = html;
 }
 
@@ -196,7 +193,6 @@ function changePage(page) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Nút danh mục
 function initCategoryButtons() {
     document.querySelectorAll('.category-btn').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -209,7 +205,6 @@ function initCategoryButtons() {
     });
 }
 
-// Mở bài viết
 function openBlogPost(id) {
     const map = {
         1: 'cach-xem-lich-am-duong.html',
@@ -237,7 +232,7 @@ window.addEventListener('load', () => {
     }
 });
 
-// Lazy loading ảnh + hiệu ứng mượt
+// Lazy loading ảnh
 function initLazyLoading() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
