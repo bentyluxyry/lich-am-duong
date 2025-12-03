@@ -10,38 +10,44 @@
     <link rel="stylesheet" href="../css/blog-post.css">
 </head>
 <body>
-    <div id="blogLoading">
-    <div class="loading-spinner"></div>
-    <div class="loading-text">
-        Đang tải bài viết<span>.</span><span>.</span><span>.</span>
-    </div>
-</div>
     <div class="container">
         <header>
-            <div class="logo">Lịch Vạn Niên</div>
+            <div class="logo">
+                🌙 Lịch Vạn Niên
+            </div>
             <nav>
-                <button class="tab-btn" onclick="window.location.href='../index.html'">Trang Chủ</button>
-                <button class="tab-btn" onclick="window.location.href='../index.html'">Lịch</button>
-                <button class="tab-btn" onclick="window.location.href='../fortune/index.html'">Bói Duyên</button>
-                <button class="tab-btn active">Trợ Lý</button>
+                <button class="tab-btn" onclick="window.location.href='../index.html'">🏠 Trang Chủ</button>
+                <button class="tab-btn" onclick="window.location.href='../index.html'">📅 Lịch</button>
+                <button class="tab-btn" onclick="window.location.href='../fortune/index.html'">🔮 Bói Duyên</button>
+                <button class="tab-btn active">✍️ Trợ Lý</button>
             </nav>
         </header>
 
         <div class="content">
             <div class="blog-header">
-                <h1>Trợ Lý Blog</h1>
+                <h1>✍️ Trợ Lý Blog</h1>
                 <p>Khám phá các bài viết về lịch âm dương, phong thủy và văn hóa truyền thống</p>
             </div>
 
+            <!-- Danh mục blog -->
             <div class="blog-categories">
                 <button class="category-btn active" data-category="all">Tất cả</button>
                 <button class="category-btn" data-category="lich">Lịch Âm Dương</button>
                 <button class="category-btn" data-category="phongthuy">Phong Thủy</button>
                 <button class="category-btn" data-category="vanhoa">Văn Hóa</button>
+                <button class="category-btn" data-category="giavang">💰 Giá Vàng</button>
+                <button class="category-btn" data-category="giabtc">₿ Giá BTC</button>
             </div>
 
-            <div id="blogPosts" class="blog-grid"></div>
-            <div class="pagination" id="pagination"></div>
+            <!-- Danh sách bài viết -->
+            <div id="blogPosts" class="blog-grid">
+                <!-- Bài viết sẽ được load từ JS -->
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination" id="pagination">
+                <!-- Phân trang sẽ được load từ JS -->
+            </div>
         </div>
 
         <footer class="blog-footer">
@@ -49,7 +55,6 @@
         </footer>
     </div>
 
-    <!-- Đường dẫn này là HOÀN HẢO, giữ nguyên! -->
     <script src="../js/blog.js"></script>
 </body>
 </html>
