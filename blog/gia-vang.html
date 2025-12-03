@@ -7,6 +7,67 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/post-detail.css">
     <style>
+        /* Lịch Vạn Niên Box */
+        .calendar-box {
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .calendar-header-text {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            opacity: 0.95;
+        }
+
+        .calendar-display {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .solar-calendar,
+        .lunar-calendar {
+            flex: 1;
+        }
+
+        .calendar-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        .solar-date-large {
+            font-size: 4em;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .solar-month-year {
+            font-size: 1.1em;
+            margin-top: 5px;
+            opacity: 0.95;
+        }
+
+        .lunar-date-large {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #ffd700;
+            line-height: 1;
+        }
+
+        .lunar-year-text {
+            font-size: 0.95em;
+            margin-top: 5px;
+            opacity: 0.9;
+        }
+
+        /* Price Section */
         .price-container {
             max-width: 1000px;
             margin: 0 auto;
@@ -78,31 +139,20 @@
             color: #e74c3c;
         }
 
-        .gold-chart {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            margin-top: 30px;
-            text-align: center;
-        }
-
-        .gold-chart h3 {
-            color: #667eea;
-            margin-bottom: 20px;
-        }
-
-        .chart-placeholder {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            height: 300px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #888;
-        }
-
         @media (max-width: 768px) {
+            .calendar-display {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .solar-date-large {
+                font-size: 3em;
+            }
+
+            .lunar-date-large {
+                font-size: 2em;
+            }
+
             .price-details {
                 grid-template-columns: 1fr;
             }
@@ -114,11 +164,26 @@
         <a href="../blog/index.html" class="back-btn">← Quay lại Blog</a>
 
         <div class="post-header category-giavang" style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);">
-            <h1 class="post-title">💰 Giá Vàng Hôm Nay - Cập Nhật Liên Tục</h1>
+            <h1 class="post-title">💰 Giá Vàng Hôm Nay</h1>
             <div class="post-meta">
-                <span>🗓️ Cập nhật: 03/12/2024</span>
-                <span>⏰ 14:30</span>
-                <span>👁️ 5,420 lượt xem</span>
+                <span id="updateTime">🗓️ Cập nhật: ...</span>
+            </div>
+        </div>
+
+        <!-- Lịch Vạn Niên -->
+        <div class="calendar-box">
+            <div class="calendar-header-text">LỊCH VẠN NIÊN</div>
+            <div class="calendar-display">
+                <div class="solar-calendar">
+                    <div class="calendar-label">Dương lịch</div>
+                    <div class="solar-date-large" id="solarDay">...</div>
+                    <div class="solar-month-year" id="solarMonthYear">...</div>
+                </div>
+                <div class="lunar-calendar">
+                    <div class="calendar-label">Âm lịch</div>
+                    <div class="lunar-date-large" id="lunarDate">...</div>
+                    <div class="lunar-year-text" id="lunarYear">...</div>
+                </div>
             </div>
         </div>
 
@@ -127,7 +192,7 @@
             <div class="price-card">
                 <div class="price-header">
                     <div class="price-name">🏆 Vàng SJC</div>
-                    <div class="price-update">Cập nhật: 14:30 hôm nay</div>
+                    <div class="price-update" id="goldUpdate">Cập nhật: ...</div>
                 </div>
                 <div class="price-details">
                     <div class="price-item">
@@ -147,7 +212,7 @@
             <div class="price-card">
                 <div class="price-header">
                     <div class="price-name">✨ Vàng 9999</div>
-                    <div class="price-update">Cập nhật: 14:30 hôm nay</div>
+                    <div class="price-update">Cập nhật: <span id="goldUpdate2">...</span></div>
                 </div>
                 <div class="price-details">
                     <div class="price-item">
@@ -167,7 +232,7 @@
             <div class="price-card">
                 <div class="price-header">
                     <div class="price-name">💍 Vàng Nhẫn Tròn Trơn</div>
-                    <div class="price-update">Cập nhật: 14:30 hôm nay</div>
+                    <div class="price-update">Cập nhật: <span id="goldUpdate3">...</span></div>
                 </div>
                 <div class="price-details">
                     <div class="price-item">
@@ -183,15 +248,7 @@
                 </div>
             </div>
 
-            <!-- Biểu đồ -->
-            <div class="gold-chart">
-                <h3>📊 Biểu Đồ Giá Vàng 7 Ngày Qua</h3>
-                <div class="chart-placeholder">
-                    <p>Biểu đồ sẽ được cập nhật tại đây<br>Tích hợp API giá vàng real-time</p>
-                </div>
-            </div>
-
-            <!-- Thông tin thêm -->
+            <!-- Thông tin -->
             <div class="post-content" style="margin-top: 30px;">
                 <h2>📌 Lưu Ý Khi Mua Bán Vàng</h2>
                 
@@ -224,20 +281,47 @@
                         <li>Bán vàng khi giá đang giảm</li>
                     </ul>
                 </div>
-
-                <h2>🔗 Nguồn Cập Nhật</h2>
-                <p>
-                    Website tự động cập nhật giá vàng từ các nguồn uy tín:
-                </p>
-                <ul>
-                    <li><strong>SJC:</strong> Công ty vàng bạc đá quý Sài Gòn</li>
-                    <li><strong>PNJ:</strong> Công ty cổ phần vàng bạc đá quý Phú Nhuận</li>
-                    <li><strong>DOJI:</strong> Tập đoàn vàng bạc đá quý DOJI</li>
-                </ul>
             </div>
         </div>
 
         <a href="../blog/index.html" class="back-btn">← Quay lại Blog</a>
     </div>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Cập nhật thời gian và lịch
+        function updateDateTime() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const day = now.getDate();
+            const month = now.getMonth() + 1;
+            const year = now.getFullYear();
+            
+            // Cập nhật giờ cập nhật
+            const timeStr = `🗓️ Cập nhật: ${day}/${month}/${year} - ⏰ ${hours}:${minutes}`;
+            document.getElementById('updateTime').textContent = timeStr;
+            
+            const timeOnly = `${hours}:${minutes} hôm nay`;
+            document.getElementById('goldUpdate').textContent = `Cập nhật: ${timeOnly}`;
+            document.getElementById('goldUpdate2').textContent = timeOnly;
+            document.getElementById('goldUpdate3').textContent = timeOnly;
+            
+            // Cập nhật dương lịch
+            document.getElementById('solarDay').textContent = day;
+            document.getElementById('solarMonthYear').textContent = `Tháng ${month} năm ${year}`;
+            
+            // Cập nhật âm lịch
+            const lunar = getLunarDate(now);
+            document.getElementById('lunarDate').textContent = `${lunar.day}/${lunar.month}`;
+            document.getElementById('lunarYear').textContent = `Năm ${lunar.year}`;
+        }
+        
+        // Chạy khi load trang
+        updateDateTime();
+        
+        // Cập nhật mỗi phút
+        setInterval(updateDateTime, 60000);
+    </script>
 </body>
 </html>
