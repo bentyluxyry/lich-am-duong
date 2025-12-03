@@ -425,3 +425,42 @@ table tr:hover {
     /* Đây là một kỹ thuật nâng cao: cho phép bảng hiển thị theo dạng "thẻ" */
     /* Tuy nhiên, với cấu trúc hiện tại (2-3 cột), `overflow-x: auto` là tối ưu nhất. */
 }
+
+
+/* Ảnh trong bài viết chi tiết - lazy loading + hiệu ứng đẹp */
+.content-img,
+.full-width {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 25px auto;
+}
+
+.content-img.loaded,
+.full-width.loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.full-width {
+    border-radius: 20px;
+    margin: 35px 0;
+}
+
+/* Placeholder shimmer cho ảnh trong bài */
+.content-img::before,
+.full-width::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(90deg, #f0e8ff 25%, #e0d6ff 50%, #f0e8ff 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+    border-radius: 16px;
+    z-index: -1;
+}
