@@ -1,4 +1,4 @@
-// Dữ liệu blog (có thể chuyển sang file JSON riêng)
+// js/blog.js - HOÀN CHỈNH & KHÔNG LỖI
 const blogPosts = [
     {
         id: 1,
@@ -8,9 +8,8 @@ const blogPosts = [
         categoryName: "Lịch Âm Dương",
         date: "2024-12-01",
         views: 1250,
-        image: "img/blog/lich-am-duong.jpg", // Ảnh đại diện
-        emoji: "📅",
-        videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        image: "img/blog/lich-am-duong.jpg",
+        emoji: "📅"
     },
     {
         id: 2,
@@ -20,7 +19,7 @@ const blogPosts = [
         categoryName: "Phong Thủy",
         date: "2024-11-28",
         views: 980,
-        image: "img/blog/phong-thuy.jpg", // Ảnh đại diện
+        image: "img/blog/phong-thuy.jpg",
         emoji: "🏠"
     },
     {
@@ -31,7 +30,7 @@ const blogPosts = [
         categoryName: "Văn Hóa",
         date: "2024-11-25",
         views: 1580,
-        image: "img/blog/tet-nguyen-dan.jpg", // Ảnh đại diện
+        image: "img/blog/tet-nguyen-dan.jpg",
         emoji: "🎊"
     },
     {
@@ -99,21 +98,51 @@ const blogPosts = [
         views: 2890,
         image: "img/blog/cuoi-hoi.jpg",
         emoji: "💑"
+    },
+    {
+        id: 10,
+        title: "Giá Vàng Hôm Nay - Cập Nhật Liên Tục",
+        excerpt: "Cập nhật giá vàng SJC, vàng 9999, vàng nhẫn tròn trơn mới nhất trong ngày. Theo dõi biến động giá vàng để đầu tư hiệu quả.",
+        category: "giavang",
+        categoryName: "Giá Vàng",
+        date: "2024-12-03",
+        views: 5420,
+        image: "img/blog/gia-vang.jpg",
+        emoji: "💰"
+    },
+    {
+        id: 11,
+        title: "Giá Bitcoin (BTC) Hôm Nay",
+        excerpt: "Theo dõi giá Bitcoin và các loại cryptocurrency phổ biến. Phân tích xu hướng thị trường crypto mới nhất.",
+        category: "giabtc",
+        categoryName: "Giá BTC",
+        date: "2024-12-03",
+        views: 4830,
+        image: "img/blog/gia-btc.jpg",
+        emoji: "₿"
     }
 ];
 
-// Biến phân trang
 let currentCategory = 'all';
 let currentPage = 1;
 const postsPerPage = 6;
 
-// Khởi tạo
+// Khởi tạo khi DOM load xong
 document.addEventListener('DOMContentLoaded', function() {
     renderBlogPosts();
     initCategoryButtons();
 });
 
-// Render blog posts
+// Format ngày tháng
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+}
+
+// Render danh sách bài viết
 function renderBlogPosts() {
     const container = document.getElementById('blogPosts');
     
@@ -131,6 +160,7 @@ function renderBlogPosts() {
     // Render posts
     if (currentPosts.length === 0) {
         container.innerHTML = '<p style="text-align: center; color: #888; grid-column: 1/-1;">Không có bài viết nào trong danh mục này.</p>';
+        document.getElementById('pagination').innerHTML = '';
         return;
     }
     
@@ -138,8 +168,8 @@ function renderBlogPosts() {
         <div class="blog-card" onclick="openBlogPost(${post.id})">
             <div class="blog-card-image">
                 ${post.image 
-                    ? `<img src="${post.image}" alt="${post.title}">` 
-                    : post.emoji
+                    ? `<img src="${post.image}" alt="${post.title}" onerror="this.style.display='none'">` 
+                    : `<div style="font-size: 4em;">${post.emoji}</div>`
                 }
                 ${post.videoUrl ? '<span class="video-badge">📹 Video</span>' : ''}
             </div>
@@ -163,38 +193,7 @@ function renderBlogPosts() {
     renderPagination(totalPages);
 }
 
-// Format date
-function formatDate(dateString) {
-    const date = new Date(dateString);
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
-}
-
-// Category buttons
-function initCategoryButtons() {
-    const buttons = document.querySelectorAll('.category-btn');
-    
-    buttons.forEach(button => {
-        button.addEventListener('click', function() {
-            // Remove active class
-            buttons.forEach(btn => btn.classList.remove('active'));
-            
-            // Add active class
-            this.classList.add('active');
-            
-            // Update category and reset page
-            currentCategory = this.getAttribute('data-category');
-            currentPage = 1;
-            
-            // Re-render
-            renderBlogPosts();
-        });
-    });
-}
-
-// Pagination
+// Render phân trang
 function renderPagination(totalPages) {
     const container = document.getElementById('pagination');
     
@@ -238,14 +237,36 @@ function renderPagination(totalPages) {
     container.innerHTML = html;
 }
 
-// Change page
+// Thay đổi trang
 function changePage(page) {
     currentPage = page;
     renderBlogPosts();
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Open blog post - Chuyển đến trang chi tiết
+// Khởi tạo nút category
+function initCategoryButtons() {
+    const buttons = document.querySelectorAll('.category-btn');
+    
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove active class
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class
+            this.classList.add('active');
+            
+            // Update category and reset page
+            currentCategory = this.getAttribute('data-category');
+            currentPage = 1;
+            
+            // Re-render
+            renderBlogPosts();
+        });
+    });
+}
+
+// Mở bài viết chi tiết
 function openBlogPost(id) {
     const post = blogPosts.find(p => p.id === id);
     if (!post) return;
@@ -260,7 +281,9 @@ function openBlogPost(id) {
         6: '12-con-giap-y-nghia.html',
         7: 'ngay-ram-y-nghia.html',
         8: 'cach-bo-tri-ban-tho.html',
-        9: 'xem-ngay-cuoi-hoi.html'
+        9: 'xem-ngay-cuoi-hoi.html',
+        10: 'gia-vang.html',
+        11: 'gia-btc.html'
     };
     
     // Nếu có file, chuyển hướng
