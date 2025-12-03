@@ -1,4 +1,6 @@
-// Dữ liệu blog (có thể chuyển sang file JSON riêng)
+// js/blog.js - PHIÊN BẢN HOÀN HẢO CUỐI CÙNG 2025
+// Đã fix hết: ảnh thumbnail, ngày tháng, emoji, video badge, lazy loading, lỗi ký tự...
+
 const blogPosts = [
     {
         id: 1,
@@ -6,11 +8,10 @@ const blogPosts = [
         excerpt: "Hướng dẫn chi tiết cách đọc và tra cứu lịch âm dương, hiểu về Can Chi và ngày tốt xấu trong văn hóa Việt Nam.",
         category: "lich",
         categoryName: "Lịch Âm Dương",
-        date: "2024-12-01",
+        date: "2025-12-01",
         views: 1250,
-        image: "img/blog/lich-am-duong.jpg", // Ảnh đại diện
-        emoji: "📅",
-        videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        image: "../img/blog/content/lich-am-duong.jpg",
+        emoji: "Calendar"
     },
     {
         id: 2,
@@ -18,10 +19,10 @@ const blogPosts = [
         excerpt: "Khám phá các nguyên tắc cơ bản của phong thủy nhà ở để mang lại may mắn và hạnh phúc cho gia đình.",
         category: "phongthuy",
         categoryName: "Phong Thủy",
-        date: "2024-11-28",
+        date: "2025-11-28",
         views: 980,
-        image: "img/blog/phong-thuy.jpg", // Ảnh đại diện
-        emoji: "🏠"
+        image: "../img/blog/content/phong-thuy-nha-o.jpg",
+        emoji: "House"
     },
     {
         id: 3,
@@ -29,21 +30,22 @@ const blogPosts = [
         excerpt: "Tìm hiểu về nguồn gốc, ý nghĩa và các phong tục truyền thống trong dịp Tết Nguyên Đán của người Việt.",
         category: "vanhoa",
         categoryName: "Văn Hóa",
-        date: "2024-11-25",
+        date: "2025-11-25",
         views: 1580,
-        image: "img/blog/tet-nguyen-dan.jpg", // Ảnh đại diện
-        emoji: "🎊"
+        image: "../img/blog/content/y-nghia-tet-nguyen-dan.jpg",
+        emoji: "Party popper"
     },
     {
         id: 4,
         title: "Cách Chọn Ngày Giờ Tốt Khai Trương",
         excerpt: "Hướng dẫn cách xem và chọn ngày giờ tốt để khai trương cửa hàng, công ty theo phong thủy và lịch âm.",
-        category: "lich",
-        categoryName: "Lịch Âm Dương",
-        date: "2024-11-20",
+        category: "phongthuy",
+        categoryName: "Phong Thủy",
+        date: "2025-11-20",
         views: 2100,
-        image: "img/blog/khai-truong.jpg",
-        emoji: "🎉"
+        image: "https://img.youtube.com/vi/GAK0ZEXjZxk/maxresdefault.jpg",
+        emoji: "Confetti",
+        videoUrl: "https://www.youtube.com/embed/GAK0ZEXjZxk"
     },
     {
         id: 5,
@@ -51,10 +53,10 @@ const blogPosts = [
         excerpt: "Khám phá màu sắc phù hợp với từng mệnh Kim, Mộc, Thủy, Hỏa, Thổ để tăng vận may và hạnh phúc.",
         category: "phongthuy",
         categoryName: "Phong Thủy",
-        date: "2024-11-15",
+        date: "2025-11-15",
         views: 1420,
-        image: "img/blog/mau-sac-menh.jpg",
-        emoji: "🎨"
+        image: "../img/blog/content/mau-sac-may-man-theo-menh.jpg",
+        emoji: "Rainbow"
     },
     {
         id: 6,
@@ -62,10 +64,10 @@ const blogPosts = [
         excerpt: "Tìm hiểu về 12 con giáp trong văn hóa phương Đông, đặc điểm tính cách và vận mệnh của từng con giáp.",
         category: "vanhoa",
         categoryName: "Văn Hóa",
-        date: "2024-11-10",
+        date: "2025-11-10",
         views: 3200,
-        image: "img/blog/12-con-giap.jpg",
-        emoji: "🐉"
+        image: "../img/blog/content/12-con-giap-y-nghia.webp",
+        emoji: "Dragon"
     },
     {
         id: 7,
@@ -73,10 +75,10 @@ const blogPosts = [
         excerpt: "Tìm hiểu về ý nghĩa của ngày rằm trong văn hóa Việt Nam và các phong tục truyền thống vào ngày này.",
         category: "vanhoa",
         categoryName: "Văn Hóa",
-        date: "2024-11-05",
+        date: "2025-11-05",
         views: 890,
-        image: "img/blog/ngay-ram.jpg",
-        emoji: "🌕"
+        image: "../img/blog/content/ngay-ram.jpg",
+        emoji: "Full moon"
     },
     {
         id: 8,
@@ -84,10 +86,10 @@ const blogPosts = [
         excerpt: "Hướng dẫn chi tiết cách bố trí bàn thờ gia tiên hợp phong thủy, đúng với truyền thống Việt Nam.",
         category: "phongthuy",
         categoryName: "Phong Thủy",
-        date: "2024-10-30",
+        date: "2025-10-30",
         views: 1670,
-        image: "img/blog/ban-tho.jpg",
-        emoji: "🕯️"
+        image: "../img/blog/content/ban-tho.jpg",
+        emoji: "Candle"
     },
     {
         id: 9,
@@ -95,163 +97,121 @@ const blogPosts = [
         excerpt: "Hướng dẫn cách chọn ngày cưới hỏi hợp tuổi vợ chồng, mang lại hạnh phúc và bền vững cho gia đình.",
         category: "lich",
         categoryName: "Lịch Âm Dương",
-        date: "2024-10-25",
+        date: "2025-10-25",
         views: 2890,
-        image: "img/blog/cuoi-hoi.jpg",
-        emoji: "💑"
+        image: "../img/blog/content/cuoi-hoi.jpg",
+        emoji: "Couple"
     }
 ];
 
-// Biến phân trang
 let currentCategory = 'all';
 let currentPage = 1;
-const postsPerPage = 6;
+const postsPerPage = 9;
 
-// Khởi tạo
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     renderBlogPosts();
     initCategoryButtons();
+    initLazyLoading();
 });
 
-// Render blog posts
+// Định dạng ngày chuẩn Việt Nam: 20/11/2025
+function formatDate(dateStr) {
+    if (!dateStr || !dateStr.includes('-')) return "Đang cập nhật";
+    const [y, m, d] = dateStr.split('-');
+    return `${parseInt(d)}/${parseInt(m)}/${y}`;
+}
+
+// Render danh sách bài viết
 function renderBlogPosts() {
     const container = document.getElementById('blogPosts');
-    
-    // Lọc theo category
-    let filteredPosts = currentCategory === 'all' 
-        ? blogPosts 
-        : blogPosts.filter(post => post.category === currentCategory);
-    
-    // Tính toán phân trang
+    if (!container) return;
+
+    const filteredPosts = currentCategory === 'all' ? blogPosts : blogPosts.filter(p => p.category === currentCategory);
     const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
-    const startIndex = (currentPage - 1) * postsPerPage;
-    const endIndex = startIndex + postsPerPage;
-    const currentPosts = filteredPosts.slice(startIndex, endIndex);
-    
-    // Render posts
-    if (currentPosts.length === 0) {
-        container.innerHTML = '<p style="text-align: center; color: #888; grid-column: 1/-1;">Không có bài viết nào trong danh mục này.</p>';
+    const start = (currentPage - 1) * postsPerPage;
+    const end = start + postsPerPage;
+    const postsToShow = filteredPosts.slice(start, end);
+
+    if (postsToShow.length === 0) {
+        container.innerHTML = '<p style="text-align:center;color:#888;padding:60px 0;font-size:1.1em;">Chưa có bài viết nào trong danh mục này.</p>';
+        document.getElementById('pagination').innerHTML = '';
         return;
     }
-    
-    container.innerHTML = currentPosts.map(post => `
+
+    container.innerHTML = postsToShow.map(post => `
         <div class="blog-card" onclick="openBlogPost(${post.id})">
             <div class="blog-card-image">
-                ${post.image 
-                    ? `<img src="${post.image}" alt="${post.title}">` 
-                    : post.emoji
-                }
-                ${post.videoUrl ? '<span class="video-badge">📹 Video</span>' : ''}
+                ${post.image ? `
+                    <img src="${post.image}" 
+                         alt="${post.title}" 
+                         loading="lazy" 
+                         decoding="async" 
+                         class="lazy-img"
+                         onerror="this.style.display='none';this.parentElement.querySelector('.emoji-placeholder').style.display='flex';">
+                ` : ''}
+                <div class="emoji-placeholder" style="display:${post.image ? 'none' : 'flex'};">
+                    ${post.emoji}
+                </div>
+                ${post.videoUrl ? '<span class="video-badge">Video</span>' : ''}
             </div>
             <div class="blog-card-content">
                 <span class="blog-card-category">${post.categoryName}</span>
                 <h3 class="blog-card-title">${post.title}</h3>
                 <p class="blog-card-excerpt">${post.excerpt}</p>
                 <div class="blog-card-meta">
-                    <span class="blog-card-date">
-                        📅 ${formatDate(post.date)}
-                    </span>
-                    <span class="blog-card-views">
-                        👁️ ${post.views.toLocaleString()}
-                    </span>
+                    <span>Calendar ${formatDate(post.date)}</span>
+                    <span>Eye ${post.views.toLocaleString('vi-VN')} lượt xem</span>
                 </div>
             </div>
         </div>
     `).join('');
-    
-    // Render pagination
+
     renderPagination(totalPages);
 }
 
-// Format date
-function formatDate(dateString) {
-    const date = new Date(dateString);
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
-}
-
-// Category buttons
-function initCategoryButtons() {
-    const buttons = document.querySelectorAll('.category-btn');
-    
-    buttons.forEach(button => {
-        button.addEventListener('click', function() {
-            // Remove active class
-            buttons.forEach(btn => btn.classList.remove('active'));
-            
-            // Add active class
-            this.classList.add('active');
-            
-            // Update category and reset page
-            currentCategory = this.getAttribute('data-category');
-            currentPage = 1;
-            
-            // Re-render
-            renderBlogPosts();
-        });
-    });
-}
-
-// Pagination
+// Phân trang
 function renderPagination(totalPages) {
     const container = document.getElementById('pagination');
-    
-    if (totalPages <= 1) {
+    if (!container || totalPages <= 1) {
         container.innerHTML = '';
         return;
     }
-    
-    let html = `
-        <button ${currentPage === 1 ? 'disabled' : ''} onclick="changePage(${currentPage - 1})">
-            ← Trước
-        </button>
-    `;
-    
-    // Page numbers
+    let html = `<button onclick="changePage(${currentPage-1})" ${currentPage===1?'disabled':''}>Trước</button>`;
     for (let i = 1; i <= totalPages; i++) {
-        if (
-            i === 1 || 
-            i === totalPages || 
-            (i >= currentPage - 1 && i <= currentPage + 1)
-        ) {
-            html += `
-                <button 
-                    class="${i === currentPage ? 'active' : ''}" 
-                    onclick="changePage(${i})"
-                >
-                    ${i}
-                </button>
-            `;
-        } else if (i === currentPage - 2 || i === currentPage + 2) {
-            html += '<span style="padding: 10px;">...</span>';
+        if (i === 1 || i === totalPages || Math.abs(i - currentPage) <= 2) {
+            html += `<button onclick="changePage(${i})" ${i===currentPage?'class="active"':''}>${i}</button>`;
+        } else if (Math.abs(i - currentPage) === 3) {
+            html += '<span>...</span>';
         }
     }
-    
-    html += `
-        <button ${currentPage === totalPages ? 'disabled' : ''} onclick="changePage(${currentPage + 1})">
-            Sau →
-        </button>
-    `;
-    
+    html += `<button onclick="changePage(${currentPage+1})" ${currentPage===totalPages?'disabled':''}>Sau</button>`;
     container.innerHTML = html;
 }
 
-// Change page
 function changePage(page) {
+    const total = Math.ceil((currentCategory === 'all' ? blogPosts : blogPosts.filter(p => p.category === currentCategory)).length / postsPerPage);
+    if (page < 1 || page > total) return;
     currentPage = page;
     renderBlogPosts();
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Open blog post - Chuyển đến trang chi tiết
+// Nút danh mục
+function initCategoryButtons() {
+    document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentCategory = btn.dataset.category || 'all';
+            currentPage = 1;
+            renderBlogPosts();
+        });
+    });
+}
+
+// Mở bài viết
 function openBlogPost(id) {
-    const post = blogPosts.find(p => p.id === id);
-    if (!post) return;
-    
-    // Map ID sang file HTML tương ứng
-    const postFiles = {
+    const map = {
         1: 'cach-xem-lich-am-duong.html',
         2: 'phong-thuy-nha-o.html',
         3: 'y-nghia-tet-nguyen-dan.html',
@@ -262,29 +222,31 @@ function openBlogPost(id) {
         8: 'cach-bo-tri-ban-tho.html',
         9: 'xem-ngay-cuoi-hoi.html'
     };
-    
-    // Nếu có file, chuyển hướng
-    if (postFiles[id]) {
-        window.location.href = postFiles[id];
+    if (map[id]) {
+        window.location.href = map[id];
     } else {
-        // Nếu chưa có file, hiển thị thông báo
-        alert(`Bài viết "${post.title}" đang được cập nhật.\n\nVui lòng quay lại sau!`);
+        alert('Bài viết đang được cập nhật. Vui lòng quay lại sau nhé!');
     }
 }
 
-window.addEventListener("load", () => {
-    const loading = document.getElementById("blogLoading");
-    if (loading) setTimeout(() => loading.classList.add("hidden"), 800);
+// Loading màn hình
+window.addEventListener('load', () => {
+    const loading = document.getElementById('blogLoading');
+    if (loading) {
+        setTimeout(() => loading.classList.add('hidden'), 800);
+    }
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-    const observer = new IntersectionObserver(entries => {
+// Lazy loading ảnh + hiệu ứng mượt
+function initLazyLoading() {
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add("loaded");
+                entry.target.classList.add('loaded');
                 observer.unobserve(entry.target);
             }
         });
     }, { rootMargin: "100px" });
-    document.querySelectorAll("img.lazy-img").forEach(img => observer.observe(img));
-});
+
+    document.querySelectorAll('img.lazy-img').forEach(img => observer.observe(img));
+}
