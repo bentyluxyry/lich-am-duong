@@ -210,3 +210,12 @@ function openBlogPost(id) {
         alert('Bài viết đang được cập nhật. Vui lòng quay lại sau nhé! Calendar');
     }
 }
+
+// HIỆU ỨNG LOADING - TỰ ĐỘNG ẨN SAU KHI LOAD XONG
+window.addEventListener("load", function() {
+    const loading = document.getElementById("blogLoading");
+    setTimeout(() => {
+        loading.classList.add("hidden");
+        document.body.classList.add("loading-done");
+    }, 800); // Có thể giảm xuống 500 nếu muốn nhanh hơn
+});
