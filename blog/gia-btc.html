@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giá Bitcoin (BTC) Hôm Nay | Lịch Vạn Niên</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/post-detail.css">
+    <style>
+        .crypto-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .crypto-card {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .crypto-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .crypto-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .crypto-icon {
+            font-size: 3em;
+        }
+
+        .crypto-name {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .crypto-symbol {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .crypto-price {
+            text-align: right;
+        }
+
+        .price-main {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .price-usd {
+            font-size: 1.1em;
+            opacity: 0.8;
+        }
+
+        .crypto-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        .stat-change {
+            font-size: 0.85em;
+            margin-top: 5px;
+        }
+
+        .stat-change.up {
+            color: #2ecc71;
+        }
+
+        .stat-change.down {
+            color: #e74c3c;
+        }
+
+        .other-cryptos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .mini-crypto-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .mini-crypto-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .mini-crypto-name {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .mini-crypto-price {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        @media (max-width: 768px) {
+            .crypto-main {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .crypto-price {
+                text-align: center;
+                margin-top: 20px;
+            }
+
+            .price-main {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="post-container">
+        <a href="../blog/index.html" class="back-btn">← Quay lại Blog</a>
+
+        <div class="post-header category-giabtc" style="background: linear-gradient(135deg, #f7931a 0%, #ff6b00 100%);">
+            <h1 class="post-title">₿ Giá Bitcoin (BTC) Hôm Nay</h1>
+            <div class="post-meta">
+                <span>🗓️ Cập nhật: 03/12/2024</span>
+                <span>⏰ 14:35</span>
+                <span>👁️ 4,830 lượt xem</span>
+            </div>
+        </div>
+
+        <div class="crypto-container">
+            <!-- Bitcoin Card -->
+            <div class="crypto-card">
+                <div class="crypto-main">
+                    <div class="crypto-info">
+                        <div class="crypto-icon">₿</div>
+                        <div>
+                            <div class="crypto-name">Bitcoin</div>
+                            <div class="crypto-symbol">BTC</div>
+                        </div>
+                    </div>
+                    <div class="crypto-price">
+                        <div class="price-main">$42,350</div>
+                        <div class="price-usd">≈ 1,045,000,000 VNĐ</div>
+                    </div>
+                </div>
+
+                <div class="crypto-stats">
+                    <div class="stat-item">
+                        <div class="stat-label">24h Thay đổi</div>
+                        <div class="stat-value">+3.45%</div>
+                        <div class="stat-change up">▲ +$1,420</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">24h Cao nhất</div>
+                        <div class="stat-value">$43,120</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">24h Thấp nhất</div>
+                        <div class="stat-value">$40,850</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Khối lượng 24h</div>
+                        <div class="stat-value">$28.5B</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Vốn hóa</div>
+                        <div class="stat-value">$828B</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Dominance</div>
+                        <div class="stat-value">52.3%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other Cryptocurrencies -->
+            <h2 style="color: #667eea; margin: 30px 0 20px;">📊 Các Cryptocurrency Khác</h2>
+            
+            <div class="other-cryptos">
+                <div class="mini-crypto-card">
+                    <div class="mini-crypto-header">
+                        <div class="mini-crypto-name">Ethereum (ETH)</div>
+                    </div>
+                    <div class="mini-crypto-price">$2,245</div>
+                    <div class="stat-change up">▲ +2.15%</div>
+                </div>
+
+                <div class="mini-crypto-card">
+                    <div class="mini-crypto-header">
+                        <div class="mini-crypto-name">Binance Coin (BNB)</div>
+                    </div>
+                    <div class="mini-crypto-price">$312</div>
+                    <div class="stat-change up">▲ +1.85%</div>
+                </div>
+
+                <div class="mini-crypto-card">
+                    <div class="mini-crypto-header">
+                        <div class="mini-crypto-name">Cardano (ADA)</div>
+                    </div>
+                    <div class="mini-crypto-price">$0.58</div>
+                    <div class="stat-change down">▼ -0.45%</div>
+                </div>
+
+                <div class="mini-crypto-card">
+                    <div class="mini-crypto-header">
+                        <div class="mini-crypto-name">Solana (SOL)</div>
+                    </div>
+                    <div class="mini-crypto-price">$68.5</div>
+                    <div class="stat-change up">▲ +4.20%</div>
+                </div>
+
+                <div class="mini-crypto-card">
+                    <div class="mini-crypto-header">
+                        <div class="mini-crypto-name">Ripple (XRP)</div>
+                    </div>
+                    <div class="mini-crypto-price">$0.62</div>
+                    <div class="stat-change up">▲ +1.25%</div>
+                </div>
+
+                <div class="mini-crypto-card">
+                    <div class="mini-crypto-header">
+                        <div class="mini-crypto-name">Polkadot (DOT)</div>
+                    </div>
+                    <div class="mini-crypto-price">$7.35</div>
+                    <div class="stat-change down">▼ -0.85%</div>
+                </div>
+            </div>
+
+            <!-- Thông tin thêm -->
+            <div class="post-content" style="margin-top: 30px;">
+                <h2>📌 Bitcoin Là Gì?</h2>
+                <p>
+                    Bitcoin (BTC) là loại tiền điện tử đầu tiên và lớn nhất thế giới, được tạo ra vào năm 2009 
+                    bởi Satoshi Nakamoto. Bitcoin hoạt động trên công nghệ blockchain phi tập trung, cho phép 
+                    giao dịch ngang hàng mà không cần trung gian.
+                </p>
+
+                <div class="info-box">
+                    <strong>ℹ️ Đặc điểm nổi bật:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>Tổng cung: 21 triệu BTC (giới hạn)</li>
+                        <li>Block time: ~10 phút</li>
+                        <li>Halving: Mỗi 4 năm</li>
+                        <li>Phi tập trung hoàn toàn</li>
+                    </ul>
+                </div>
+
+                <h2>💡 Cách Đầu Tư Bitcoin</h2>
+                
+                <div class="success-box">
+                    <strong>✅ Cho người mới:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>Học về Bitcoin và blockchain trước</li>
+                        <li>Bắt đầu với số tiền nhỏ</li>
+                        <li>Mua trên sàn uy tín (Binance, Coinbase)</li>
+                        <li>Bảo mật ví crypto cẩn thận</li>
+                        <li>Đầu tư dài hạn (HODL)</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <strong>⚠️ Rủi ro cần biết:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>Giá biến động rất mạnh</li>
+                        <li>Không được bảo hiểm như ngân hàng</li>
+                        <li>Có thể bị hack nếu bảo mật kém</li>
+                        <li>Chưa được pháp luật VN công nhận</li>
+                        <li>Có thể mất 100% vốn đầu tư</li>
+                    </ul>
+                </div>
+
+                <h2>📊 Phân Tích Kỹ Thuật</h2>
+                <div class="highlight-box">
+                    <strong>💡 Xu hướng hiện tại:</strong>
+                    <p style="margin-top: 10px;">
+                        Bitcoin đang trong xu hướng tăng, vượt qua mốc kháng cự $42,000. 
+                        Chỉ báo RSI ở mức 68 (gần vùng quá mua). Nếu giữ được trên $41,500, 
+                        mục tiêu tiếp theo là $45,000.
+                    </p>
+                </div>
+
+                <h2>🔗 Nguồn Dữ Liệu</h2>
+                <p>Giá được cập nhật từ:</p>
+                <ul>
+                    <li><strong>Binance:</strong> Sàn giao dịch lớn nhất thế giới</li>
+                    <li><strong>Coinbase:</strong> Sàn uy tín tại Mỹ</li>
+                    <li><strong>CoinMarketCap:</strong> Trang thống kê crypto</li>
+                </ul>
+
+                <div class="warning-box">
+                    <strong>⚠️ Lưu ý pháp lý:</strong>
+                    <p style="margin-top: 10px;">
+                        Cryptocurrency chưa được công nhận là phương tiện thanh toán hợp pháp tại Việt Nam. 
+                        Đầu tư crypto có rủi ro cao. Chỉ đầu tư số tiền bạn có thể chấp nhận mất.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <a href="../blog/index.html" class="back-btn">← Quay lại Blog</a>
+    </div>
+</body>
+</html>
