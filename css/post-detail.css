@@ -390,3 +390,38 @@ table tr:hover {
         grid-template-columns: 1fr;
     }
 }
+
+/* Responsive Table Enhancements for smaller screens */
+@media (max-width: 480px) {
+    /* Đảm bảo khung chứa bảng vẫn hoạt động tốt */
+    .table-container {
+        margin: 15px 0;
+        /* Loại bỏ đổ bóng bên trong container nếu có xung đột */
+        box-shadow: none; 
+    }
+
+    /* Đảm bảo bảng sử dụng toàn bộ chiều rộng có thể */
+    table {
+        min-width: 380px; /* Đặt chiều rộng tối thiểu để bảng không quá hẹp */
+        /* Loại bỏ đổ bóng trên màn hình nhỏ để tăng diện tích hiển thị */
+        box-shadow: none; 
+    }
+
+    /* Giảm padding và cỡ chữ cho các ô trong bảng */
+    table th,
+    table td {
+        padding: 8px 10px; /* Giảm padding */
+        font-size: 0.9em; /* Giảm cỡ chữ */
+        vertical-align: top; /* Canh trên cho nội dung dài */
+    }
+
+    /* Tối ưu hóa tiêu đề (th) */
+    table th {
+        padding: 10px 10px;
+        background: #667eea; /* Đơn giản hóa gradient nếu cần */
+    }
+
+    /* Tối ưu hóa cột 'Chi tiết' nếu nó quá dài */
+    /* Đây là một kỹ thuật nâng cao: cho phép bảng hiển thị theo dạng "thẻ" */
+    /* Tuy nhiên, với cấu trúc hiện tại (2-3 cột), `overflow-x: auto` là tối ưu nhất. */
+}
