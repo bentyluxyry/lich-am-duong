@@ -98,22 +98,6 @@
         <a href="../blog/index.html" class="back-btn">← Quay lại Blog</a>
     </div>
 
-    <!-- JS TỰ ĐỘNG KÍCH HOẠT HIỆU ỨNG CHO TẤT CẢ ẢNH TRONG BÀI CHI TIẾT -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const images = document.querySelectorAll(".post-content img");
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        img.classList.add("loaded");
-                        observer.unobserve(img);
-                    }
-                });
-            }, { rootMargin: "100px" });
 
-            images.forEach(img => observer.observe(img));
-        });
-    </script>
 </body>
 </html>
