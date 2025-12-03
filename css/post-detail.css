@@ -476,3 +476,69 @@ img[data-src].loaded {
     opacity: 1;
     transform: translateY(0);
 }
+
+/* ====================== POST DETAIL - ĐẸP CHO TẤT CẢ BÀI VIẾT ====================== */
+.post-content img {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(102,77,162,0.15);
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 35px auto;
+    background: #f5f0ff;
+}
+.post-content img.loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Grid 12 con giáp / bảng màu / các card đẹp */
+.zodiac-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin: 40px 0;
+}
+.zodiac-card {
+    background: linear-gradient(135deg, #fdfbfb, #f8f4ff);
+    border-radius: 20px;
+    padding: 24px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(102,77,162,0.1);
+    transition: all 0.4s ease;
+}
+.zodiac-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(102,77,162,0.2);
+}
+.zodiac-emoji { font-size: 3.8em; margin-bottom: 12px; }
+.zodiac-name { 
+    font-size: 1.5em; 
+    font-weight: 700; 
+    color: #667eea; 
+    margin: 12px 0 8px;
+}
+
+/* Các box nổi bật (highlight-box, info-box, success-box, warning-box) */
+.highlight-box, .info-box, .success-box, .warning-box {
+    padding: 20px;
+    border-radius: 16px;
+    margin: 30px 0;
+    font-size: 1.05em;
+}
+.highlight-box { background: linear-gradient(135deg, #e0d6ff, #f8f4ff); border-left: 6px solid #667eea; }
+.info-box     { background: #e3f2fd; border-left: 6px solid #2196F3; }
+.success-box  { background: #e8f5e8; border-left: 6px solid #4caf50; }
+.warning-box  { background: #fff3e0; border-left: 6px solid #ff9800; }
+
+/* Caption ảnh */
+.image-caption {
+    text-align: center;
+    color: #777;
+    font-style: italic;
+    margin-top: -20px;
+    margin-bottom: 30px;
+}
