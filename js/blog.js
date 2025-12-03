@@ -36,16 +36,19 @@ const blogPosts = [
         image: "../img/blog/tet-nguyen-dan.jpg",
         emoji: "Party popper"
     },
-    {
+
+
+        {
         id: 4,
         title: "Cách Chọn Ngày Giờ Tốt Khai Trương",
-        excerpt: "Hướng dẫn cách xem và chọn ngày giờ tốt để khai trương cửa hàng, công ty theo phong thủy và lịch âm.",
-        category: "lich",
-        categoryName: "Lịch Âm Dương",
-        date: "2024-11-20",
+        excerpt: "Hướng dẫn cách xem và chọn ngày giờ tốt để khai trương cửa hàng...",
+        category: "phongthuy",
+        categoryName: "Phong Thủy",
+        date: "20/11/2024",
         views: 2100,
-        image: "../img/blog/khai-truong.jpg",
-        emoji: "Party popper"
+        image: "https://img.youtube.com/vi/GAK0ZEXjZxk/maxresdefault.jpg",  // DÙNG ẢNH TỪ YOUTUBE
+        emoji: "Confetti",
+        videoUrl: "https://www.youtube.com/embed/GAK0ZEXjZxk" // nếu có video thì thêm dòng này
     },
     {
         id: 5,
