@@ -224,4 +224,24 @@ function openBlogPost(id) {
     }
 }
 
+// Loading màn hình
+window.addEventListener('load', () => {
+    const loading = document.getElementById('blogLoading');
+    if (loading) {
+        setTimeout(() => loading.classList.add('hidden'), 800);
+    }
+});
 
+// Lazy loading ảnh
+function initLazyLoading() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('loaded');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { rootMargin: "100px" });
+
+    document.querySelectorAll('img.lazy-img').forEach(img => observer.observe(img));
+}
