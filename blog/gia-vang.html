@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giá Vàng Hôm Nay - Cập Nhật Liên Tục | Lịch Vạn Niên</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/post-detail.css">
+    <style>
+        .price-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .price-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .price-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .price-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .price-update {
+            font-size: 0.9em;
+            color: #888;
+        }
+
+        .price-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .price-item {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .price-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .price-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #f39c12;
+        }
+
+        .price-change {
+            font-size: 0.85em;
+            margin-top: 5px;
+        }
+
+        .price-change.up {
+            color: #27ae60;
+        }
+
+        .price-change.down {
+            color: #e74c3c;
+        }
+
+        .gold-chart {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .gold-chart h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .chart-placeholder {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            height: 300px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+        }
+
+        @media (max-width: 768px) {
+            .price-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="post-container">
+        <a href="../blog/index.html" class="back-btn">← Quay lại Blog</a>
+
+        <div class="post-header category-giavang" style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);">
+            <h1 class="post-title">💰 Giá Vàng Hôm Nay - Cập Nhật Liên Tục</h1>
+            <div class="post-meta">
+                <span>🗓️ Cập nhật: 03/12/2024</span>
+                <span>⏰ 14:30</span>
+                <span>👁️ 5,420 lượt xem</span>
+            </div>
+        </div>
+
+        <div class="price-container">
+            <!-- Giá Vàng SJC -->
+            <div class="price-card">
+                <div class="price-header">
+                    <div class="price-name">🏆 Vàng SJC</div>
+                    <div class="price-update">Cập nhật: 14:30 hôm nay</div>
+                </div>
+                <div class="price-details">
+                    <div class="price-item">
+                        <div class="price-label">Mua vào</div>
+                        <div class="price-value">76.50</div>
+                        <div class="price-change up">▲ +0.20 triệu/lượng</div>
+                    </div>
+                    <div class="price-item">
+                        <div class="price-label">Bán ra</div>
+                        <div class="price-value">78.50</div>
+                        <div class="price-change up">▲ +0.30 triệu/lượng</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Giá Vàng 9999 -->
+            <div class="price-card">
+                <div class="price-header">
+                    <div class="price-name">✨ Vàng 9999</div>
+                    <div class="price-update">Cập nhật: 14:30 hôm nay</div>
+                </div>
+                <div class="price-details">
+                    <div class="price-item">
+                        <div class="price-label">Mua vào</div>
+                        <div class="price-value">75.80</div>
+                        <div class="price-change up">▲ +0.15 triệu/lượng</div>
+                    </div>
+                    <div class="price-item">
+                        <div class="price-label">Bán ra</div>
+                        <div class="price-value">77.30</div>
+                        <div class="price-change down">▼ -0.10 triệu/lượng</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Giá Vàng Nhẫn -->
+            <div class="price-card">
+                <div class="price-header">
+                    <div class="price-name">💍 Vàng Nhẫn Tròn Trơn</div>
+                    <div class="price-update">Cập nhật: 14:30 hôm nay</div>
+                </div>
+                <div class="price-details">
+                    <div class="price-item">
+                        <div class="price-label">Mua vào</div>
+                        <div class="price-value">74.50</div>
+                        <div class="price-change up">▲ +0.25 triệu/lượng</div>
+                    </div>
+                    <div class="price-item">
+                        <div class="price-label">Bán ra</div>
+                        <div class="price-value">76.00</div>
+                        <div class="price-change up">▲ +0.35 triệu/lượng</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Biểu đồ -->
+            <div class="gold-chart">
+                <h3>📊 Biểu Đồ Giá Vàng 7 Ngày Qua</h3>
+                <div class="chart-placeholder">
+                    <p>Biểu đồ sẽ được cập nhật tại đây<br>Tích hợp API giá vàng real-time</p>
+                </div>
+            </div>
+
+            <!-- Thông tin thêm -->
+            <div class="post-content" style="margin-top: 30px;">
+                <h2>📌 Lưu Ý Khi Mua Bán Vàng</h2>
+                
+                <div class="info-box">
+                    <strong>ℹ️ Thông tin quan trọng:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>Giá vàng được cập nhật từ các đơn vị uy tín: SJC, PNJ, DOJI</li>
+                        <li>Giá vàng biến động liên tục theo thị trường thế giới</li>
+                        <li>Nên theo dõi thường xuyên để đầu tư hiệu quả</li>
+                    </ul>
+                </div>
+
+                <h2>💡 Mẹo Đầu Tư Vàng</h2>
+                <div class="success-box">
+                    <strong>✅ Nên:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>Mua vàng khi giá giảm sâu</li>
+                        <li>Đa dạng hóa danh mục đầu tư</li>
+                        <li>Theo dõi tin tức kinh tế thế giới</li>
+                        <li>Mua tại các đơn vị có uy tín</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <strong>⚠️ Tránh:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>Mua vàng khi giá đang tăng nóng</li>
+                        <li>Đầu tư 100% vốn vào vàng</li>
+                        <li>Mua vàng không rõ nguồn gốc</li>
+                        <li>Bán vàng khi giá đang giảm</li>
+                    </ul>
+                </div>
+
+                <h2>🔗 Nguồn Cập Nhật</h2>
+                <p>
+                    Website tự động cập nhật giá vàng từ các nguồn uy tín:
+                </p>
+                <ul>
+                    <li><strong>SJC:</strong> Công ty vàng bạc đá quý Sài Gòn</li>
+                    <li><strong>PNJ:</strong> Công ty cổ phần vàng bạc đá quý Phú Nhuận</li>
+                    <li><strong>DOJI:</strong> Tập đoàn vàng bạc đá quý DOJI</li>
+                </ul>
+            </div>
+        </div>
+
+        <a href="../blog/index.html" class="back-btn">← Quay lại Blog</a>
+    </div>
+</body>
+</html>
