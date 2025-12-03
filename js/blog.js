@@ -8,7 +8,7 @@ const blogPosts = [
         categoryName: "Lịch Âm Dương",
         date: "2025-12-01",
         views: 1250,
-        image: "../img/blog/content/lich-am-duong.jpg",
+        image: "../img/blog/lich-am-duong.jpg",
         emoji: "Calendar"
     },
     {
