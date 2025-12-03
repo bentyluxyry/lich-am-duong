@@ -131,9 +131,20 @@ function renderBlogPosts() {
         <div class="blog-card" onclick="openBlogPost(${post.id})">
             <div class="blog-card-image">
                 ${post.image 
-                    ? `<img src="${post.image}" alt="${post.title}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">`
+                    ? `<img 
+                        src="${post.image}" 
+                        alt="${post.title}" 
+                        loading="lazy" 
+                        decoding="async"
+                        class="lazy-img"
+                        onerror="this.style.display='none'; this.parentElement.querySelector('.emoji-placeholder').style.display='flex';"
+                       >`
                     : ''
                 }
+                <div class="emoji-placeholder" style="display: ${post.image ? 'none' : 'flex'};">
+                    ${post.emoji}
+                </div>
+                ${post.videoUrl ? '<span class="video-badge">Video</span>' : ''}
                 <div class="emoji-placeholder" style="display: ${post.image ? 'none' : 'flex'};">${post.emoji}</div>
                 ${post.videoUrl ? '<span class="video-badge">Video</span>' : ''}
             </div>
