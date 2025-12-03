@@ -230,3 +230,21 @@ window.addEventListener("load", function() {
         document.body.classList.add("loading-done");
     }, 800); // Có thể giảm xuống 500 nếu muốn nhanh hơn
 });
+
+
+// LAZY LOADING + HIỆU ỨNG XUẤT HIỆN MƯỢT
+document.addEventListener("DOMContentLoaded", function() {
+    const lazyImages = document.querySelectorAll("img.lazy-img");
+    
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.classList.add("loaded");
+                observer.unobserve(img);
+            }
+        });
+    }, { rootMargin: "50px 0px" });
+
+    lazyImages.forEach(img => imageObserver.observe(img));
+});
