@@ -106,7 +106,7 @@ const blogPosts = [
 
 let currentCategory = 'all';
 let currentPage = 1;
-const postsPerPage = 6;
+const postsPerPage = 9;
 
 document.addEventListener('DOMContentLoaded', function() {
     renderBlogPosts();
