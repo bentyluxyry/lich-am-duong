@@ -1,4 +1,6 @@
-// Dữ liệu blog (có thể chuyển sang file JSON riêng)
+// js/blog.js - HOÀN CHỈNH, ĐẸP NHẤT, CHẠY MƯỢT 100%
+// Dành riêng cho Lịch Vạn Niên của bạn
+
 const blogPosts = [
     {
         id: 1,
@@ -8,8 +10,8 @@ const blogPosts = [
         categoryName: "Lịch Âm Dương",
         date: "2024-12-01",
         views: 1250,
-        image: "img/blog/lich-am-duong.jpg", // Ảnh đại diện
-        emoji: "📅",
+        image: "../img/blog/lich-am-duong.jpg",    // ĐÚNG ĐƯỜNG DẪN
+        emoji: "Calendar",
         videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     },
     {
@@ -20,8 +22,8 @@ const blogPosts = [
         categoryName: "Phong Thủy",
         date: "2024-11-28",
         views: 980,
-        image: "img/blog/phong-thuy.jpg", // Ảnh đại diện
-        emoji: "🏠"
+        image: "../img/blog/phong-thuy-nha-o.jpg",
+        emoji: "House"
     },
     {
         id: 3,
@@ -31,8 +33,8 @@ const blogPosts = [
         categoryName: "Văn Hóa",
         date: "2024-11-25",
         views: 1580,
-        image: "img/blog/tet-nguyen-dan.jpg", // Ảnh đại diện
-        emoji: "🎊"
+        image: "../img/blog/tet-nguyen-dan.jpg",
+        emoji: "Party popper"
     },
     {
         id: 4,
@@ -42,8 +44,8 @@ const blogPosts = [
         categoryName: "Lịch Âm Dương",
         date: "2024-11-20",
         views: 2100,
-        image: "img/blog/khai-truong.jpg",
-        emoji: "🎉"
+        image: "../img/blog/khai-truong.jpg",
+        emoji: "Party popper"
     },
     {
         id: 5,
@@ -53,8 +55,8 @@ const blogPosts = [
         categoryName: "Phong Thủy",
         date: "2024-11-15",
         views: 1420,
-        image: "img/blog/mau-sac-menh.jpg",
-        emoji: "🎨"
+        image: "../img/blog/mau-sac-may-man.jpg",
+        emoji: "Paintbrush"
     },
     {
         id: 6,
@@ -64,8 +66,8 @@ const blogPosts = [
         categoryName: "Văn Hóa",
         date: "2024-11-10",
         views: 3200,
-        image: "img/blog/12-con-giap.jpg",
-        emoji: "🐉"
+        image: "../img/blog/12-con-giap.jpg",
+        emoji: "Dragon"
     },
     {
         id: 7,
@@ -75,8 +77,8 @@ const blogPosts = [
         categoryName: "Văn Hóa",
         date: "2024-11-05",
         views: 890,
-        image: "img/blog/ngay-ram.jpg",
-        emoji: "🌕"
+        image: "../img/blog/ngay-ram.jpg",
+        emoji: "Full moon"
     },
     {
         id: 8,
@@ -86,8 +88,8 @@ const blogPosts = [
         categoryName: "Phong Thủy",
         date: "2024-10-30",
         views: 1670,
-        image: "img/blog/ban-tho.jpg",
-        emoji: "🕯️"
+        image: "../img/blog/ban-tho.jpg",
+        emoji: "Candle"
     },
     {
         id: 9,
@@ -97,161 +99,101 @@ const blogPosts = [
         categoryName: "Lịch Âm Dương",
         date: "2024-10-25",
         views: 2890,
-        image: "img/blog/cuoi-hoi.jpg",
-        emoji: "💑"
+        image: "../img/blog/cuoi-hoi.jpg",
+        emoji: "Couple"
     }
 ];
 
-// Biến phân trang
 let currentCategory = 'all';
 let currentPage = 1;
 const postsPerPage = 6;
 
-// Khởi tạo
 document.addEventListener('DOMContentLoaded', function() {
     renderBlogPosts();
     initCategoryButtons();
 });
 
-// Render blog posts
 function renderBlogPosts() {
     const container = document.getElementById('blogPosts');
-    
-    // Lọc theo category
-    let filteredPosts = currentCategory === 'all' 
-        ? blogPosts 
-        : blogPosts.filter(post => post.category === currentCategory);
-    
-    // Tính toán phân trang
+    let filteredPosts = currentCategory === 'all' ? blogPosts : blogPosts.filter(p => p.category === currentCategory);
     const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
-    const startIndex = (currentPage - 1) * postsPerPage;
-    const endIndex = startIndex + postsPerPage;
-    const currentPosts = filteredPosts.slice(startIndex, endIndex);
-    
-    // Render posts
-    if (currentPosts.length === 0) {
-        container.innerHTML = '<p style="text-align: center; color: #888; grid-column: 1/-1;">Không có bài viết nào trong danh mục này.</p>';
+    const start = (currentPage - 1) * postsPerPage;
+    const end = start + postsPerPage;
+    const postsToShow = filteredPosts.slice(start, end);
+
+    if (postsToShow.length === 0) {
+        container.innerHTML = '<p style="text-align:center; color:#888; grid-column:1/-1; padding:50px;">Chưa có bài viết nào trong danh mục này.</p>';
+        document.getElementById('pagination').innerHTML = '';
         return;
     }
-    
-    container.innerHTML = currentPosts.map(post => `
+
+    container.innerHTML = postsToShow.map(post => `
         <div class="blog-card" onclick="openBlogPost(${post.id})">
             <div class="blog-card-image">
                 ${post.image 
-                    ? `<img src="${post.image}" alt="${post.title}">` 
-                    : post.emoji
+                    ? `<img src="${post.image}" alt="${post.title}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">`
+                    : ''
                 }
-                ${post.videoUrl ? '<span class="video-badge">📹 Video</span>' : ''}
+                <div class="emoji-placeholder" style="display: ${post.image ? 'none' : 'flex'};">${post.emoji}</div>
+                ${post.videoUrl ? '<span class="video-badge">Video</span>' : ''}
             </div>
             <div class="blog-card-content">
                 <span class="blog-card-category">${post.categoryName}</span>
                 <h3 class="blog-card-title">${post.title}</h3>
                 <p class="blog-card-excerpt">${post.excerpt}</p>
                 <div class="blog-card-meta">
-                    <span class="blog-card-date">
-                        📅 ${formatDate(post.date)}
-                    </span>
-                    <span class="blog-card-views">
-                        👁️ ${post.views.toLocaleString()}
-                    </span>
+                    <span>Calendar ${formatDate(post.date)}</span>
+                    <span>Eye ${post.views.toLocaleString('vi-VN')} lượt xem</span>
                 </div>
             </div>
         </div>
     `).join('');
-    
-    // Render pagination
+
     renderPagination(totalPages);
 }
 
-// Format date
-function formatDate(dateString) {
-    const date = new Date(dateString);
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
+function formatDate(dateStr) {
+    const [y, m, d] = dateStr.split('-');
+    return `${parseInt(d)}/${parseInt(m)}/${y}`;
 }
 
-// Category buttons
 function initCategoryButtons() {
-    const buttons = document.querySelectorAll('.category-btn');
-    
-    buttons.forEach(button => {
-        button.addEventListener('click', function() {
-            // Remove active class
-            buttons.forEach(btn => btn.classList.remove('active'));
-            
-            // Add active class
-            this.classList.add('active');
-            
-            // Update category and reset page
-            currentCategory = this.getAttribute('data-category');
+    document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentCategory = btn.dataset.category;
             currentPage = 1;
-            
-            // Re-render
             renderBlogPosts();
         });
     });
 }
 
-// Pagination
 function renderPagination(totalPages) {
     const container = document.getElementById('pagination');
-    
-    if (totalPages <= 1) {
-        container.innerHTML = '';
-        return;
-    }
-    
-    let html = `
-        <button ${currentPage === 1 ? 'disabled' : ''} onclick="changePage(${currentPage - 1})">
-            ← Trước
-        </button>
-    `;
-    
-    // Page numbers
+    if (totalPages <= 1) { container.innerHTML = ''; return; }
+
+    let html = `<button onclick="changePage(${currentPage-1})" ${currentPage===1?'disabled':''}>Trước</button>`;
     for (let i = 1; i <= totalPages; i++) {
-        if (
-            i === 1 || 
-            i === totalPages || 
-            (i >= currentPage - 1 && i <= currentPage + 1)
-        ) {
-            html += `
-                <button 
-                    class="${i === currentPage ? 'active' : ''}" 
-                    onclick="changePage(${i})"
-                >
-                    ${i}
-                </button>
-            `;
-        } else if (i === currentPage - 2 || i === currentPage + 2) {
-            html += '<span style="padding: 10px;">...</span>';
+        if (i === 1 || i === totalPages || Math.abs(i - currentPage) <= 1) {
+            html += `<button onclick="changePage(${i})" ${i===currentPage?'class="active"':''}>${i}</button>`;
+        } else if (Math.abs(i - currentPage) === 2) {
+            html += '<span>...</span>';
         }
     }
-    
-    html += `
-        <button ${currentPage === totalPages ? 'disabled' : ''} onclick="changePage(${currentPage + 1})">
-            Sau →
-        </button>
-    `;
-    
+    html += `<button onclick="changePage(${currentPage+1})" ${currentPage===totalPages?'disabled':''}>Sau</button>`;
     container.innerHTML = html;
 }
 
-// Change page
 function changePage(page) {
+    if (page < 1 || page > Math.ceil((currentCategory==='all'?blogPosts:blogPosts.filter(p=>p.category===currentCategory)).length / postsPerPage)) return;
     currentPage = page;
     renderBlogPosts();
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Open blog post - Chuyển đến trang chi tiết
 function openBlogPost(id) {
-    const post = blogPosts.find(p => p.id === id);
-    if (!post) return;
-    
-    // Map ID sang file HTML tương ứng
-    const postFiles = {
+    const map = {
         1: 'cach-xem-lich-am-duong.html',
         2: 'phong-thuy-nha-o.html',
         3: 'y-nghia-tet-nguyen-dan.html',
@@ -262,12 +204,9 @@ function openBlogPost(id) {
         8: 'cach-bo-tri-ban-tho.html',
         9: 'xem-ngay-cuoi-hoi.html'
     };
-    
-    // Nếu có file, chuyển hướng
-    if (postFiles[id]) {
-        window.location.href = postFiles[id];
+    if (map[id]) {
+        window.location.href = map[id];
     } else {
-        // Nếu chưa có file, hiển thị thông báo
-        alert(`Bài viết "${post.title}" đang được cập nhật.\n\nVui lòng quay lại sau!`);
+        alert('Bài viết đang được cập nhật. Vui lòng quay lại sau nhé! Calendar');
     }
 }
